@@ -7,9 +7,9 @@ import pytest
 import pydantic
 from pydantic import Field
 
-from fashn_sdk._utils import PropertyInfo
-from fashn_sdk._compat import PYDANTIC_V2, parse_obj, model_dump, model_json
-from fashn_sdk._models import BaseModel, construct_type
+from fashn._utils import PropertyInfo
+from fashn._compat import PYDANTIC_V2, parse_obj, model_dump, model_json
+from fashn._models import BaseModel, construct_type
 
 
 class BasicModel(BaseModel):

@@ -217,7 +217,7 @@ class BaseAPIResponse(Generic[R]):
             and not issubclass(origin, BaseModel)
             and issubclass(origin, pydantic.BaseModel)
         ):
-            raise TypeError("Pydantic models must subclass our base model type, e.g. `from fashn_sdk import BaseModel`")
+            raise TypeError("Pydantic models must subclass our base model type, e.g. `from fashn import BaseModel`")
 
         if (
             cast_to is not object
@@ -283,7 +283,7 @@ class APIResponse(BaseAPIResponse[R]):
         the `to` argument, e.g.
 
         ```py
-        from fashn_sdk import BaseModel
+        from fashn import BaseModel
 
 
         class MyModel(BaseModel):
@@ -385,7 +385,7 @@ class AsyncAPIResponse(BaseAPIResponse[R]):
         the `to` argument, e.g.
 
         ```py
-        from fashn_sdk import BaseModel
+        from fashn import BaseModel
 
 
         class MyModel(BaseModel):
@@ -556,7 +556,7 @@ class AsyncStreamedBinaryAPIResponse(AsyncAPIResponse[bytes]):
 class MissingStreamClassError(TypeError):
     def __init__(self) -> None:
         super().__init__(
-            "The `stream` argument was set to `True` but the `stream_cls` argument was not given. See `fashn_sdk._streaming` for reference",
+            "The `stream` argument was set to `True` but the `stream_cls` argument was not given. See `fashn._streaming` for reference",
         )
 
 

@@ -1,4 +1,4 @@
 # File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-__title__ = "fashn_sdk"
+__title__ = "fashn"
 __version__ = "0.0.1"
