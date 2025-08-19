@@ -5,8 +5,8 @@ from typing import Iterator, AsyncIterator
 import httpx
 import pytest
 
-from fashn_sdk import Fashn, AsyncFashn
-from fashn_sdk._streaming import Stream, AsyncStream, ServerSentEvent
+from fashn import Fashn, AsyncFashn
+from fashn._streaming import Stream, AsyncStream, ServerSentEvent
 
 
 @pytest.mark.asyncio

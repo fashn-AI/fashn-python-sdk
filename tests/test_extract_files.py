@@ -4,8 +4,8 @@ from typing import Sequence
 
 import pytest
 
-from fashn_sdk._types import FileTypes
-from fashn_sdk._utils import extract_files
+from fashn._types import FileTypes
+from fashn._utils import extract_files
 
 
 def test_removes_files_from_input() -> None:

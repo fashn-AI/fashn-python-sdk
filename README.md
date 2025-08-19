@@ -1,7 +1,7 @@
 # Fashn Python API library
 
 <!-- prettier-ignore -->
-[![PyPI version](https://img.shields.io/pypi/v/fashn_sdk.svg?label=pypi%20(stable))](https://pypi.org/project/fashn_sdk/)
+[![PyPI version](https://img.shields.io/pypi/v/fashn.svg?label=pypi%20(stable))](https://pypi.org/project/fashn/)
 
 The Fashn Python library provides convenient access to the Fashn REST API from any Python 3.8+
 application. The library includes type definitions for all request params and response fields,
@@ -21,7 +21,7 @@ pip install git+ssh://git@github.com/stainless-sdks/fashn-sdk-python.git
 ```
 
 > [!NOTE]
-> Once this package is [published to PyPI](https://www.stainless.com/docs/guides/publish), this will become: `pip install fashn_sdk`
+> Once this package is [published to PyPI](https://www.stainless.com/docs/guides/publish), this will become: `pip install fashn`
 
 ## Usage
 
@@ -29,7 +29,7 @@ The full API of this library can be found in [api.md](api.md).
 
 ```python
 import os
-from fashn_sdk import Fashn
+from fashn import Fashn
 
 client = Fashn(
     api_key=os.environ.get("FASHN_API_KEY"),  # This is the default and can be omitted
@@ -57,7 +57,7 @@ Simply import `AsyncFashn` instead of `Fashn` and use `await` with each API call
 ```python
 import os
 import asyncio
-from fashn_sdk import AsyncFashn
+from fashn import AsyncFashn
 
 client = AsyncFashn(
     api_key=os.environ.get("FASHN_API_KEY"),  # This is the default and can be omitted
@@ -88,15 +88,15 @@ You can enable this by installing `aiohttp`:
 
 ```sh
 # install from this staging repo
-pip install 'fashn_sdk[aiohttp] @ git+ssh://git@github.com/stainless-sdks/fashn-sdk-python.git'
+pip install 'fashn[aiohttp] @ git+ssh://git@github.com/stainless-sdks/fashn-sdk-python.git'
 ```
 
 Then you can enable it by instantiating the client with `http_client=DefaultAioHttpClient()`:
 
 ```python
 import asyncio
-from fashn_sdk import DefaultAioHttpClient
-from fashn_sdk import AsyncFashn
+from fashn import DefaultAioHttpClient
+from fashn import AsyncFashn
 
 
 async def main() -> None:
@@ -131,7 +131,7 @@ Typed requests and responses provide autocomplete and documentation within your 
 Nested parameters are dictionaries, typed using `TypedDict`, for example:
 
 ```python
-from fashn_sdk import Fashn
+from fashn import Fashn
 
 client = Fashn()
 
@@ -147,16 +147,16 @@ print(prediction.inputs)
 
 ## Handling errors
 
-When the library is unable to connect to the API (for example, due to network connection problems or a timeout), a subclass of `fashn_sdk.APIConnectionError` is raised.
+When the library is unable to connect to the API (for example, due to network connection problems or a timeout), a subclass of `fashn.APIConnectionError` is raised.
 
 When the API returns a non-success status code (that is, 4xx or 5xx
-response), a subclass of `fashn_sdk.APIStatusError` is raised, containing `status_code` and `response` properties.
+response), a subclass of `fashn.APIStatusError` is raised, containing `status_code` and `response` properties.
 
-All errors inherit from `fashn_sdk.APIError`.
+All errors inherit from `fashn.APIError`.
 
 ```python
-import fashn_sdk
-from fashn_sdk import Fashn
+import fashn
+from fashn import Fashn
 
 client = Fashn()
 
@@ -168,12 +168,12 @@ try:
         },
         model_name="tryon-v1.6",
     )
-except fashn_sdk.APIConnectionError as e:
+except fashn.APIConnectionError as e:
     print("The server could not be reached")
     print(e.__cause__)  # an underlying Exception, likely raised within httpx.
-except fashn_sdk.RateLimitError as e:
+except fashn.RateLimitError as e:
     print("A 429 status code was received; we should back off a bit.")
-except fashn_sdk.APIStatusError as e:
+except fashn.APIStatusError as e:
     print("Another non-200-range status code was received")
     print(e.status_code)
     print(e.response)
@@ -201,7 +201,7 @@ Connection errors (for example, due to a network connectivity problem), 408 Requ
 You can use the `max_retries` option to configure or disable retry settings:
 
 ```python
-from fashn_sdk import Fashn
+from fashn import Fashn
 
 # Configure the default for all requests:
 client = Fashn(
@@ -225,7 +225,7 @@ By default requests time out after 1 minute. You can configure this with a `time
 which accepts a float or an [`httpx.Timeout`](https://www.python-httpx.org/advanced/timeouts/#fine-tuning-the-configuration) object:
 
 ```python
-from fashn_sdk import Fashn
+from fashn import Fashn
 
 # Configure the default for all requests:
 client = Fashn(
@@ -283,7 +283,7 @@ if response.my_field is None:
 The "raw" Response object can be accessed by prefixing `.with_raw_response.` to any HTTP method call, e.g.,
 
 ```py
-from fashn_sdk import Fashn
+from fashn import Fashn
 
 client = Fashn()
 response = client.predictions.with_raw_response.create(
@@ -299,9 +299,9 @@ prediction = response.parse()  # get the object that `predictions.create()` woul
 print(prediction.id)
 ```
 
-These methods return an [`APIResponse`](https://github.com/stainless-sdks/fashn-sdk-python/tree/main/src/fashn_sdk/_response.py) object.
+These methods return an [`APIResponse`](https://github.com/stainless-sdks/fashn-sdk-python/tree/main/src/fashn/_response.py) object.
 
-The async client returns an [`AsyncAPIResponse`](https://github.com/stainless-sdks/fashn-sdk-python/tree/main/src/fashn_sdk/_response.py) with the same structure, the only difference being `await`able methods for reading the response content.
+The async client returns an [`AsyncAPIResponse`](https://github.com/stainless-sdks/fashn-sdk-python/tree/main/src/fashn/_response.py) with the same structure, the only difference being `await`able methods for reading the response content.
 
 #### `.with_streaming_response`
 
@@ -369,7 +369,7 @@ You can directly override the [httpx client](https://www.python-httpx.org/api/#c
 
 ```python
 import httpx
-from fashn_sdk import Fashn, DefaultHttpxClient
+from fashn import Fashn, DefaultHttpxClient
 
 client = Fashn(
     # Or use the `FASHN_BASE_URL` env var
@@ -392,7 +392,7 @@ client.with_options(http_client=DefaultHttpxClient(...))
 By default the library closes underlying HTTP connections whenever the client is [garbage collected](https://docs.python.org/3/reference/datamodel.html#object.__del__). You can manually close the client using the `.close()` method if desired, or with a context manager that closes when exiting.
 
 ```py
-from fashn_sdk import Fashn
+from fashn import Fashn
 
 with Fashn() as client:
   # make requests here
@@ -420,8 +420,8 @@ If you've upgraded to the latest version but aren't seeing any new features you 
 You can determine the version that is being used at runtime with:
 
 ```py
-import fashn_sdk
-print(fashn_sdk.__version__)
+import fashn
+print(fashn.__version__)
 ```
 
 ## Requirements

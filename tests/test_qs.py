@@ -4,7 +4,7 @@ from urllib.parse import unquote
 
 import pytest
 
-from fashn_sdk._qs import Querystring, stringify
+from fashn._qs import Querystring, stringify
 
 
 def test_empty() -> None:
