@@ -6,7 +6,7 @@ from typing_extensions import Literal, overload
 
 import httpx
 
-from ..types import prediction_create_params
+from ..types import prediction_run_params
 from .._types import NOT_GIVEN, Body, Query, Headers, NotGiven
 from .._utils import required_args, maybe_transform, async_maybe_transform
 from .._compat import cached_property
@@ -18,7 +18,7 @@ from .._response import (
     async_to_streamed_response_wrapper,
 )
 from .._base_client import make_request_options
-from ..types.prediction_create_response import PredictionCreateResponse
+from ..types.prediction_run_response import PredictionRunResponse
 from ..types.prediction_status_response import PredictionStatusResponse
 
 __all__ = ["PredictionsResource", "AsyncPredictionsResource"]
@@ -45,10 +45,10 @@ class PredictionsResource(SyncAPIResource):
         return PredictionsResourceWithStreamingResponse(self)
 
     @overload
-    def create(
+    def run(
         self,
         *,
-        inputs: prediction_create_params.TryOnRequestInputs,
+        inputs: prediction_run_params.TryOnRequestInputs,
         model_name: Literal["tryon-v1.6"],
         webhook_url: str | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -57,7 +57,7 @@ class PredictionsResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> PredictionCreateResponse:
+    ) -> PredictionRunResponse:
         """Submit a prediction request for AI-powered fashion processing.
 
         Supports multiple
@@ -89,10 +89,10 @@ class PredictionsResource(SyncAPIResource):
         ...
 
     @overload
-    def create(
+    def run(
         self,
         *,
-        inputs: prediction_create_params.ModelCreateRequestInputs,
+        inputs: prediction_run_params.ModelCreateRequestInputs,
         model_name: Literal["model-create"],
         webhook_url: str | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -101,7 +101,7 @@ class PredictionsResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> PredictionCreateResponse:
+    ) -> PredictionRunResponse:
         """Submit a prediction request for AI-powered fashion processing.
 
         Supports multiple
@@ -132,10 +132,10 @@ class PredictionsResource(SyncAPIResource):
         ...
 
     @overload
-    def create(
+    def run(
         self,
         *,
-        inputs: prediction_create_params.ModelVariationRequestInputs,
+        inputs: prediction_run_params.ModelVariationRequestInputs,
         model_name: Literal["model-variation"],
         webhook_url: str | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -144,7 +144,7 @@ class PredictionsResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> PredictionCreateResponse:
+    ) -> PredictionRunResponse:
         """Submit a prediction request for AI-powered fashion processing.
 
         Supports multiple
@@ -175,10 +175,10 @@ class PredictionsResource(SyncAPIResource):
         ...
 
     @overload
-    def create(
+    def run(
         self,
         *,
-        inputs: prediction_create_params.ModelSwapRequestInputs,
+        inputs: prediction_run_params.ModelSwapRequestInputs,
         model_name: Literal["model-swap"],
         webhook_url: str | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -187,7 +187,7 @@ class PredictionsResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> PredictionCreateResponse:
+    ) -> PredictionRunResponse:
         """Submit a prediction request for AI-powered fashion processing.
 
         Supports multiple
@@ -219,10 +219,10 @@ class PredictionsResource(SyncAPIResource):
         ...
 
     @overload
-    def create(
+    def run(
         self,
         *,
-        inputs: prediction_create_params.ReframeRequestInputs,
+        inputs: prediction_run_params.ReframeRequestInputs,
         model_name: Literal["reframe"],
         webhook_url: str | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -231,7 +231,7 @@ class PredictionsResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> PredictionCreateResponse:
+    ) -> PredictionRunResponse:
         """Submit a prediction request for AI-powered fashion processing.
 
         Supports multiple
@@ -262,10 +262,10 @@ class PredictionsResource(SyncAPIResource):
         ...
 
     @overload
-    def create(
+    def run(
         self,
         *,
-        inputs: prediction_create_params.BackgroundChangeRequestInputs,
+        inputs: prediction_run_params.BackgroundChangeRequestInputs,
         model_name: Literal["background-change"],
         webhook_url: str | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -274,7 +274,7 @@ class PredictionsResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> PredictionCreateResponse:
+    ) -> PredictionRunResponse:
         """Submit a prediction request for AI-powered fashion processing.
 
         Supports multiple
@@ -305,10 +305,10 @@ class PredictionsResource(SyncAPIResource):
         ...
 
     @overload
-    def create(
+    def run(
         self,
         *,
-        inputs: prediction_create_params.BackgroundRemoveRequestInputs,
+        inputs: prediction_run_params.BackgroundRemoveRequestInputs,
         model_name: Literal["background-remove"],
         webhook_url: str | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -317,7 +317,7 @@ class PredictionsResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> PredictionCreateResponse:
+    ) -> PredictionRunResponse:
         """Submit a prediction request for AI-powered fashion processing.
 
         Supports multiple
@@ -348,16 +348,16 @@ class PredictionsResource(SyncAPIResource):
         ...
 
     @required_args(["inputs", "model_name"])
-    def create(
+    def run(
         self,
         *,
-        inputs: prediction_create_params.TryOnRequestInputs
-        | prediction_create_params.ModelCreateRequestInputs
-        | prediction_create_params.ModelVariationRequestInputs
-        | prediction_create_params.ModelSwapRequestInputs
-        | prediction_create_params.ReframeRequestInputs
-        | prediction_create_params.BackgroundChangeRequestInputs
-        | prediction_create_params.BackgroundRemoveRequestInputs,
+        inputs: prediction_run_params.TryOnRequestInputs
+        | prediction_run_params.ModelCreateRequestInputs
+        | prediction_run_params.ModelVariationRequestInputs
+        | prediction_run_params.ModelSwapRequestInputs
+        | prediction_run_params.ReframeRequestInputs
+        | prediction_run_params.BackgroundChangeRequestInputs
+        | prediction_run_params.BackgroundRemoveRequestInputs,
         model_name: Literal["tryon-v1.6"]
         | Literal["model-create"]
         | Literal["model-variation"]
@@ -372,7 +372,7 @@ class PredictionsResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> PredictionCreateResponse:
+    ) -> PredictionRunResponse:
         return self._post(
             "/v1/run",
             body=maybe_transform(
@@ -380,16 +380,16 @@ class PredictionsResource(SyncAPIResource):
                     "inputs": inputs,
                     "model_name": model_name,
                 },
-                prediction_create_params.PredictionCreateParams,
+                prediction_run_params.PredictionRunParams,
             ),
             options=make_request_options(
                 extra_headers=extra_headers,
                 extra_query=extra_query,
                 extra_body=extra_body,
                 timeout=timeout,
-                query=maybe_transform({"webhook_url": webhook_url}, prediction_create_params.PredictionCreateParams),
+                query=maybe_transform({"webhook_url": webhook_url}, prediction_run_params.PredictionRunParams),
             ),
-            cast_to=PredictionCreateResponse,
+            cast_to=PredictionRunResponse,
         )
 
     def status(
@@ -463,10 +463,10 @@ class AsyncPredictionsResource(AsyncAPIResource):
         return AsyncPredictionsResourceWithStreamingResponse(self)
 
     @overload
-    async def create(
+    async def run(
         self,
         *,
-        inputs: prediction_create_params.TryOnRequestInputs,
+        inputs: prediction_run_params.TryOnRequestInputs,
         model_name: Literal["tryon-v1.6"],
         webhook_url: str | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -475,7 +475,7 @@ class AsyncPredictionsResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> PredictionCreateResponse:
+    ) -> PredictionRunResponse:
         """Submit a prediction request for AI-powered fashion processing.
 
         Supports multiple
@@ -507,10 +507,10 @@ class AsyncPredictionsResource(AsyncAPIResource):
         ...
 
     @overload
-    async def create(
+    async def run(
         self,
         *,
-        inputs: prediction_create_params.ModelCreateRequestInputs,
+        inputs: prediction_run_params.ModelCreateRequestInputs,
         model_name: Literal["model-create"],
         webhook_url: str | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -519,7 +519,7 @@ class AsyncPredictionsResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> PredictionCreateResponse:
+    ) -> PredictionRunResponse:
         """Submit a prediction request for AI-powered fashion processing.
 
         Supports multiple
@@ -550,10 +550,10 @@ class AsyncPredictionsResource(AsyncAPIResource):
         ...
 
     @overload
-    async def create(
+    async def run(
         self,
         *,
-        inputs: prediction_create_params.ModelVariationRequestInputs,
+        inputs: prediction_run_params.ModelVariationRequestInputs,
         model_name: Literal["model-variation"],
         webhook_url: str | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -562,7 +562,7 @@ class AsyncPredictionsResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> PredictionCreateResponse:
+    ) -> PredictionRunResponse:
         """Submit a prediction request for AI-powered fashion processing.
 
         Supports multiple
@@ -593,10 +593,10 @@ class AsyncPredictionsResource(AsyncAPIResource):
         ...
 
     @overload
-    async def create(
+    async def run(
         self,
         *,
-        inputs: prediction_create_params.ModelSwapRequestInputs,
+        inputs: prediction_run_params.ModelSwapRequestInputs,
         model_name: Literal["model-swap"],
         webhook_url: str | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -605,7 +605,7 @@ class AsyncPredictionsResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> PredictionCreateResponse:
+    ) -> PredictionRunResponse:
         """Submit a prediction request for AI-powered fashion processing.
 
         Supports multiple
@@ -637,10 +637,10 @@ class AsyncPredictionsResource(AsyncAPIResource):
         ...
 
     @overload
-    async def create(
+    async def run(
         self,
         *,
-        inputs: prediction_create_params.ReframeRequestInputs,
+        inputs: prediction_run_params.ReframeRequestInputs,
         model_name: Literal["reframe"],
         webhook_url: str | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -649,7 +649,7 @@ class AsyncPredictionsResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> PredictionCreateResponse:
+    ) -> PredictionRunResponse:
         """Submit a prediction request for AI-powered fashion processing.
 
         Supports multiple
@@ -680,10 +680,10 @@ class AsyncPredictionsResource(AsyncAPIResource):
         ...
 
     @overload
-    async def create(
+    async def run(
         self,
         *,
-        inputs: prediction_create_params.BackgroundChangeRequestInputs,
+        inputs: prediction_run_params.BackgroundChangeRequestInputs,
         model_name: Literal["background-change"],
         webhook_url: str | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -692,7 +692,7 @@ class AsyncPredictionsResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> PredictionCreateResponse:
+    ) -> PredictionRunResponse:
         """Submit a prediction request for AI-powered fashion processing.
 
         Supports multiple
@@ -723,10 +723,10 @@ class AsyncPredictionsResource(AsyncAPIResource):
         ...
 
     @overload
-    async def create(
+    async def run(
         self,
         *,
-        inputs: prediction_create_params.BackgroundRemoveRequestInputs,
+        inputs: prediction_run_params.BackgroundRemoveRequestInputs,
         model_name: Literal["background-remove"],
         webhook_url: str | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -735,7 +735,7 @@ class AsyncPredictionsResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> PredictionCreateResponse:
+    ) -> PredictionRunResponse:
         """Submit a prediction request for AI-powered fashion processing.
 
         Supports multiple
@@ -766,16 +766,16 @@ class AsyncPredictionsResource(AsyncAPIResource):
         ...
 
     @required_args(["inputs", "model_name"])
-    async def create(
+    async def run(
         self,
         *,
-        inputs: prediction_create_params.TryOnRequestInputs
-        | prediction_create_params.ModelCreateRequestInputs
-        | prediction_create_params.ModelVariationRequestInputs
-        | prediction_create_params.ModelSwapRequestInputs
-        | prediction_create_params.ReframeRequestInputs
-        | prediction_create_params.BackgroundChangeRequestInputs
-        | prediction_create_params.BackgroundRemoveRequestInputs,
+        inputs: prediction_run_params.TryOnRequestInputs
+        | prediction_run_params.ModelCreateRequestInputs
+        | prediction_run_params.ModelVariationRequestInputs
+        | prediction_run_params.ModelSwapRequestInputs
+        | prediction_run_params.ReframeRequestInputs
+        | prediction_run_params.BackgroundChangeRequestInputs
+        | prediction_run_params.BackgroundRemoveRequestInputs,
         model_name: Literal["tryon-v1.6"]
         | Literal["model-create"]
         | Literal["model-variation"]
@@ -790,7 +790,7 @@ class AsyncPredictionsResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> PredictionCreateResponse:
+    ) -> PredictionRunResponse:
         return await self._post(
             "/v1/run",
             body=await async_maybe_transform(
@@ -798,7 +798,7 @@ class AsyncPredictionsResource(AsyncAPIResource):
                     "inputs": inputs,
                     "model_name": model_name,
                 },
-                prediction_create_params.PredictionCreateParams,
+                prediction_run_params.PredictionRunParams,
             ),
             options=make_request_options(
                 extra_headers=extra_headers,
@@ -806,10 +806,10 @@ class AsyncPredictionsResource(AsyncAPIResource):
                 extra_body=extra_body,
                 timeout=timeout,
                 query=await async_maybe_transform(
-                    {"webhook_url": webhook_url}, prediction_create_params.PredictionCreateParams
+                    {"webhook_url": webhook_url}, prediction_run_params.PredictionRunParams
                 ),
             ),
-            cast_to=PredictionCreateResponse,
+            cast_to=PredictionRunResponse,
         )
 
     async def status(
@@ -866,8 +866,8 @@ class PredictionsResourceWithRawResponse:
     def __init__(self, predictions: PredictionsResource) -> None:
         self._predictions = predictions
 
-        self.create = to_raw_response_wrapper(
-            predictions.create,
+        self.run = to_raw_response_wrapper(
+            predictions.run,
         )
         self.status = to_raw_response_wrapper(
             predictions.status,
@@ -878,8 +878,8 @@ class AsyncPredictionsResourceWithRawResponse:
     def __init__(self, predictions: AsyncPredictionsResource) -> None:
         self._predictions = predictions
 
-        self.create = async_to_raw_response_wrapper(
-            predictions.create,
+        self.run = async_to_raw_response_wrapper(
+            predictions.run,
         )
         self.status = async_to_raw_response_wrapper(
             predictions.status,
@@ -890,8 +890,8 @@ class PredictionsResourceWithStreamingResponse:
     def __init__(self, predictions: PredictionsResource) -> None:
         self._predictions = predictions
 
-        self.create = to_streamed_response_wrapper(
-            predictions.create,
+        self.run = to_streamed_response_wrapper(
+            predictions.run,
         )
         self.status = to_streamed_response_wrapper(
             predictions.status,
@@ -902,8 +902,8 @@ class AsyncPredictionsResourceWithStreamingResponse:
     def __init__(self, predictions: AsyncPredictionsResource) -> None:
         self._predictions = predictions
 
-        self.create = async_to_streamed_response_wrapper(
-            predictions.create,
+        self.run = async_to_streamed_response_wrapper(
+            predictions.run,
         )
         self.status = async_to_streamed_response_wrapper(
             predictions.status,

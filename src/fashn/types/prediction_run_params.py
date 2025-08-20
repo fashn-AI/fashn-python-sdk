@@ -6,7 +6,7 @@ from typing import Union
 from typing_extensions import Literal, Required, TypeAlias, TypedDict
 
 __all__ = [
-    "PredictionCreateParams",
+    "PredictionRunParams",
     "TryOnRequest",
     "TryOnRequestInputs",
     "ModelCreateRequest",
@@ -575,7 +575,7 @@ class BackgroundRemoveRequestInputs(TypedDict, total=False):
     """
 
 
-PredictionCreateParams: TypeAlias = Union[
+PredictionRunParams: TypeAlias = Union[
     TryOnRequest,
     ModelCreateRequest,
     ModelVariationRequest,

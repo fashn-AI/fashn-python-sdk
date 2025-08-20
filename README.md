@@ -35,14 +35,14 @@ client = Fashn(
     api_key=os.environ.get("FASHN_API_KEY"),  # This is the default and can be omitted
 )
 
-prediction = client.predictions.create(
+response = client.predictions.run(
     inputs={
         "garment_image": "https://example.com/garment.jpg",
         "model_image": "https://example.com/model.jpg",
     },
     model_name="tryon-v1.6",
 )
-print(prediction.id)
+print(response.id)
 ```
 
 While you can provide an `api_key` keyword argument,
@@ -65,14 +65,14 @@ client = AsyncFashn(
 
 
 async def main() -> None:
-    prediction = await client.predictions.create(
+    response = await client.predictions.run(
         inputs={
             "garment_image": "https://example.com/garment.jpg",
             "model_image": "https://example.com/model.jpg",
         },
         model_name="tryon-v1.6",
     )
-    print(prediction.id)
+    print(response.id)
 
 
 asyncio.run(main())
@@ -104,14 +104,14 @@ async def main() -> None:
         api_key="My API Key",
         http_client=DefaultAioHttpClient(),
     ) as client:
-        prediction = await client.predictions.create(
+        response = await client.predictions.run(
             inputs={
                 "garment_image": "https://example.com/garment.jpg",
                 "model_image": "https://example.com/model.jpg",
             },
             model_name="tryon-v1.6",
         )
-        print(prediction.id)
+        print(response.id)
 
 
 asyncio.run(main())
@@ -135,14 +135,14 @@ from fashn import Fashn
 
 client = Fashn()
 
-prediction = client.predictions.create(
+response = client.predictions.run(
     inputs={
         "garment_image": "https://example.com/garment.jpg",
         "model_image": "https://example.com/model.jpg",
     },
     model_name="tryon-v1.6",
 )
-print(prediction.inputs)
+print(response.inputs)
 ```
 
 ## Handling errors
@@ -161,7 +161,7 @@ from fashn import Fashn
 client = Fashn()
 
 try:
-    client.predictions.create(
+    client.predictions.run(
         inputs={
             "garment_image": "https://example.com/garment.jpg",
             "model_image": "https://example.com/model.jpg",
@@ -210,7 +210,7 @@ client = Fashn(
 )
 
 # Or, configure per-request:
-client.with_options(max_retries=5).predictions.create(
+client.with_options(max_retries=5).predictions.run(
     inputs={
         "garment_image": "https://example.com/garment.jpg",
         "model_image": "https://example.com/model.jpg",
@@ -239,7 +239,7 @@ client = Fashn(
 )
 
 # Override per-request:
-client.with_options(timeout=5.0).predictions.create(
+client.with_options(timeout=5.0).predictions.run(
     inputs={
         "garment_image": "https://example.com/garment.jpg",
         "model_image": "https://example.com/model.jpg",
@@ -286,7 +286,7 @@ The "raw" Response object can be accessed by prefixing `.with_raw_response.` to 
 from fashn import Fashn
 
 client = Fashn()
-response = client.predictions.with_raw_response.create(
+response = client.predictions.with_raw_response.run(
     inputs={
         "garment_image": "https://example.com/garment.jpg",
         "model_image": "https://example.com/model.jpg",
@@ -295,7 +295,7 @@ response = client.predictions.with_raw_response.create(
 )
 print(response.headers.get('X-My-Header'))
 
-prediction = response.parse()  # get the object that `predictions.create()` would have returned
+prediction = response.parse()  # get the object that `predictions.run()` would have returned
 print(prediction.id)
 ```
 
@@ -310,7 +310,7 @@ The above interface eagerly reads the full response body when you make the reque
 To stream the response body, use `.with_streaming_response` instead, which requires a context manager and only reads the response body once you call `.read()`, `.text()`, `.json()`, `.iter_bytes()`, `.iter_text()`, `.iter_lines()` or `.parse()`. In the async client, these are async methods.
 
 ```python
-with client.predictions.with_streaming_response.create(
+with client.predictions.with_streaming_response.run(
     inputs={
         "garment_image": "https://example.com/garment.jpg",
         "model_image": "https://example.com/model.jpg",
