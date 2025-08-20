@@ -4,10 +4,10 @@ from typing import Optional
 
 from .._models import BaseModel
 
-__all__ = ["PredictionCreateResponse"]
+__all__ = ["PredictionRunResponse"]
 
 
-class PredictionCreateResponse(BaseModel):
+class PredictionRunResponse(BaseModel):
     id: str
     """Unique prediction identifier"""
 

@@ -8,7 +8,7 @@ from typing import Any, cast
 import pytest
 
 from fashn import Fashn, AsyncFashn
-from fashn.types import PredictionCreateResponse, PredictionStatusResponse
+from fashn.types import PredictionRunResponse, PredictionStatusResponse
 from tests.utils import assert_matches_type
 
 base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
@@ -19,20 +19,20 @@ class TestPredictions:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    def test_method_create_overload_1(self, client: Fashn) -> None:
-        prediction = client.predictions.create(
+    def test_method_run_overload_1(self, client: Fashn) -> None:
+        prediction = client.predictions.run(
             inputs={
                 "garment_image": "https://example.com/garment.jpg",
                 "model_image": "https://example.com/model.jpg",
             },
             model_name="tryon-v1.6",
         )
-        assert_matches_type(PredictionCreateResponse, prediction, path=["response"])
+        assert_matches_type(PredictionRunResponse, prediction, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    def test_method_create_with_all_params_overload_1(self, client: Fashn) -> None:
-        prediction = client.predictions.create(
+    def test_method_run_with_all_params_overload_1(self, client: Fashn) -> None:
+        prediction = client.predictions.run(
             inputs={
                 "garment_image": "https://example.com/garment.jpg",
                 "model_image": "https://example.com/model.jpg",
@@ -49,12 +49,12 @@ class TestPredictions:
             model_name="tryon-v1.6",
             webhook_url="https://example.com/webhook",
         )
-        assert_matches_type(PredictionCreateResponse, prediction, path=["response"])
+        assert_matches_type(PredictionRunResponse, prediction, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    def test_raw_response_create_overload_1(self, client: Fashn) -> None:
-        response = client.predictions.with_raw_response.create(
+    def test_raw_response_run_overload_1(self, client: Fashn) -> None:
+        response = client.predictions.with_raw_response.run(
             inputs={
                 "garment_image": "https://example.com/garment.jpg",
                 "model_image": "https://example.com/model.jpg",
@@ -65,12 +65,12 @@ class TestPredictions:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         prediction = response.parse()
-        assert_matches_type(PredictionCreateResponse, prediction, path=["response"])
+        assert_matches_type(PredictionRunResponse, prediction, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    def test_streaming_response_create_overload_1(self, client: Fashn) -> None:
-        with client.predictions.with_streaming_response.create(
+    def test_streaming_response_run_overload_1(self, client: Fashn) -> None:
+        with client.predictions.with_streaming_response.run(
             inputs={
                 "garment_image": "https://example.com/garment.jpg",
                 "model_image": "https://example.com/model.jpg",
@@ -81,23 +81,23 @@ class TestPredictions:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             prediction = response.parse()
-            assert_matches_type(PredictionCreateResponse, prediction, path=["response"])
+            assert_matches_type(PredictionRunResponse, prediction, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    def test_method_create_overload_2(self, client: Fashn) -> None:
-        prediction = client.predictions.create(
+    def test_method_run_overload_2(self, client: Fashn) -> None:
+        prediction = client.predictions.run(
             inputs={"prompt": "A professional model wearing casual clothes"},
             model_name="model-create",
         )
-        assert_matches_type(PredictionCreateResponse, prediction, path=["response"])
+        assert_matches_type(PredictionRunResponse, prediction, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    def test_method_create_with_all_params_overload_2(self, client: Fashn) -> None:
-        prediction = client.predictions.create(
+    def test_method_run_with_all_params_overload_2(self, client: Fashn) -> None:
+        prediction = client.predictions.run(
             inputs={
                 "prompt": "A professional model wearing casual clothes",
                 "aspect_ratio": "1:1",
@@ -112,12 +112,12 @@ class TestPredictions:
             model_name="model-create",
             webhook_url="https://example.com/webhook",
         )
-        assert_matches_type(PredictionCreateResponse, prediction, path=["response"])
+        assert_matches_type(PredictionRunResponse, prediction, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    def test_raw_response_create_overload_2(self, client: Fashn) -> None:
-        response = client.predictions.with_raw_response.create(
+    def test_raw_response_run_overload_2(self, client: Fashn) -> None:
+        response = client.predictions.with_raw_response.run(
             inputs={"prompt": "A professional model wearing casual clothes"},
             model_name="model-create",
         )
@@ -125,12 +125,12 @@ class TestPredictions:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         prediction = response.parse()
-        assert_matches_type(PredictionCreateResponse, prediction, path=["response"])
+        assert_matches_type(PredictionRunResponse, prediction, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    def test_streaming_response_create_overload_2(self, client: Fashn) -> None:
-        with client.predictions.with_streaming_response.create(
+    def test_streaming_response_run_overload_2(self, client: Fashn) -> None:
+        with client.predictions.with_streaming_response.run(
             inputs={"prompt": "A professional model wearing casual clothes"},
             model_name="model-create",
         ) as response:
@@ -138,23 +138,23 @@ class TestPredictions:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             prediction = response.parse()
-            assert_matches_type(PredictionCreateResponse, prediction, path=["response"])
+            assert_matches_type(PredictionRunResponse, prediction, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    def test_method_create_overload_3(self, client: Fashn) -> None:
-        prediction = client.predictions.create(
+    def test_method_run_overload_3(self, client: Fashn) -> None:
+        prediction = client.predictions.run(
             inputs={"model_image": "https://example.com/model.jpg"},
             model_name="model-variation",
         )
-        assert_matches_type(PredictionCreateResponse, prediction, path=["response"])
+        assert_matches_type(PredictionRunResponse, prediction, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    def test_method_create_with_all_params_overload_3(self, client: Fashn) -> None:
-        prediction = client.predictions.create(
+    def test_method_run_with_all_params_overload_3(self, client: Fashn) -> None:
+        prediction = client.predictions.run(
             inputs={
                 "model_image": "https://example.com/model.jpg",
                 "lora_url": "https://example.com/custom_identity.safetensors",
@@ -166,12 +166,12 @@ class TestPredictions:
             model_name="model-variation",
             webhook_url="https://example.com/webhook",
         )
-        assert_matches_type(PredictionCreateResponse, prediction, path=["response"])
+        assert_matches_type(PredictionRunResponse, prediction, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    def test_raw_response_create_overload_3(self, client: Fashn) -> None:
-        response = client.predictions.with_raw_response.create(
+    def test_raw_response_run_overload_3(self, client: Fashn) -> None:
+        response = client.predictions.with_raw_response.run(
             inputs={"model_image": "https://example.com/model.jpg"},
             model_name="model-variation",
         )
@@ -179,12 +179,12 @@ class TestPredictions:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         prediction = response.parse()
-        assert_matches_type(PredictionCreateResponse, prediction, path=["response"])
+        assert_matches_type(PredictionRunResponse, prediction, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    def test_streaming_response_create_overload_3(self, client: Fashn) -> None:
-        with client.predictions.with_streaming_response.create(
+    def test_streaming_response_run_overload_3(self, client: Fashn) -> None:
+        with client.predictions.with_streaming_response.run(
             inputs={"model_image": "https://example.com/model.jpg"},
             model_name="model-variation",
         ) as response:
@@ -192,23 +192,23 @@ class TestPredictions:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             prediction = response.parse()
-            assert_matches_type(PredictionCreateResponse, prediction, path=["response"])
+            assert_matches_type(PredictionRunResponse, prediction, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    def test_method_create_overload_4(self, client: Fashn) -> None:
-        prediction = client.predictions.create(
+    def test_method_run_overload_4(self, client: Fashn) -> None:
+        prediction = client.predictions.run(
             inputs={"model_image": "https://example.com/model.jpg"},
             model_name="model-swap",
         )
-        assert_matches_type(PredictionCreateResponse, prediction, path=["response"])
+        assert_matches_type(PredictionRunResponse, prediction, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    def test_method_create_with_all_params_overload_4(self, client: Fashn) -> None:
-        prediction = client.predictions.create(
+    def test_method_run_with_all_params_overload_4(self, client: Fashn) -> None:
+        prediction = client.predictions.run(
             inputs={
                 "model_image": "https://example.com/model.jpg",
                 "background_change": True,
@@ -222,12 +222,12 @@ class TestPredictions:
             model_name="model-swap",
             webhook_url="https://example.com/webhook",
         )
-        assert_matches_type(PredictionCreateResponse, prediction, path=["response"])
+        assert_matches_type(PredictionRunResponse, prediction, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    def test_raw_response_create_overload_4(self, client: Fashn) -> None:
-        response = client.predictions.with_raw_response.create(
+    def test_raw_response_run_overload_4(self, client: Fashn) -> None:
+        response = client.predictions.with_raw_response.run(
             inputs={"model_image": "https://example.com/model.jpg"},
             model_name="model-swap",
         )
@@ -235,12 +235,12 @@ class TestPredictions:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         prediction = response.parse()
-        assert_matches_type(PredictionCreateResponse, prediction, path=["response"])
+        assert_matches_type(PredictionRunResponse, prediction, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    def test_streaming_response_create_overload_4(self, client: Fashn) -> None:
-        with client.predictions.with_streaming_response.create(
+    def test_streaming_response_run_overload_4(self, client: Fashn) -> None:
+        with client.predictions.with_streaming_response.run(
             inputs={"model_image": "https://example.com/model.jpg"},
             model_name="model-swap",
         ) as response:
@@ -248,23 +248,23 @@ class TestPredictions:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             prediction = response.parse()
-            assert_matches_type(PredictionCreateResponse, prediction, path=["response"])
+            assert_matches_type(PredictionRunResponse, prediction, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    def test_method_create_overload_5(self, client: Fashn) -> None:
-        prediction = client.predictions.create(
+    def test_method_run_overload_5(self, client: Fashn) -> None:
+        prediction = client.predictions.run(
             inputs={"image": "https://example.com/image.jpg"},
             model_name="reframe",
         )
-        assert_matches_type(PredictionCreateResponse, prediction, path=["response"])
+        assert_matches_type(PredictionRunResponse, prediction, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    def test_method_create_with_all_params_overload_5(self, client: Fashn) -> None:
-        prediction = client.predictions.create(
+    def test_method_run_with_all_params_overload_5(self, client: Fashn) -> None:
+        prediction = client.predictions.run(
             inputs={
                 "image": "https://example.com/image.jpg",
                 "mode": "direction",
@@ -277,12 +277,12 @@ class TestPredictions:
             model_name="reframe",
             webhook_url="https://example.com/webhook",
         )
-        assert_matches_type(PredictionCreateResponse, prediction, path=["response"])
+        assert_matches_type(PredictionRunResponse, prediction, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    def test_raw_response_create_overload_5(self, client: Fashn) -> None:
-        response = client.predictions.with_raw_response.create(
+    def test_raw_response_run_overload_5(self, client: Fashn) -> None:
+        response = client.predictions.with_raw_response.run(
             inputs={"image": "https://example.com/image.jpg"},
             model_name="reframe",
         )
@@ -290,12 +290,12 @@ class TestPredictions:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         prediction = response.parse()
-        assert_matches_type(PredictionCreateResponse, prediction, path=["response"])
+        assert_matches_type(PredictionRunResponse, prediction, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    def test_streaming_response_create_overload_5(self, client: Fashn) -> None:
-        with client.predictions.with_streaming_response.create(
+    def test_streaming_response_run_overload_5(self, client: Fashn) -> None:
+        with client.predictions.with_streaming_response.run(
             inputs={"image": "https://example.com/image.jpg"},
             model_name="reframe",
         ) as response:
@@ -303,23 +303,23 @@ class TestPredictions:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             prediction = response.parse()
-            assert_matches_type(PredictionCreateResponse, prediction, path=["response"])
+            assert_matches_type(PredictionRunResponse, prediction, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    def test_method_create_overload_6(self, client: Fashn) -> None:
-        prediction = client.predictions.create(
+    def test_method_run_overload_6(self, client: Fashn) -> None:
+        prediction = client.predictions.run(
             inputs={"image": "https://example.com/image.jpg"},
             model_name="background-change",
         )
-        assert_matches_type(PredictionCreateResponse, prediction, path=["response"])
+        assert_matches_type(PredictionRunResponse, prediction, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    def test_method_create_with_all_params_overload_6(self, client: Fashn) -> None:
-        prediction = client.predictions.create(
+    def test_method_run_with_all_params_overload_6(self, client: Fashn) -> None:
+        prediction = client.predictions.run(
             inputs={
                 "image": "https://example.com/image.jpg",
                 "background_prompt": "A beautiful sunset beach scene",
@@ -331,12 +331,12 @@ class TestPredictions:
             model_name="background-change",
             webhook_url="https://example.com/webhook",
         )
-        assert_matches_type(PredictionCreateResponse, prediction, path=["response"])
+        assert_matches_type(PredictionRunResponse, prediction, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    def test_raw_response_create_overload_6(self, client: Fashn) -> None:
-        response = client.predictions.with_raw_response.create(
+    def test_raw_response_run_overload_6(self, client: Fashn) -> None:
+        response = client.predictions.with_raw_response.run(
             inputs={"image": "https://example.com/image.jpg"},
             model_name="background-change",
         )
@@ -344,12 +344,12 @@ class TestPredictions:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         prediction = response.parse()
-        assert_matches_type(PredictionCreateResponse, prediction, path=["response"])
+        assert_matches_type(PredictionRunResponse, prediction, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    def test_streaming_response_create_overload_6(self, client: Fashn) -> None:
-        with client.predictions.with_streaming_response.create(
+    def test_streaming_response_run_overload_6(self, client: Fashn) -> None:
+        with client.predictions.with_streaming_response.run(
             inputs={"image": "https://example.com/image.jpg"},
             model_name="background-change",
         ) as response:
@@ -357,23 +357,23 @@ class TestPredictions:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             prediction = response.parse()
-            assert_matches_type(PredictionCreateResponse, prediction, path=["response"])
+            assert_matches_type(PredictionRunResponse, prediction, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    def test_method_create_overload_7(self, client: Fashn) -> None:
-        prediction = client.predictions.create(
+    def test_method_run_overload_7(self, client: Fashn) -> None:
+        prediction = client.predictions.run(
             inputs={"image": "https://example.com/image.jpg"},
             model_name="background-remove",
         )
-        assert_matches_type(PredictionCreateResponse, prediction, path=["response"])
+        assert_matches_type(PredictionRunResponse, prediction, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    def test_method_create_with_all_params_overload_7(self, client: Fashn) -> None:
-        prediction = client.predictions.create(
+    def test_method_run_with_all_params_overload_7(self, client: Fashn) -> None:
+        prediction = client.predictions.run(
             inputs={
                 "image": "https://example.com/image.jpg",
                 "return_base64": True,
@@ -381,12 +381,12 @@ class TestPredictions:
             model_name="background-remove",
             webhook_url="https://example.com/webhook",
         )
-        assert_matches_type(PredictionCreateResponse, prediction, path=["response"])
+        assert_matches_type(PredictionRunResponse, prediction, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    def test_raw_response_create_overload_7(self, client: Fashn) -> None:
-        response = client.predictions.with_raw_response.create(
+    def test_raw_response_run_overload_7(self, client: Fashn) -> None:
+        response = client.predictions.with_raw_response.run(
             inputs={"image": "https://example.com/image.jpg"},
             model_name="background-remove",
         )
@@ -394,12 +394,12 @@ class TestPredictions:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         prediction = response.parse()
-        assert_matches_type(PredictionCreateResponse, prediction, path=["response"])
+        assert_matches_type(PredictionRunResponse, prediction, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    def test_streaming_response_create_overload_7(self, client: Fashn) -> None:
-        with client.predictions.with_streaming_response.create(
+    def test_streaming_response_run_overload_7(self, client: Fashn) -> None:
+        with client.predictions.with_streaming_response.run(
             inputs={"image": "https://example.com/image.jpg"},
             model_name="background-remove",
         ) as response:
@@ -407,7 +407,7 @@ class TestPredictions:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             prediction = response.parse()
-            assert_matches_type(PredictionCreateResponse, prediction, path=["response"])
+            assert_matches_type(PredictionRunResponse, prediction, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -461,20 +461,20 @@ class TestAsyncPredictions:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    async def test_method_create_overload_1(self, async_client: AsyncFashn) -> None:
-        prediction = await async_client.predictions.create(
+    async def test_method_run_overload_1(self, async_client: AsyncFashn) -> None:
+        prediction = await async_client.predictions.run(
             inputs={
                 "garment_image": "https://example.com/garment.jpg",
                 "model_image": "https://example.com/model.jpg",
             },
             model_name="tryon-v1.6",
         )
-        assert_matches_type(PredictionCreateResponse, prediction, path=["response"])
+        assert_matches_type(PredictionRunResponse, prediction, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    async def test_method_create_with_all_params_overload_1(self, async_client: AsyncFashn) -> None:
-        prediction = await async_client.predictions.create(
+    async def test_method_run_with_all_params_overload_1(self, async_client: AsyncFashn) -> None:
+        prediction = await async_client.predictions.run(
             inputs={
                 "garment_image": "https://example.com/garment.jpg",
                 "model_image": "https://example.com/model.jpg",
@@ -491,12 +491,12 @@ class TestAsyncPredictions:
             model_name="tryon-v1.6",
             webhook_url="https://example.com/webhook",
         )
-        assert_matches_type(PredictionCreateResponse, prediction, path=["response"])
+        assert_matches_type(PredictionRunResponse, prediction, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    async def test_raw_response_create_overload_1(self, async_client: AsyncFashn) -> None:
-        response = await async_client.predictions.with_raw_response.create(
+    async def test_raw_response_run_overload_1(self, async_client: AsyncFashn) -> None:
+        response = await async_client.predictions.with_raw_response.run(
             inputs={
                 "garment_image": "https://example.com/garment.jpg",
                 "model_image": "https://example.com/model.jpg",
@@ -507,12 +507,12 @@ class TestAsyncPredictions:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         prediction = await response.parse()
-        assert_matches_type(PredictionCreateResponse, prediction, path=["response"])
+        assert_matches_type(PredictionRunResponse, prediction, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    async def test_streaming_response_create_overload_1(self, async_client: AsyncFashn) -> None:
-        async with async_client.predictions.with_streaming_response.create(
+    async def test_streaming_response_run_overload_1(self, async_client: AsyncFashn) -> None:
+        async with async_client.predictions.with_streaming_response.run(
             inputs={
                 "garment_image": "https://example.com/garment.jpg",
                 "model_image": "https://example.com/model.jpg",
@@ -523,23 +523,23 @@ class TestAsyncPredictions:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             prediction = await response.parse()
-            assert_matches_type(PredictionCreateResponse, prediction, path=["response"])
+            assert_matches_type(PredictionRunResponse, prediction, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    async def test_method_create_overload_2(self, async_client: AsyncFashn) -> None:
-        prediction = await async_client.predictions.create(
+    async def test_method_run_overload_2(self, async_client: AsyncFashn) -> None:
+        prediction = await async_client.predictions.run(
             inputs={"prompt": "A professional model wearing casual clothes"},
             model_name="model-create",
         )
-        assert_matches_type(PredictionCreateResponse, prediction, path=["response"])
+        assert_matches_type(PredictionRunResponse, prediction, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    async def test_method_create_with_all_params_overload_2(self, async_client: AsyncFashn) -> None:
-        prediction = await async_client.predictions.create(
+    async def test_method_run_with_all_params_overload_2(self, async_client: AsyncFashn) -> None:
+        prediction = await async_client.predictions.run(
             inputs={
                 "prompt": "A professional model wearing casual clothes",
                 "aspect_ratio": "1:1",
@@ -554,12 +554,12 @@ class TestAsyncPredictions:
             model_name="model-create",
             webhook_url="https://example.com/webhook",
         )
-        assert_matches_type(PredictionCreateResponse, prediction, path=["response"])
+        assert_matches_type(PredictionRunResponse, prediction, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    async def test_raw_response_create_overload_2(self, async_client: AsyncFashn) -> None:
-        response = await async_client.predictions.with_raw_response.create(
+    async def test_raw_response_run_overload_2(self, async_client: AsyncFashn) -> None:
+        response = await async_client.predictions.with_raw_response.run(
             inputs={"prompt": "A professional model wearing casual clothes"},
             model_name="model-create",
         )
@@ -567,12 +567,12 @@ class TestAsyncPredictions:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         prediction = await response.parse()
-        assert_matches_type(PredictionCreateResponse, prediction, path=["response"])
+        assert_matches_type(PredictionRunResponse, prediction, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    async def test_streaming_response_create_overload_2(self, async_client: AsyncFashn) -> None:
-        async with async_client.predictions.with_streaming_response.create(
+    async def test_streaming_response_run_overload_2(self, async_client: AsyncFashn) -> None:
+        async with async_client.predictions.with_streaming_response.run(
             inputs={"prompt": "A professional model wearing casual clothes"},
             model_name="model-create",
         ) as response:
@@ -580,23 +580,23 @@ class TestAsyncPredictions:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             prediction = await response.parse()
-            assert_matches_type(PredictionCreateResponse, prediction, path=["response"])
+            assert_matches_type(PredictionRunResponse, prediction, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    async def test_method_create_overload_3(self, async_client: AsyncFashn) -> None:
-        prediction = await async_client.predictions.create(
+    async def test_method_run_overload_3(self, async_client: AsyncFashn) -> None:
+        prediction = await async_client.predictions.run(
             inputs={"model_image": "https://example.com/model.jpg"},
             model_name="model-variation",
         )
-        assert_matches_type(PredictionCreateResponse, prediction, path=["response"])
+        assert_matches_type(PredictionRunResponse, prediction, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    async def test_method_create_with_all_params_overload_3(self, async_client: AsyncFashn) -> None:
-        prediction = await async_client.predictions.create(
+    async def test_method_run_with_all_params_overload_3(self, async_client: AsyncFashn) -> None:
+        prediction = await async_client.predictions.run(
             inputs={
                 "model_image": "https://example.com/model.jpg",
                 "lora_url": "https://example.com/custom_identity.safetensors",
@@ -608,12 +608,12 @@ class TestAsyncPredictions:
             model_name="model-variation",
             webhook_url="https://example.com/webhook",
         )
-        assert_matches_type(PredictionCreateResponse, prediction, path=["response"])
+        assert_matches_type(PredictionRunResponse, prediction, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    async def test_raw_response_create_overload_3(self, async_client: AsyncFashn) -> None:
-        response = await async_client.predictions.with_raw_response.create(
+    async def test_raw_response_run_overload_3(self, async_client: AsyncFashn) -> None:
+        response = await async_client.predictions.with_raw_response.run(
             inputs={"model_image": "https://example.com/model.jpg"},
             model_name="model-variation",
         )
@@ -621,12 +621,12 @@ class TestAsyncPredictions:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         prediction = await response.parse()
-        assert_matches_type(PredictionCreateResponse, prediction, path=["response"])
+        assert_matches_type(PredictionRunResponse, prediction, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    async def test_streaming_response_create_overload_3(self, async_client: AsyncFashn) -> None:
-        async with async_client.predictions.with_streaming_response.create(
+    async def test_streaming_response_run_overload_3(self, async_client: AsyncFashn) -> None:
+        async with async_client.predictions.with_streaming_response.run(
             inputs={"model_image": "https://example.com/model.jpg"},
             model_name="model-variation",
         ) as response:
@@ -634,23 +634,23 @@ class TestAsyncPredictions:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             prediction = await response.parse()
-            assert_matches_type(PredictionCreateResponse, prediction, path=["response"])
+            assert_matches_type(PredictionRunResponse, prediction, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    async def test_method_create_overload_4(self, async_client: AsyncFashn) -> None:
-        prediction = await async_client.predictions.create(
+    async def test_method_run_overload_4(self, async_client: AsyncFashn) -> None:
+        prediction = await async_client.predictions.run(
             inputs={"model_image": "https://example.com/model.jpg"},
             model_name="model-swap",
         )
-        assert_matches_type(PredictionCreateResponse, prediction, path=["response"])
+        assert_matches_type(PredictionRunResponse, prediction, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    async def test_method_create_with_all_params_overload_4(self, async_client: AsyncFashn) -> None:
-        prediction = await async_client.predictions.create(
+    async def test_method_run_with_all_params_overload_4(self, async_client: AsyncFashn) -> None:
+        prediction = await async_client.predictions.run(
             inputs={
                 "model_image": "https://example.com/model.jpg",
                 "background_change": True,
@@ -664,12 +664,12 @@ class TestAsyncPredictions:
             model_name="model-swap",
             webhook_url="https://example.com/webhook",
         )
-        assert_matches_type(PredictionCreateResponse, prediction, path=["response"])
+        assert_matches_type(PredictionRunResponse, prediction, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    async def test_raw_response_create_overload_4(self, async_client: AsyncFashn) -> None:
-        response = await async_client.predictions.with_raw_response.create(
+    async def test_raw_response_run_overload_4(self, async_client: AsyncFashn) -> None:
+        response = await async_client.predictions.with_raw_response.run(
             inputs={"model_image": "https://example.com/model.jpg"},
             model_name="model-swap",
         )
@@ -677,12 +677,12 @@ class TestAsyncPredictions:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         prediction = await response.parse()
-        assert_matches_type(PredictionCreateResponse, prediction, path=["response"])
+        assert_matches_type(PredictionRunResponse, prediction, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    async def test_streaming_response_create_overload_4(self, async_client: AsyncFashn) -> None:
-        async with async_client.predictions.with_streaming_response.create(
+    async def test_streaming_response_run_overload_4(self, async_client: AsyncFashn) -> None:
+        async with async_client.predictions.with_streaming_response.run(
             inputs={"model_image": "https://example.com/model.jpg"},
             model_name="model-swap",
         ) as response:
@@ -690,23 +690,23 @@ class TestAsyncPredictions:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             prediction = await response.parse()
-            assert_matches_type(PredictionCreateResponse, prediction, path=["response"])
+            assert_matches_type(PredictionRunResponse, prediction, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    async def test_method_create_overload_5(self, async_client: AsyncFashn) -> None:
-        prediction = await async_client.predictions.create(
+    async def test_method_run_overload_5(self, async_client: AsyncFashn) -> None:
+        prediction = await async_client.predictions.run(
             inputs={"image": "https://example.com/image.jpg"},
             model_name="reframe",
         )
-        assert_matches_type(PredictionCreateResponse, prediction, path=["response"])
+        assert_matches_type(PredictionRunResponse, prediction, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    async def test_method_create_with_all_params_overload_5(self, async_client: AsyncFashn) -> None:
-        prediction = await async_client.predictions.create(
+    async def test_method_run_with_all_params_overload_5(self, async_client: AsyncFashn) -> None:
+        prediction = await async_client.predictions.run(
             inputs={
                 "image": "https://example.com/image.jpg",
                 "mode": "direction",
@@ -719,12 +719,12 @@ class TestAsyncPredictions:
             model_name="reframe",
             webhook_url="https://example.com/webhook",
         )
-        assert_matches_type(PredictionCreateResponse, prediction, path=["response"])
+        assert_matches_type(PredictionRunResponse, prediction, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    async def test_raw_response_create_overload_5(self, async_client: AsyncFashn) -> None:
-        response = await async_client.predictions.with_raw_response.create(
+    async def test_raw_response_run_overload_5(self, async_client: AsyncFashn) -> None:
+        response = await async_client.predictions.with_raw_response.run(
             inputs={"image": "https://example.com/image.jpg"},
             model_name="reframe",
         )
@@ -732,12 +732,12 @@ class TestAsyncPredictions:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         prediction = await response.parse()
-        assert_matches_type(PredictionCreateResponse, prediction, path=["response"])
+        assert_matches_type(PredictionRunResponse, prediction, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    async def test_streaming_response_create_overload_5(self, async_client: AsyncFashn) -> None:
-        async with async_client.predictions.with_streaming_response.create(
+    async def test_streaming_response_run_overload_5(self, async_client: AsyncFashn) -> None:
+        async with async_client.predictions.with_streaming_response.run(
             inputs={"image": "https://example.com/image.jpg"},
             model_name="reframe",
         ) as response:
@@ -745,23 +745,23 @@ class TestAsyncPredictions:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             prediction = await response.parse()
-            assert_matches_type(PredictionCreateResponse, prediction, path=["response"])
+            assert_matches_type(PredictionRunResponse, prediction, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    async def test_method_create_overload_6(self, async_client: AsyncFashn) -> None:
-        prediction = await async_client.predictions.create(
+    async def test_method_run_overload_6(self, async_client: AsyncFashn) -> None:
+        prediction = await async_client.predictions.run(
             inputs={"image": "https://example.com/image.jpg"},
             model_name="background-change",
         )
-        assert_matches_type(PredictionCreateResponse, prediction, path=["response"])
+        assert_matches_type(PredictionRunResponse, prediction, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    async def test_method_create_with_all_params_overload_6(self, async_client: AsyncFashn) -> None:
-        prediction = await async_client.predictions.create(
+    async def test_method_run_with_all_params_overload_6(self, async_client: AsyncFashn) -> None:
+        prediction = await async_client.predictions.run(
             inputs={
                 "image": "https://example.com/image.jpg",
                 "background_prompt": "A beautiful sunset beach scene",
@@ -773,12 +773,12 @@ class TestAsyncPredictions:
             model_name="background-change",
             webhook_url="https://example.com/webhook",
         )
-        assert_matches_type(PredictionCreateResponse, prediction, path=["response"])
+        assert_matches_type(PredictionRunResponse, prediction, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    async def test_raw_response_create_overload_6(self, async_client: AsyncFashn) -> None:
-        response = await async_client.predictions.with_raw_response.create(
+    async def test_raw_response_run_overload_6(self, async_client: AsyncFashn) -> None:
+        response = await async_client.predictions.with_raw_response.run(
             inputs={"image": "https://example.com/image.jpg"},
             model_name="background-change",
         )
@@ -786,12 +786,12 @@ class TestAsyncPredictions:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         prediction = await response.parse()
-        assert_matches_type(PredictionCreateResponse, prediction, path=["response"])
+        assert_matches_type(PredictionRunResponse, prediction, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    async def test_streaming_response_create_overload_6(self, async_client: AsyncFashn) -> None:
-        async with async_client.predictions.with_streaming_response.create(
+    async def test_streaming_response_run_overload_6(self, async_client: AsyncFashn) -> None:
+        async with async_client.predictions.with_streaming_response.run(
             inputs={"image": "https://example.com/image.jpg"},
             model_name="background-change",
         ) as response:
@@ -799,23 +799,23 @@ class TestAsyncPredictions:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             prediction = await response.parse()
-            assert_matches_type(PredictionCreateResponse, prediction, path=["response"])
+            assert_matches_type(PredictionRunResponse, prediction, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    async def test_method_create_overload_7(self, async_client: AsyncFashn) -> None:
-        prediction = await async_client.predictions.create(
+    async def test_method_run_overload_7(self, async_client: AsyncFashn) -> None:
+        prediction = await async_client.predictions.run(
             inputs={"image": "https://example.com/image.jpg"},
             model_name="background-remove",
         )
-        assert_matches_type(PredictionCreateResponse, prediction, path=["response"])
+        assert_matches_type(PredictionRunResponse, prediction, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    async def test_method_create_with_all_params_overload_7(self, async_client: AsyncFashn) -> None:
-        prediction = await async_client.predictions.create(
+    async def test_method_run_with_all_params_overload_7(self, async_client: AsyncFashn) -> None:
+        prediction = await async_client.predictions.run(
             inputs={
                 "image": "https://example.com/image.jpg",
                 "return_base64": True,
@@ -823,12 +823,12 @@ class TestAsyncPredictions:
             model_name="background-remove",
             webhook_url="https://example.com/webhook",
         )
-        assert_matches_type(PredictionCreateResponse, prediction, path=["response"])
+        assert_matches_type(PredictionRunResponse, prediction, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    async def test_raw_response_create_overload_7(self, async_client: AsyncFashn) -> None:
-        response = await async_client.predictions.with_raw_response.create(
+    async def test_raw_response_run_overload_7(self, async_client: AsyncFashn) -> None:
+        response = await async_client.predictions.with_raw_response.run(
             inputs={"image": "https://example.com/image.jpg"},
             model_name="background-remove",
         )
@@ -836,12 +836,12 @@ class TestAsyncPredictions:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         prediction = await response.parse()
-        assert_matches_type(PredictionCreateResponse, prediction, path=["response"])
+        assert_matches_type(PredictionRunResponse, prediction, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    async def test_streaming_response_create_overload_7(self, async_client: AsyncFashn) -> None:
-        async with async_client.predictions.with_streaming_response.create(
+    async def test_streaming_response_run_overload_7(self, async_client: AsyncFashn) -> None:
+        async with async_client.predictions.with_streaming_response.run(
             inputs={"image": "https://example.com/image.jpg"},
             model_name="background-remove",
         ) as response:
@@ -849,7 +849,7 @@ class TestAsyncPredictions:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             prediction = await response.parse()
-            assert_matches_type(PredictionCreateResponse, prediction, path=["response"])
+            assert_matches_type(PredictionRunResponse, prediction, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
