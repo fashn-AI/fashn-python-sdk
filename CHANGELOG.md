@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.1.1 (2025-08-25)
+
+Full Changelog: [v0.1.0...v0.1.1](https://github.com/fashn-AI/fashn-python-sdk/compare/v0.1.0...v0.1.1)
+
+### Documentation
+
+* **readme:** add companies logo and docs links ([f9d3691](https://github.com/fashn-AI/fashn-python-sdk/commit/f9d36914b08a393c9c574449f044d9709fa74d98))
+
 ## 0.1.0 (2025-08-25)
 
 Full Changelog: [v0.0.1...v0.1.0](https://github.com/fashn-AI/fashn-python-sdk/compare/v0.0.1...v0.1.0)
