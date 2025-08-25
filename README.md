@@ -1,17 +1,21 @@
-# Fashn Python API library
+# FASHN Python SDK
 
 <!-- prettier-ignore -->
 [![PyPI version](https://img.shields.io/pypi/v/fashn.svg?label=pypi%20(stable))](https://pypi.org/project/fashn/)
 
-The Fashn Python library provides convenient access to the Fashn REST API from any Python 3.8+
+![FASHN AI Try-On App](https://cilsrdpvqtgutxprdofn.supabase.co/storage/v1/object/public/assets/logo-enhanced_60x60.png)
+
+This library provides convenient access to the FASHN REST API from any Python 3.8+
 application. The library includes type definitions for all request params and response fields,
 and offers both synchronous and asynchronous clients powered by [httpx](https://github.com/encode/httpx).
 
-It is generated with [Stainless](https://www.stainless.com/).
+The REST API documentation can be found on [docs.fashn.ai](https://docs.fashn.ai) with a [playground](https://docs.fashn.ai/playground).
 
-## Documentation
+### API Key
+To use this SDK, you need to have an API key from a FASHN account.
 
-The REST API documentation can be found on [docs.fashn.ai](https://docs.fashn.ai). The full API of this library can be found in [api.md](api.md).
+Don't have an account yet? [Create an account](https://app.fashn.ai/?utm_source=nextjs-tryon-app&utm_medium=readme&utm_campaign=signup)
+If you already have an account, go to Developer API → API Keys → `+ Create new API key`
 
 ## Installation
 
