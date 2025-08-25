@@ -715,7 +715,7 @@ class TestFashn:
         respx_mock.post("/v1/run").mock(side_effect=httpx.TimeoutException("Test timeout error"))
 
         with pytest.raises(APITimeoutError):
-            client.predictions.with_streaming_response.create(
+            client.predictions.with_streaming_response.run(
                 inputs={
                     "garment_image": "https://example.com/garment.jpg",
                     "model_image": "https://example.com/model.jpg",
@@ -731,7 +731,7 @@ class TestFashn:
         respx_mock.post("/v1/run").mock(return_value=httpx.Response(500))
 
         with pytest.raises(APIStatusError):
-            client.predictions.with_streaming_response.create(
+            client.predictions.with_streaming_response.run(
                 inputs={
                     "garment_image": "https://example.com/garment.jpg",
                     "model_image": "https://example.com/model.jpg",
@@ -766,7 +766,7 @@ class TestFashn:
 
         respx_mock.post("/v1/run").mock(side_effect=retry_handler)
 
-        response = client.predictions.with_raw_response.create(
+        response = client.predictions.with_raw_response.run(
             inputs={
                 "garment_image": "https://example.com/garment.jpg",
                 "model_image": "https://example.com/model.jpg",
@@ -794,7 +794,7 @@ class TestFashn:
 
         respx_mock.post("/v1/run").mock(side_effect=retry_handler)
 
-        response = client.predictions.with_raw_response.create(
+        response = client.predictions.with_raw_response.run(
             inputs={
                 "garment_image": "https://example.com/garment.jpg",
                 "model_image": "https://example.com/model.jpg",
@@ -824,7 +824,7 @@ class TestFashn:
 
         respx_mock.post("/v1/run").mock(side_effect=retry_handler)
 
-        response = client.predictions.with_raw_response.create(
+        response = client.predictions.with_raw_response.run(
             inputs={
                 "garment_image": "https://example.com/garment.jpg",
                 "model_image": "https://example.com/model.jpg",
@@ -1558,7 +1558,7 @@ class TestAsyncFashn:
         respx_mock.post("/v1/run").mock(side_effect=httpx.TimeoutException("Test timeout error"))
 
         with pytest.raises(APITimeoutError):
-            await async_client.predictions.with_streaming_response.create(
+            await async_client.predictions.with_streaming_response.run(
                 inputs={
                     "garment_image": "https://example.com/garment.jpg",
                     "model_image": "https://example.com/model.jpg",
@@ -1574,7 +1574,7 @@ class TestAsyncFashn:
         respx_mock.post("/v1/run").mock(return_value=httpx.Response(500))
 
         with pytest.raises(APIStatusError):
-            await async_client.predictions.with_streaming_response.create(
+            await async_client.predictions.with_streaming_response.run(
                 inputs={
                     "garment_image": "https://example.com/garment.jpg",
                     "model_image": "https://example.com/model.jpg",
@@ -1610,7 +1610,7 @@ class TestAsyncFashn:
 
         respx_mock.post("/v1/run").mock(side_effect=retry_handler)
 
-        response = await client.predictions.with_raw_response.create(
+        response = await client.predictions.with_raw_response.run(
             inputs={
                 "garment_image": "https://example.com/garment.jpg",
                 "model_image": "https://example.com/model.jpg",
@@ -1641,7 +1641,7 @@ class TestAsyncFashn:
 
         respx_mock.post("/v1/run").mock(side_effect=retry_handler)
 
-        response = await client.predictions.with_raw_response.create(
+        response = await client.predictions.with_raw_response.run(
             inputs={
                 "garment_image": "https://example.com/garment.jpg",
                 "model_image": "https://example.com/model.jpg",
@@ -1672,7 +1672,7 @@ class TestAsyncFashn:
 
         respx_mock.post("/v1/run").mock(side_effect=retry_handler)
 
-        response = await client.predictions.with_raw_response.create(
+        response = await client.predictions.with_raw_response.run(
             inputs={
                 "garment_image": "https://example.com/garment.jpg",
                 "model_image": "https://example.com/model.jpg",

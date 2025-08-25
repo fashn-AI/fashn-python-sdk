@@ -16,12 +16,9 @@ The REST API documentation can be found on [docs.fashn.ai](https://docs.fashn.ai
 ## Installation
 
 ```sh
-# install from this staging repo
-pip install git+ssh://git@github.com/stainless-sdks/fashn-sdk-python.git
+# install from PyPI
+pip install fashn
 ```
-
-> [!NOTE]
-> Once this package is [published to PyPI](https://www.stainless.com/docs/guides/publish), this will become: `pip install fashn`
 
 ## Usage
 
@@ -35,14 +32,14 @@ client = Fashn(
     api_key=os.environ.get("FASHN_API_KEY"),  # This is the default and can be omitted
 )
 
-prediction = client.predictions.create(
+response = client.predictions.run(
     inputs={
         "garment_image": "https://example.com/garment.jpg",
         "model_image": "https://example.com/model.jpg",
     },
     model_name="tryon-v1.6",
 )
-print(prediction.id)
+print(response.id)
 ```
 
 While you can provide an `api_key` keyword argument,
@@ -65,14 +62,14 @@ client = AsyncFashn(
 
 
 async def main() -> None:
-    prediction = await client.predictions.create(
+    response = await client.predictions.run(
         inputs={
             "garment_image": "https://example.com/garment.jpg",
             "model_image": "https://example.com/model.jpg",
         },
         model_name="tryon-v1.6",
     )
-    print(prediction.id)
+    print(response.id)
 
 
 asyncio.run(main())
@@ -87,8 +84,8 @@ By default, the async client uses `httpx` for HTTP requests. However, for improv
 You can enable this by installing `aiohttp`:
 
 ```sh
-# install from this staging repo
-pip install 'fashn[aiohttp] @ git+ssh://git@github.com/stainless-sdks/fashn-sdk-python.git'
+# install from PyPI
+pip install fashn[aiohttp]
 ```
 
 Then you can enable it by instantiating the client with `http_client=DefaultAioHttpClient()`:
@@ -104,14 +101,14 @@ async def main() -> None:
         api_key="My API Key",
         http_client=DefaultAioHttpClient(),
     ) as client:
-        prediction = await client.predictions.create(
+        response = await client.predictions.run(
             inputs={
                 "garment_image": "https://example.com/garment.jpg",
                 "model_image": "https://example.com/model.jpg",
             },
             model_name="tryon-v1.6",
         )
-        print(prediction.id)
+        print(response.id)
 
 
 asyncio.run(main())
@@ -135,14 +132,14 @@ from fashn import Fashn
 
 client = Fashn()
 
-prediction = client.predictions.create(
+response = client.predictions.run(
     inputs={
         "garment_image": "https://example.com/garment.jpg",
         "model_image": "https://example.com/model.jpg",
     },
     model_name="tryon-v1.6",
 )
-print(prediction.inputs)
+print(response.inputs)
 ```
 
 ## Handling errors
@@ -161,7 +158,7 @@ from fashn import Fashn
 client = Fashn()
 
 try:
-    client.predictions.create(
+    client.predictions.run(
         inputs={
             "garment_image": "https://example.com/garment.jpg",
             "model_image": "https://example.com/model.jpg",
@@ -210,7 +207,7 @@ client = Fashn(
 )
 
 # Or, configure per-request:
-client.with_options(max_retries=5).predictions.create(
+client.with_options(max_retries=5).predictions.run(
     inputs={
         "garment_image": "https://example.com/garment.jpg",
         "model_image": "https://example.com/model.jpg",
@@ -239,7 +236,7 @@ client = Fashn(
 )
 
 # Override per-request:
-client.with_options(timeout=5.0).predictions.create(
+client.with_options(timeout=5.0).predictions.run(
     inputs={
         "garment_image": "https://example.com/garment.jpg",
         "model_image": "https://example.com/model.jpg",
@@ -286,7 +283,7 @@ The "raw" Response object can be accessed by prefixing `.with_raw_response.` to 
 from fashn import Fashn
 
 client = Fashn()
-response = client.predictions.with_raw_response.create(
+response = client.predictions.with_raw_response.run(
     inputs={
         "garment_image": "https://example.com/garment.jpg",
         "model_image": "https://example.com/model.jpg",
@@ -295,13 +292,13 @@ response = client.predictions.with_raw_response.create(
 )
 print(response.headers.get('X-My-Header'))
 
-prediction = response.parse()  # get the object that `predictions.create()` would have returned
+prediction = response.parse()  # get the object that `predictions.run()` would have returned
 print(prediction.id)
 ```
 
-These methods return an [`APIResponse`](https://github.com/stainless-sdks/fashn-sdk-python/tree/main/src/fashn/_response.py) object.
+These methods return an [`APIResponse`](https://github.com/fashn-AI/fashn-python-sdk/tree/main/src/fashn/_response.py) object.
 
-The async client returns an [`AsyncAPIResponse`](https://github.com/stainless-sdks/fashn-sdk-python/tree/main/src/fashn/_response.py) with the same structure, the only difference being `await`able methods for reading the response content.
+The async client returns an [`AsyncAPIResponse`](https://github.com/fashn-AI/fashn-python-sdk/tree/main/src/fashn/_response.py) with the same structure, the only difference being `await`able methods for reading the response content.
 
 #### `.with_streaming_response`
 
@@ -310,7 +307,7 @@ The above interface eagerly reads the full response body when you make the reque
 To stream the response body, use `.with_streaming_response` instead, which requires a context manager and only reads the response body once you call `.read()`, `.text()`, `.json()`, `.iter_bytes()`, `.iter_text()`, `.iter_lines()` or `.parse()`. In the async client, these are async methods.
 
 ```python
-with client.predictions.with_streaming_response.create(
+with client.predictions.with_streaming_response.run(
     inputs={
         "garment_image": "https://example.com/garment.jpg",
         "model_image": "https://example.com/model.jpg",
@@ -411,7 +408,7 @@ This package generally follows [SemVer](https://semver.org/spec/v2.0.0.html) con
 
 We take backwards-compatibility seriously and work hard to ensure you can rely on a smooth upgrade experience.
 
-We are keen for your feedback; please open an [issue](https://www.github.com/stainless-sdks/fashn-sdk-python/issues) with questions, bugs, or suggestions.
+We are keen for your feedback; please open an [issue](https://www.github.com/fashn-AI/fashn-python-sdk/issues) with questions, bugs, or suggestions.
 
 ### Determining the installed version
 
