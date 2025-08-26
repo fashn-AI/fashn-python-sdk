@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.1.2 (2025-08-26)
+
+Full Changelog: [v0.1.1...v0.1.2](https://github.com/fashn-AI/fashn-python-sdk/compare/v0.1.1...v0.1.2)
+
+### Chores
+
+* **internal:** change ci workflow machines ([94ff961](https://github.com/fashn-AI/fashn-python-sdk/commit/94ff961e1d80f4b1286cb40e057dd0d3c95c9d14))
+
 ## 0.1.1 (2025-08-25)
 
 Full Changelog: [v0.1.0...v0.1.1](https://github.com/fashn-AI/fashn-python-sdk/compare/v0.1.0...v0.1.1)
