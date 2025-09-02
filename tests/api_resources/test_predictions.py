@@ -89,6 +89,61 @@ class TestPredictions:
     @parametrize
     def test_method_run_overload_2(self, client: Fashn) -> None:
         prediction = client.predictions.run(
+            inputs={"product_image": "https://example.com/product.jpg"},
+            model_name="product-to-model",
+        )
+        assert_matches_type(PredictionRunResponse, prediction, path=["response"])
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    def test_method_run_with_all_params_overload_2(self, client: Fashn) -> None:
+        prediction = client.predictions.run(
+            inputs={
+                "product_image": "https://example.com/product.jpg",
+                "aspect_ratio": "1:1",
+                "model_image": "https://example.com/person.jpg",
+                "output_format": "png",
+                "prompt": "professional office setting",
+                "return_base64": True,
+                "seed": 0,
+            },
+            model_name="product-to-model",
+            webhook_url="https://example.com/webhook",
+        )
+        assert_matches_type(PredictionRunResponse, prediction, path=["response"])
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    def test_raw_response_run_overload_2(self, client: Fashn) -> None:
+        response = client.predictions.with_raw_response.run(
+            inputs={"product_image": "https://example.com/product.jpg"},
+            model_name="product-to-model",
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        prediction = response.parse()
+        assert_matches_type(PredictionRunResponse, prediction, path=["response"])
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    def test_streaming_response_run_overload_2(self, client: Fashn) -> None:
+        with client.predictions.with_streaming_response.run(
+            inputs={"product_image": "https://example.com/product.jpg"},
+            model_name="product-to-model",
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            prediction = response.parse()
+            assert_matches_type(PredictionRunResponse, prediction, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    def test_method_run_overload_3(self, client: Fashn) -> None:
+        prediction = client.predictions.run(
             inputs={"prompt": "A professional model wearing casual clothes"},
             model_name="model-create",
         )
@@ -96,7 +151,7 @@ class TestPredictions:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    def test_method_run_with_all_params_overload_2(self, client: Fashn) -> None:
+    def test_method_run_with_all_params_overload_3(self, client: Fashn) -> None:
         prediction = client.predictions.run(
             inputs={
                 "prompt": "A professional model wearing casual clothes",
@@ -116,7 +171,7 @@ class TestPredictions:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    def test_raw_response_run_overload_2(self, client: Fashn) -> None:
+    def test_raw_response_run_overload_3(self, client: Fashn) -> None:
         response = client.predictions.with_raw_response.run(
             inputs={"prompt": "A professional model wearing casual clothes"},
             model_name="model-create",
@@ -129,7 +184,7 @@ class TestPredictions:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    def test_streaming_response_run_overload_2(self, client: Fashn) -> None:
+    def test_streaming_response_run_overload_3(self, client: Fashn) -> None:
         with client.predictions.with_streaming_response.run(
             inputs={"prompt": "A professional model wearing casual clothes"},
             model_name="model-create",
@@ -144,7 +199,7 @@ class TestPredictions:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    def test_method_run_overload_3(self, client: Fashn) -> None:
+    def test_method_run_overload_4(self, client: Fashn) -> None:
         prediction = client.predictions.run(
             inputs={"model_image": "https://example.com/model.jpg"},
             model_name="model-variation",
@@ -153,7 +208,7 @@ class TestPredictions:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    def test_method_run_with_all_params_overload_3(self, client: Fashn) -> None:
+    def test_method_run_with_all_params_overload_4(self, client: Fashn) -> None:
         prediction = client.predictions.run(
             inputs={
                 "model_image": "https://example.com/model.jpg",
@@ -170,7 +225,7 @@ class TestPredictions:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    def test_raw_response_run_overload_3(self, client: Fashn) -> None:
+    def test_raw_response_run_overload_4(self, client: Fashn) -> None:
         response = client.predictions.with_raw_response.run(
             inputs={"model_image": "https://example.com/model.jpg"},
             model_name="model-variation",
@@ -183,7 +238,7 @@ class TestPredictions:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    def test_streaming_response_run_overload_3(self, client: Fashn) -> None:
+    def test_streaming_response_run_overload_4(self, client: Fashn) -> None:
         with client.predictions.with_streaming_response.run(
             inputs={"model_image": "https://example.com/model.jpg"},
             model_name="model-variation",
@@ -198,7 +253,7 @@ class TestPredictions:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    def test_method_run_overload_4(self, client: Fashn) -> None:
+    def test_method_run_overload_5(self, client: Fashn) -> None:
         prediction = client.predictions.run(
             inputs={"model_image": "https://example.com/model.jpg"},
             model_name="model-swap",
@@ -207,7 +262,7 @@ class TestPredictions:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    def test_method_run_with_all_params_overload_4(self, client: Fashn) -> None:
+    def test_method_run_with_all_params_overload_5(self, client: Fashn) -> None:
         prediction = client.predictions.run(
             inputs={
                 "model_image": "https://example.com/model.jpg",
@@ -226,7 +281,7 @@ class TestPredictions:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    def test_raw_response_run_overload_4(self, client: Fashn) -> None:
+    def test_raw_response_run_overload_5(self, client: Fashn) -> None:
         response = client.predictions.with_raw_response.run(
             inputs={"model_image": "https://example.com/model.jpg"},
             model_name="model-swap",
@@ -239,7 +294,7 @@ class TestPredictions:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    def test_streaming_response_run_overload_4(self, client: Fashn) -> None:
+    def test_streaming_response_run_overload_5(self, client: Fashn) -> None:
         with client.predictions.with_streaming_response.run(
             inputs={"model_image": "https://example.com/model.jpg"},
             model_name="model-swap",
@@ -254,7 +309,7 @@ class TestPredictions:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    def test_method_run_overload_5(self, client: Fashn) -> None:
+    def test_method_run_overload_6(self, client: Fashn) -> None:
         prediction = client.predictions.run(
             inputs={"image": "https://example.com/image.jpg"},
             model_name="reframe",
@@ -263,7 +318,7 @@ class TestPredictions:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    def test_method_run_with_all_params_overload_5(self, client: Fashn) -> None:
+    def test_method_run_with_all_params_overload_6(self, client: Fashn) -> None:
         prediction = client.predictions.run(
             inputs={
                 "image": "https://example.com/image.jpg",
@@ -281,7 +336,7 @@ class TestPredictions:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    def test_raw_response_run_overload_5(self, client: Fashn) -> None:
+    def test_raw_response_run_overload_6(self, client: Fashn) -> None:
         response = client.predictions.with_raw_response.run(
             inputs={"image": "https://example.com/image.jpg"},
             model_name="reframe",
@@ -294,7 +349,7 @@ class TestPredictions:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    def test_streaming_response_run_overload_5(self, client: Fashn) -> None:
+    def test_streaming_response_run_overload_6(self, client: Fashn) -> None:
         with client.predictions.with_streaming_response.run(
             inputs={"image": "https://example.com/image.jpg"},
             model_name="reframe",
@@ -309,7 +364,7 @@ class TestPredictions:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    def test_method_run_overload_6(self, client: Fashn) -> None:
+    def test_method_run_overload_7(self, client: Fashn) -> None:
         prediction = client.predictions.run(
             inputs={"image": "https://example.com/image.jpg"},
             model_name="background-change",
@@ -318,7 +373,7 @@ class TestPredictions:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    def test_method_run_with_all_params_overload_6(self, client: Fashn) -> None:
+    def test_method_run_with_all_params_overload_7(self, client: Fashn) -> None:
         prediction = client.predictions.run(
             inputs={
                 "image": "https://example.com/image.jpg",
@@ -335,7 +390,7 @@ class TestPredictions:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    def test_raw_response_run_overload_6(self, client: Fashn) -> None:
+    def test_raw_response_run_overload_7(self, client: Fashn) -> None:
         response = client.predictions.with_raw_response.run(
             inputs={"image": "https://example.com/image.jpg"},
             model_name="background-change",
@@ -348,7 +403,7 @@ class TestPredictions:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    def test_streaming_response_run_overload_6(self, client: Fashn) -> None:
+    def test_streaming_response_run_overload_7(self, client: Fashn) -> None:
         with client.predictions.with_streaming_response.run(
             inputs={"image": "https://example.com/image.jpg"},
             model_name="background-change",
@@ -363,7 +418,7 @@ class TestPredictions:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    def test_method_run_overload_7(self, client: Fashn) -> None:
+    def test_method_run_overload_8(self, client: Fashn) -> None:
         prediction = client.predictions.run(
             inputs={"image": "https://example.com/image.jpg"},
             model_name="background-remove",
@@ -372,7 +427,7 @@ class TestPredictions:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    def test_method_run_with_all_params_overload_7(self, client: Fashn) -> None:
+    def test_method_run_with_all_params_overload_8(self, client: Fashn) -> None:
         prediction = client.predictions.run(
             inputs={
                 "image": "https://example.com/image.jpg",
@@ -385,7 +440,7 @@ class TestPredictions:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    def test_raw_response_run_overload_7(self, client: Fashn) -> None:
+    def test_raw_response_run_overload_8(self, client: Fashn) -> None:
         response = client.predictions.with_raw_response.run(
             inputs={"image": "https://example.com/image.jpg"},
             model_name="background-remove",
@@ -398,7 +453,7 @@ class TestPredictions:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    def test_streaming_response_run_overload_7(self, client: Fashn) -> None:
+    def test_streaming_response_run_overload_8(self, client: Fashn) -> None:
         with client.predictions.with_streaming_response.run(
             inputs={"image": "https://example.com/image.jpg"},
             model_name="background-remove",
@@ -531,6 +586,61 @@ class TestAsyncPredictions:
     @parametrize
     async def test_method_run_overload_2(self, async_client: AsyncFashn) -> None:
         prediction = await async_client.predictions.run(
+            inputs={"product_image": "https://example.com/product.jpg"},
+            model_name="product-to-model",
+        )
+        assert_matches_type(PredictionRunResponse, prediction, path=["response"])
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    async def test_method_run_with_all_params_overload_2(self, async_client: AsyncFashn) -> None:
+        prediction = await async_client.predictions.run(
+            inputs={
+                "product_image": "https://example.com/product.jpg",
+                "aspect_ratio": "1:1",
+                "model_image": "https://example.com/person.jpg",
+                "output_format": "png",
+                "prompt": "professional office setting",
+                "return_base64": True,
+                "seed": 0,
+            },
+            model_name="product-to-model",
+            webhook_url="https://example.com/webhook",
+        )
+        assert_matches_type(PredictionRunResponse, prediction, path=["response"])
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    async def test_raw_response_run_overload_2(self, async_client: AsyncFashn) -> None:
+        response = await async_client.predictions.with_raw_response.run(
+            inputs={"product_image": "https://example.com/product.jpg"},
+            model_name="product-to-model",
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        prediction = await response.parse()
+        assert_matches_type(PredictionRunResponse, prediction, path=["response"])
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    async def test_streaming_response_run_overload_2(self, async_client: AsyncFashn) -> None:
+        async with async_client.predictions.with_streaming_response.run(
+            inputs={"product_image": "https://example.com/product.jpg"},
+            model_name="product-to-model",
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            prediction = await response.parse()
+            assert_matches_type(PredictionRunResponse, prediction, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    async def test_method_run_overload_3(self, async_client: AsyncFashn) -> None:
+        prediction = await async_client.predictions.run(
             inputs={"prompt": "A professional model wearing casual clothes"},
             model_name="model-create",
         )
@@ -538,7 +648,7 @@ class TestAsyncPredictions:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    async def test_method_run_with_all_params_overload_2(self, async_client: AsyncFashn) -> None:
+    async def test_method_run_with_all_params_overload_3(self, async_client: AsyncFashn) -> None:
         prediction = await async_client.predictions.run(
             inputs={
                 "prompt": "A professional model wearing casual clothes",
@@ -558,7 +668,7 @@ class TestAsyncPredictions:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    async def test_raw_response_run_overload_2(self, async_client: AsyncFashn) -> None:
+    async def test_raw_response_run_overload_3(self, async_client: AsyncFashn) -> None:
         response = await async_client.predictions.with_raw_response.run(
             inputs={"prompt": "A professional model wearing casual clothes"},
             model_name="model-create",
@@ -571,7 +681,7 @@ class TestAsyncPredictions:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    async def test_streaming_response_run_overload_2(self, async_client: AsyncFashn) -> None:
+    async def test_streaming_response_run_overload_3(self, async_client: AsyncFashn) -> None:
         async with async_client.predictions.with_streaming_response.run(
             inputs={"prompt": "A professional model wearing casual clothes"},
             model_name="model-create",
@@ -586,7 +696,7 @@ class TestAsyncPredictions:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    async def test_method_run_overload_3(self, async_client: AsyncFashn) -> None:
+    async def test_method_run_overload_4(self, async_client: AsyncFashn) -> None:
         prediction = await async_client.predictions.run(
             inputs={"model_image": "https://example.com/model.jpg"},
             model_name="model-variation",
@@ -595,7 +705,7 @@ class TestAsyncPredictions:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    async def test_method_run_with_all_params_overload_3(self, async_client: AsyncFashn) -> None:
+    async def test_method_run_with_all_params_overload_4(self, async_client: AsyncFashn) -> None:
         prediction = await async_client.predictions.run(
             inputs={
                 "model_image": "https://example.com/model.jpg",
@@ -612,7 +722,7 @@ class TestAsyncPredictions:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    async def test_raw_response_run_overload_3(self, async_client: AsyncFashn) -> None:
+    async def test_raw_response_run_overload_4(self, async_client: AsyncFashn) -> None:
         response = await async_client.predictions.with_raw_response.run(
             inputs={"model_image": "https://example.com/model.jpg"},
             model_name="model-variation",
@@ -625,7 +735,7 @@ class TestAsyncPredictions:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    async def test_streaming_response_run_overload_3(self, async_client: AsyncFashn) -> None:
+    async def test_streaming_response_run_overload_4(self, async_client: AsyncFashn) -> None:
         async with async_client.predictions.with_streaming_response.run(
             inputs={"model_image": "https://example.com/model.jpg"},
             model_name="model-variation",
@@ -640,7 +750,7 @@ class TestAsyncPredictions:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    async def test_method_run_overload_4(self, async_client: AsyncFashn) -> None:
+    async def test_method_run_overload_5(self, async_client: AsyncFashn) -> None:
         prediction = await async_client.predictions.run(
             inputs={"model_image": "https://example.com/model.jpg"},
             model_name="model-swap",
@@ -649,7 +759,7 @@ class TestAsyncPredictions:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    async def test_method_run_with_all_params_overload_4(self, async_client: AsyncFashn) -> None:
+    async def test_method_run_with_all_params_overload_5(self, async_client: AsyncFashn) -> None:
         prediction = await async_client.predictions.run(
             inputs={
                 "model_image": "https://example.com/model.jpg",
@@ -668,7 +778,7 @@ class TestAsyncPredictions:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    async def test_raw_response_run_overload_4(self, async_client: AsyncFashn) -> None:
+    async def test_raw_response_run_overload_5(self, async_client: AsyncFashn) -> None:
         response = await async_client.predictions.with_raw_response.run(
             inputs={"model_image": "https://example.com/model.jpg"},
             model_name="model-swap",
@@ -681,7 +791,7 @@ class TestAsyncPredictions:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    async def test_streaming_response_run_overload_4(self, async_client: AsyncFashn) -> None:
+    async def test_streaming_response_run_overload_5(self, async_client: AsyncFashn) -> None:
         async with async_client.predictions.with_streaming_response.run(
             inputs={"model_image": "https://example.com/model.jpg"},
             model_name="model-swap",
@@ -696,7 +806,7 @@ class TestAsyncPredictions:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    async def test_method_run_overload_5(self, async_client: AsyncFashn) -> None:
+    async def test_method_run_overload_6(self, async_client: AsyncFashn) -> None:
         prediction = await async_client.predictions.run(
             inputs={"image": "https://example.com/image.jpg"},
             model_name="reframe",
@@ -705,7 +815,7 @@ class TestAsyncPredictions:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    async def test_method_run_with_all_params_overload_5(self, async_client: AsyncFashn) -> None:
+    async def test_method_run_with_all_params_overload_6(self, async_client: AsyncFashn) -> None:
         prediction = await async_client.predictions.run(
             inputs={
                 "image": "https://example.com/image.jpg",
@@ -723,7 +833,7 @@ class TestAsyncPredictions:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    async def test_raw_response_run_overload_5(self, async_client: AsyncFashn) -> None:
+    async def test_raw_response_run_overload_6(self, async_client: AsyncFashn) -> None:
         response = await async_client.predictions.with_raw_response.run(
             inputs={"image": "https://example.com/image.jpg"},
             model_name="reframe",
@@ -736,7 +846,7 @@ class TestAsyncPredictions:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    async def test_streaming_response_run_overload_5(self, async_client: AsyncFashn) -> None:
+    async def test_streaming_response_run_overload_6(self, async_client: AsyncFashn) -> None:
         async with async_client.predictions.with_streaming_response.run(
             inputs={"image": "https://example.com/image.jpg"},
             model_name="reframe",
@@ -751,7 +861,7 @@ class TestAsyncPredictions:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    async def test_method_run_overload_6(self, async_client: AsyncFashn) -> None:
+    async def test_method_run_overload_7(self, async_client: AsyncFashn) -> None:
         prediction = await async_client.predictions.run(
             inputs={"image": "https://example.com/image.jpg"},
             model_name="background-change",
@@ -760,7 +870,7 @@ class TestAsyncPredictions:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    async def test_method_run_with_all_params_overload_6(self, async_client: AsyncFashn) -> None:
+    async def test_method_run_with_all_params_overload_7(self, async_client: AsyncFashn) -> None:
         prediction = await async_client.predictions.run(
             inputs={
                 "image": "https://example.com/image.jpg",
@@ -777,7 +887,7 @@ class TestAsyncPredictions:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    async def test_raw_response_run_overload_6(self, async_client: AsyncFashn) -> None:
+    async def test_raw_response_run_overload_7(self, async_client: AsyncFashn) -> None:
         response = await async_client.predictions.with_raw_response.run(
             inputs={"image": "https://example.com/image.jpg"},
             model_name="background-change",
@@ -790,7 +900,7 @@ class TestAsyncPredictions:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    async def test_streaming_response_run_overload_6(self, async_client: AsyncFashn) -> None:
+    async def test_streaming_response_run_overload_7(self, async_client: AsyncFashn) -> None:
         async with async_client.predictions.with_streaming_response.run(
             inputs={"image": "https://example.com/image.jpg"},
             model_name="background-change",
@@ -805,7 +915,7 @@ class TestAsyncPredictions:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    async def test_method_run_overload_7(self, async_client: AsyncFashn) -> None:
+    async def test_method_run_overload_8(self, async_client: AsyncFashn) -> None:
         prediction = await async_client.predictions.run(
             inputs={"image": "https://example.com/image.jpg"},
             model_name="background-remove",
@@ -814,7 +924,7 @@ class TestAsyncPredictions:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    async def test_method_run_with_all_params_overload_7(self, async_client: AsyncFashn) -> None:
+    async def test_method_run_with_all_params_overload_8(self, async_client: AsyncFashn) -> None:
         prediction = await async_client.predictions.run(
             inputs={
                 "image": "https://example.com/image.jpg",
@@ -827,7 +937,7 @@ class TestAsyncPredictions:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    async def test_raw_response_run_overload_7(self, async_client: AsyncFashn) -> None:
+    async def test_raw_response_run_overload_8(self, async_client: AsyncFashn) -> None:
         response = await async_client.predictions.with_raw_response.run(
             inputs={"image": "https://example.com/image.jpg"},
             model_name="background-remove",
@@ -840,7 +950,7 @@ class TestAsyncPredictions:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    async def test_streaming_response_run_overload_7(self, async_client: AsyncFashn) -> None:
+    async def test_streaming_response_run_overload_8(self, async_client: AsyncFashn) -> None:
         async with async_client.predictions.with_streaming_response.run(
             inputs={"image": "https://example.com/image.jpg"},
             model_name="background-remove",

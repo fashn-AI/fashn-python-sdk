@@ -27,15 +27,22 @@ class Error(BaseModel):
 
     **ImageLoadError** - Unable to load image from provided inputs
 
-    - _Cause_: Pipeline cannot load model/garment/reference image
+    - _Cause_: Pipeline cannot load product image, model image, garment image, or
+      reference image
     - _Solution_: For URLs - ensure public accessibility and correct Content-Type
       headers. For Base64 - include proper data:image/format;base64 prefix
 
-    **ContentModerationError** - Prohibited content detected (try-on models only)
+    **ContentModerationError** - Prohibited content detected
 
-    - _Cause_: Content moderation flagged garment image
-    - _Solution_: Adjust moderation_level to 'permissive' or 'none' if appropriate
-      for your use case
+    - _Cause_: Content moderation flagged product, garment, or model image. More
+      sensitive when model_image contains an actual person (virtual try-on mode)
+    - _Solution_: For try-on models - adjust moderation_level to 'permissive' or
+      'none' if appropriate. For product-to-model - explicit or inappropriate
+      imagery is prohibited, particularly with real people. For intimate apparel
+      (lingerie/swimwear), use FASHN Virtual Try-On endpoint with full moderation
+      control. Product generation without model_image operates under more permissive
+      policies. Contact support@fashn.ai with prediction ID if content was
+      incorrectly flagged
 
     **PoseError** - Unable to detect body pose (try-on models only)
 
@@ -66,6 +73,8 @@ class Error(BaseModel):
     - _Cause_: External service restrictions (content/prompt limitations)
     - _Model-specific solutions_:
       - _Try-on_: Modify image inputs for captioning restrictions
+      - _Product-to-model_: Try modifying image inputs, most likely caused by
+        content restrictions in image captioning
       - _Model-swap_: Try different inputs or disable prompt enhancement
       - _Background-change_: Modify image inputs or background prompt
       - _Reframe_: Try different image inputs for captioning restrictions

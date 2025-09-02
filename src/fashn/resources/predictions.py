@@ -67,6 +67,7 @@ class PredictionsResource(SyncAPIResource):
         - Model creation (model-create)
         - Model variation (model-variation)
         - Model swap (model-swap)
+        - Product to model (product-to-model)
         - Background operations (background-remove, background-change)
         - Image reframing (reframe)
 
@@ -75,6 +76,52 @@ class PredictionsResource(SyncAPIResource):
         Args:
           model_name: Virtual Try-On v1.6 enables realistic garment visualization using just a single
               photo of a person and a garment
+
+          webhook_url: Optional webhook URL to receive completion notifications
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        ...
+
+    @overload
+    def run(
+        self,
+        *,
+        inputs: prediction_run_params.ProductToModelRequestInputs,
+        model_name: Literal["product-to-model"],
+        webhook_url: str | NotGiven = NOT_GIVEN,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> PredictionRunResponse:
+        """Submit a prediction request for AI-powered fashion processing.
+
+        Supports multiple
+        model types including:
+
+        - Virtual try-on (tryon-v1.6)
+        - Model creation (model-create)
+        - Model variation (model-variation)
+        - Model swap (model-swap)
+        - Product to model (product-to-model)
+        - Background operations (background-remove, background-change)
+        - Image reframing (reframe)
+
+        All requests use the versioned format with model_name and inputs structure.
+
+        Args:
+          model_name: Product to Model endpoint transforms product images into people wearing those
+              products. It supports dual-mode operation: standard product-to-model (generates
+              new person) and try-on mode (adds product to existing person)
 
           webhook_url: Optional webhook URL to receive completion notifications
 
@@ -111,6 +158,7 @@ class PredictionsResource(SyncAPIResource):
         - Model creation (model-create)
         - Model variation (model-variation)
         - Model swap (model-swap)
+        - Product to model (product-to-model)
         - Background operations (background-remove, background-change)
         - Image reframing (reframe)
 
@@ -154,6 +202,7 @@ class PredictionsResource(SyncAPIResource):
         - Model creation (model-create)
         - Model variation (model-variation)
         - Model swap (model-swap)
+        - Product to model (product-to-model)
         - Background operations (background-remove, background-change)
         - Image reframing (reframe)
 
@@ -197,6 +246,7 @@ class PredictionsResource(SyncAPIResource):
         - Model creation (model-create)
         - Model variation (model-variation)
         - Model swap (model-swap)
+        - Product to model (product-to-model)
         - Background operations (background-remove, background-change)
         - Image reframing (reframe)
 
@@ -241,6 +291,7 @@ class PredictionsResource(SyncAPIResource):
         - Model creation (model-create)
         - Model variation (model-variation)
         - Model swap (model-swap)
+        - Product to model (product-to-model)
         - Background operations (background-remove, background-change)
         - Image reframing (reframe)
 
@@ -284,6 +335,7 @@ class PredictionsResource(SyncAPIResource):
         - Model creation (model-create)
         - Model variation (model-variation)
         - Model swap (model-swap)
+        - Product to model (product-to-model)
         - Background operations (background-remove, background-change)
         - Image reframing (reframe)
 
@@ -327,6 +379,7 @@ class PredictionsResource(SyncAPIResource):
         - Model creation (model-create)
         - Model variation (model-variation)
         - Model swap (model-swap)
+        - Product to model (product-to-model)
         - Background operations (background-remove, background-change)
         - Image reframing (reframe)
 
@@ -352,6 +405,7 @@ class PredictionsResource(SyncAPIResource):
         self,
         *,
         inputs: prediction_run_params.TryOnRequestInputs
+        | prediction_run_params.ProductToModelRequestInputs
         | prediction_run_params.ModelCreateRequestInputs
         | prediction_run_params.ModelVariationRequestInputs
         | prediction_run_params.ModelSwapRequestInputs
@@ -359,6 +413,7 @@ class PredictionsResource(SyncAPIResource):
         | prediction_run_params.BackgroundChangeRequestInputs
         | prediction_run_params.BackgroundRemoveRequestInputs,
         model_name: Literal["tryon-v1.6"]
+        | Literal["product-to-model"]
         | Literal["model-create"]
         | Literal["model-variation"]
         | Literal["model-swap"]
@@ -485,6 +540,7 @@ class AsyncPredictionsResource(AsyncAPIResource):
         - Model creation (model-create)
         - Model variation (model-variation)
         - Model swap (model-swap)
+        - Product to model (product-to-model)
         - Background operations (background-remove, background-change)
         - Image reframing (reframe)
 
@@ -493,6 +549,52 @@ class AsyncPredictionsResource(AsyncAPIResource):
         Args:
           model_name: Virtual Try-On v1.6 enables realistic garment visualization using just a single
               photo of a person and a garment
+
+          webhook_url: Optional webhook URL to receive completion notifications
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        ...
+
+    @overload
+    async def run(
+        self,
+        *,
+        inputs: prediction_run_params.ProductToModelRequestInputs,
+        model_name: Literal["product-to-model"],
+        webhook_url: str | NotGiven = NOT_GIVEN,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> PredictionRunResponse:
+        """Submit a prediction request for AI-powered fashion processing.
+
+        Supports multiple
+        model types including:
+
+        - Virtual try-on (tryon-v1.6)
+        - Model creation (model-create)
+        - Model variation (model-variation)
+        - Model swap (model-swap)
+        - Product to model (product-to-model)
+        - Background operations (background-remove, background-change)
+        - Image reframing (reframe)
+
+        All requests use the versioned format with model_name and inputs structure.
+
+        Args:
+          model_name: Product to Model endpoint transforms product images into people wearing those
+              products. It supports dual-mode operation: standard product-to-model (generates
+              new person) and try-on mode (adds product to existing person)
 
           webhook_url: Optional webhook URL to receive completion notifications
 
@@ -529,6 +631,7 @@ class AsyncPredictionsResource(AsyncAPIResource):
         - Model creation (model-create)
         - Model variation (model-variation)
         - Model swap (model-swap)
+        - Product to model (product-to-model)
         - Background operations (background-remove, background-change)
         - Image reframing (reframe)
 
@@ -572,6 +675,7 @@ class AsyncPredictionsResource(AsyncAPIResource):
         - Model creation (model-create)
         - Model variation (model-variation)
         - Model swap (model-swap)
+        - Product to model (product-to-model)
         - Background operations (background-remove, background-change)
         - Image reframing (reframe)
 
@@ -615,6 +719,7 @@ class AsyncPredictionsResource(AsyncAPIResource):
         - Model creation (model-create)
         - Model variation (model-variation)
         - Model swap (model-swap)
+        - Product to model (product-to-model)
         - Background operations (background-remove, background-change)
         - Image reframing (reframe)
 
@@ -659,6 +764,7 @@ class AsyncPredictionsResource(AsyncAPIResource):
         - Model creation (model-create)
         - Model variation (model-variation)
         - Model swap (model-swap)
+        - Product to model (product-to-model)
         - Background operations (background-remove, background-change)
         - Image reframing (reframe)
 
@@ -702,6 +808,7 @@ class AsyncPredictionsResource(AsyncAPIResource):
         - Model creation (model-create)
         - Model variation (model-variation)
         - Model swap (model-swap)
+        - Product to model (product-to-model)
         - Background operations (background-remove, background-change)
         - Image reframing (reframe)
 
@@ -745,6 +852,7 @@ class AsyncPredictionsResource(AsyncAPIResource):
         - Model creation (model-create)
         - Model variation (model-variation)
         - Model swap (model-swap)
+        - Product to model (product-to-model)
         - Background operations (background-remove, background-change)
         - Image reframing (reframe)
 
@@ -770,6 +878,7 @@ class AsyncPredictionsResource(AsyncAPIResource):
         self,
         *,
         inputs: prediction_run_params.TryOnRequestInputs
+        | prediction_run_params.ProductToModelRequestInputs
         | prediction_run_params.ModelCreateRequestInputs
         | prediction_run_params.ModelVariationRequestInputs
         | prediction_run_params.ModelSwapRequestInputs
@@ -777,6 +886,7 @@ class AsyncPredictionsResource(AsyncAPIResource):
         | prediction_run_params.BackgroundChangeRequestInputs
         | prediction_run_params.BackgroundRemoveRequestInputs,
         model_name: Literal["tryon-v1.6"]
+        | Literal["product-to-model"]
         | Literal["model-create"]
         | Literal["model-variation"]
         | Literal["model-swap"]

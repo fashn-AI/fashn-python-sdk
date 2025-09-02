@@ -9,6 +9,8 @@ __all__ = [
     "PredictionRunParams",
     "TryOnRequest",
     "TryOnRequestInputs",
+    "ProductToModelRequest",
+    "ProductToModelRequestInputs",
     "ModelCreateRequest",
     "ModelCreateRequestInputs",
     "ModelVariationRequest",
@@ -134,6 +136,87 @@ class TryOnRequestInputs(TypedDict, total=False):
     Direct garment fitting without clothing segmentation, enabling bulkier garment
     try-ons with improved preservation of body shape and skin texture. Set to
     `false` if original garments are not removed properly.
+    """
+
+
+class ProductToModelRequest(TypedDict, total=False):
+    inputs: Required[ProductToModelRequestInputs]
+
+    model_name: Required[Literal["product-to-model"]]
+    """
+    Product to Model endpoint transforms product images into people wearing those
+    products. It supports dual-mode operation: standard product-to-model (generates
+    new person) and try-on mode (adds product to existing person)
+    """
+
+    webhook_url: str
+    """Optional webhook URL to receive completion notifications"""
+
+
+class ProductToModelRequestInputs(TypedDict, total=False):
+    product_image: Required[str]
+    """URL or base64 encoded image of the product to be worn.
+
+    Supports clothing, accessories, shoes, and other wearable fashion items. Base64
+    images must include the proper prefix (e.g.,
+    data:image/jpg;base64,<YOUR_BASE64>)
+    """
+
+    aspect_ratio: Literal["1:1", "2:3", "3:4", "4:5", "5:4", "4:3", "3:2", "16:9", "9:16"]
+    """Desired aspect ratio for the output image.
+
+    Only applies when `model_image` is not provided (standard product-to-model
+    mode).
+
+    When `model_image` is provided (try-on mode), this parameter is ignored and the
+    output will match the `model_image`'s aspect ratio.
+
+    **Default:** product_image's aspect ratio (standard mode only)
+    """
+
+    model_image: str
+    """URL or base64 encoded image of the person to wear the product.
+
+    When provided, enables try-on mode. When omitted, generates a new person wearing
+    the product. Base64 images must include the proper prefix (e.g.,
+    data:image/jpg;base64,<YOUR_BASE64>)
+    """
+
+    output_format: Literal["png", "jpeg"]
+    """Specifies the desired output image format.
+
+    - `png`: Delivers the highest quality image, ideal for use cases such as content
+      creation where quality is paramount.
+    - `jpeg`: Provides a faster response with a slightly compressed image, more
+      suitable for real-time applications.
+    """
+
+    prompt: str
+    """
+    Additional instructions for person appearance (when `model_image` is not
+    provided), styling preferences, or background.
+
+    **Examples:** "man with tattoos", "tucked-in", "open jacket", "rolled-up
+    sleeves", "studio background", "professional office setting"
+
+    **Default:** None
+    """
+
+    return_base64: bool
+    """
+    When set to `true`, the API will return the generated image as a base64-encoded
+    string instead of a CDN URL. The base64 string will be prefixed
+    `data:image/png;base64,....`
+
+    This option offers enhanced privacy as user-generated outputs are not stored on
+    our servers when `return_base64` is enabled.
+    """
+
+    seed: int
+    """Seed for reproducible results.
+
+    Use the same seed to reproduce results with the same inputs, or different seed
+    to force different results. Must be between 0 and 2^32-1.
     """
 
 
@@ -452,7 +535,7 @@ class ReframeRequestInputs(TypedDict, total=False):
     to force different results.
     """
 
-    target_aspect_ratio: Literal["1:1", "2:3", "3:4", "4:5", "5:4", "4:3", "3:2", "16:9", "9:16"]
+    target_aspect_ratio: Literal["1:1", "2:3", "3:2", "3:4", "4:3", "4:5", "5:4", "9:16", "16:9"]
     """Target aspect ratio for the output canvas when using mode: 'aspect_ratio'.
 
     This parameter is ignored when mode: 'direction'.
@@ -466,10 +549,13 @@ class ReframeRequestInputs(TypedDict, total=False):
     | ------------ | ----------- | ----------------------------- |
     | 1:1          | 1024 × 1024 | Square format, social media   |
     | 2:3          | 832 × 1248  | Portrait, fashion photography |
+    | 3:2          | 1248 × 832  | Standard landscape            |
     | 3:4          | 880 × 1176  | Standard portrait             |
-    | 4:5          | 912 × 1144  | Instagram portrait            |
-    | 9:16         | 760 × 1360  | Vertical video format         |
     | 4:3          | 1176 × 880  | Traditional landscape         |
+    | 4:5          | 912 × 1144  | Instagram portrait            |
+    | 5:4          | 1144 × 912  | Instagram landscape           |
+    | 9:16         | 760 × 1360  | Vertical video format         |
+    | 16:9         | 1360 × 760  | Horizontal video format       |
     """
 
     target_direction: Literal["both", "down", "up"]
@@ -577,6 +663,7 @@ class BackgroundRemoveRequestInputs(TypedDict, total=False):
 
 PredictionRunParams: TypeAlias = Union[
     TryOnRequest,
+    ProductToModelRequest,
     ModelCreateRequest,
     ModelVariationRequest,
     ModelSwapRequest,
