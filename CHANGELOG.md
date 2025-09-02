@@ -1,5 +1,24 @@
 # Changelog
 
+## 0.2.0 (2025-09-02)
+
+Full Changelog: [v0.1.2...v0.2.0](https://github.com/fashn-AI/fashn-python-sdk/compare/v0.1.2...v0.2.0)
+
+### Features
+
+* **api:** api update ([d0c0d42](https://github.com/fashn-AI/fashn-python-sdk/commit/d0c0d42d7596cac8e93bb897053075d5054f2215))
+
+
+### Bug Fixes
+
+* avoid newer type syntax ([dde8e6a](https://github.com/fashn-AI/fashn-python-sdk/commit/dde8e6ac8238605cda949c416f4a297e49f44d6a))
+
+
+### Chores
+
+* **internal:** add Sequence related utils ([016f338](https://github.com/fashn-AI/fashn-python-sdk/commit/016f3385ce35a370a71ecbe21034ccd450575517))
+* **internal:** update pyright exclude list ([61d426f](https://github.com/fashn-AI/fashn-python-sdk/commit/61d426f2120d380dd2f2e71af37a10a386eae009))
+
 ## 0.1.2 (2025-08-26)
 
 Full Changelog: [v0.1.1...v0.1.2](https://github.com/fashn-AI/fashn-python-sdk/compare/v0.1.1...v0.1.2)
