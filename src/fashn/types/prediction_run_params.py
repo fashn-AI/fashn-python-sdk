@@ -11,6 +11,8 @@ __all__ = [
     "TryOnRequestInputs",
     "ProductToModelRequest",
     "ProductToModelRequestInputs",
+    "FaceToModelRequest",
+    "FaceToModelRequestInputs",
     "ModelCreateRequest",
     "ModelCreateRequestInputs",
     "ModelVariationRequest",
@@ -217,6 +219,81 @@ class ProductToModelRequestInputs(TypedDict, total=False):
 
     Use the same seed to reproduce results with the same inputs, or different seed
     to force different results. Must be between 0 and 2^32-1.
+    """
+
+
+class FaceToModelRequest(TypedDict, total=False):
+    inputs: Required[FaceToModelRequestInputs]
+
+    model_name: Required[Literal["face-to-model"]]
+    """
+    Face to Model endpoint transforms face images into try-on ready upper-body
+    avatars. It converts cropped headshots or selfies into full upper-body
+    representations that can be used in virtual try-on applications when full-body
+    photos are not available, while preserving facial identity.
+    """
+
+    webhook_url: str
+    """Optional webhook URL to receive completion notifications"""
+
+
+class FaceToModelRequestInputs(TypedDict, total=False):
+    face_image: Required[str]
+    """URL or base64 encoded image of the face to transform into an upper-body avatar.
+
+    The AI will analyze facial features, hair, and skin tone to create a
+    representation suitable for virtual try-on applications.
+
+    Base64 images must include the proper prefix (e.g.,
+    data:image/jpg;base64,<YOUR_BASE64>)
+    """
+
+    aspect_ratio: Literal["1:1", "4:5", "3:4", "2:3", "9:16"]
+    """Desired aspect ratio for the output image.
+
+    Only vertical ratios are supported. Images will always be extended downward to
+    fit the aspect ratio.
+
+    **Default:** `2:3`
+    """
+
+    output_format: Literal["png", "jpeg"]
+    """Specifies the output image format.
+
+    - `png` - PNG format, original quality
+    - `jpeg` - JPEG format, smaller file size
+
+    **Default:** `"jpeg"`
+    """
+
+    prompt: str
+    """Optional styling or body shape guidance for the avatar representation.
+
+    Examples: "athletic build", "curvy figure", "slender frame".
+
+    If you don't provide a prompt, the body shape will be inferred from the face
+    image.
+
+    **Default:** Empty string
+    """
+
+    return_base64: bool
+    """
+    When set to `true`, the API will return the generated image as a base64-encoded
+    string instead of a CDN URL. The base64 string will be prefixed
+    `data:image/png;base64,...`.
+
+    This option offers enhanced privacy as user-generated outputs are not stored on
+    our servers when `return_base64` is enabled.
+
+    **Default:** `false`
+    """
+
+    seed: int
+    """Sets random operations to a fixed state.
+
+    Use the same seed to reproduce results with the same inputs, or different seed
+    to force different results.
     """
 
 
@@ -590,13 +667,11 @@ class BackgroundChangeRequestInputs(TypedDict, total=False):
     data:image/jpg;base64,<YOUR_BASE64>)
     """
 
-    background_prompt: str
-    """Text description of the desired background environment.
-
-    The AI generates a new background based on this description and harmonizes it
-    with the preserved foreground subject."
-
-    **Default: Empty string (Natural background for the subject)**
+    prompt: Required[str]
+    """
+    Description of the desired new background (e.g., 'beach sunset', 'modern
+    office', 'forest clearing'). The AI generates a new background based on this
+    description and harmonizes it with the preserved foreground subject.
     """
 
     disable_prompt_enhancement: bool
@@ -606,7 +681,7 @@ class BackgroundChangeRequestInputs(TypedDict, total=False):
     """
 
     output_format: Literal["png", "jpeg"]
-    """Specifies the desired output image format.
+    """Specifies the output image format.
 
     - `png`: Delivers the highest quality image, ideal for use cases such as content
       creation where quality is paramount.
@@ -664,6 +739,7 @@ class BackgroundRemoveRequestInputs(TypedDict, total=False):
 PredictionRunParams: TypeAlias = Union[
     TryOnRequest,
     ProductToModelRequest,
+    FaceToModelRequest,
     ModelCreateRequest,
     ModelVariationRequest,
     ModelSwapRequest,
