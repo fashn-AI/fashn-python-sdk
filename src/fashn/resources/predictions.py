@@ -7,7 +7,7 @@ from typing_extensions import Literal, overload
 import httpx
 
 from ..types import prediction_run_params
-from .._types import NOT_GIVEN, Body, Query, Headers, NotGiven
+from .._types import Body, Omit, Query, Headers, NotGiven, omit, not_given
 from .._utils import required_args, maybe_transform, async_maybe_transform
 from .._compat import cached_property
 from .._resource import SyncAPIResource, AsyncAPIResource
@@ -50,13 +50,13 @@ class PredictionsResource(SyncAPIResource):
         *,
         inputs: prediction_run_params.TryOnRequestInputs,
         model_name: Literal["tryon-v1.6"],
-        webhook_url: str | NotGiven = NOT_GIVEN,
+        webhook_url: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> PredictionRunResponse:
         """Submit a prediction request for AI-powered fashion processing.
 
@@ -95,13 +95,13 @@ class PredictionsResource(SyncAPIResource):
         *,
         inputs: prediction_run_params.ProductToModelRequestInputs,
         model_name: Literal["product-to-model"],
-        webhook_url: str | NotGiven = NOT_GIVEN,
+        webhook_url: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> PredictionRunResponse:
         """Submit a prediction request for AI-powered fashion processing.
 
@@ -141,13 +141,13 @@ class PredictionsResource(SyncAPIResource):
         *,
         inputs: prediction_run_params.ModelCreateRequestInputs,
         model_name: Literal["model-create"],
-        webhook_url: str | NotGiven = NOT_GIVEN,
+        webhook_url: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> PredictionRunResponse:
         """Submit a prediction request for AI-powered fashion processing.
 
@@ -185,13 +185,13 @@ class PredictionsResource(SyncAPIResource):
         *,
         inputs: prediction_run_params.ModelVariationRequestInputs,
         model_name: Literal["model-variation"],
-        webhook_url: str | NotGiven = NOT_GIVEN,
+        webhook_url: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> PredictionRunResponse:
         """Submit a prediction request for AI-powered fashion processing.
 
@@ -229,13 +229,13 @@ class PredictionsResource(SyncAPIResource):
         *,
         inputs: prediction_run_params.ModelSwapRequestInputs,
         model_name: Literal["model-swap"],
-        webhook_url: str | NotGiven = NOT_GIVEN,
+        webhook_url: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> PredictionRunResponse:
         """Submit a prediction request for AI-powered fashion processing.
 
@@ -274,13 +274,13 @@ class PredictionsResource(SyncAPIResource):
         *,
         inputs: prediction_run_params.ReframeRequestInputs,
         model_name: Literal["reframe"],
-        webhook_url: str | NotGiven = NOT_GIVEN,
+        webhook_url: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> PredictionRunResponse:
         """Submit a prediction request for AI-powered fashion processing.
 
@@ -318,13 +318,13 @@ class PredictionsResource(SyncAPIResource):
         *,
         inputs: prediction_run_params.BackgroundChangeRequestInputs,
         model_name: Literal["background-change"],
-        webhook_url: str | NotGiven = NOT_GIVEN,
+        webhook_url: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> PredictionRunResponse:
         """Submit a prediction request for AI-powered fashion processing.
 
@@ -362,13 +362,13 @@ class PredictionsResource(SyncAPIResource):
         *,
         inputs: prediction_run_params.BackgroundRemoveRequestInputs,
         model_name: Literal["background-remove"],
-        webhook_url: str | NotGiven = NOT_GIVEN,
+        webhook_url: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> PredictionRunResponse:
         """Submit a prediction request for AI-powered fashion processing.
 
@@ -420,13 +420,13 @@ class PredictionsResource(SyncAPIResource):
         | Literal["reframe"]
         | Literal["background-change"]
         | Literal["background-remove"],
-        webhook_url: str | NotGiven = NOT_GIVEN,
+        webhook_url: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> PredictionRunResponse:
         return self._post(
             "/v1/run",
@@ -456,7 +456,7 @@ class PredictionsResource(SyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> PredictionStatusResponse:
         """Poll for the status of a specific prediction using its ID.
 
@@ -523,13 +523,13 @@ class AsyncPredictionsResource(AsyncAPIResource):
         *,
         inputs: prediction_run_params.TryOnRequestInputs,
         model_name: Literal["tryon-v1.6"],
-        webhook_url: str | NotGiven = NOT_GIVEN,
+        webhook_url: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> PredictionRunResponse:
         """Submit a prediction request for AI-powered fashion processing.
 
@@ -568,13 +568,13 @@ class AsyncPredictionsResource(AsyncAPIResource):
         *,
         inputs: prediction_run_params.ProductToModelRequestInputs,
         model_name: Literal["product-to-model"],
-        webhook_url: str | NotGiven = NOT_GIVEN,
+        webhook_url: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> PredictionRunResponse:
         """Submit a prediction request for AI-powered fashion processing.
 
@@ -614,13 +614,13 @@ class AsyncPredictionsResource(AsyncAPIResource):
         *,
         inputs: prediction_run_params.ModelCreateRequestInputs,
         model_name: Literal["model-create"],
-        webhook_url: str | NotGiven = NOT_GIVEN,
+        webhook_url: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> PredictionRunResponse:
         """Submit a prediction request for AI-powered fashion processing.
 
@@ -658,13 +658,13 @@ class AsyncPredictionsResource(AsyncAPIResource):
         *,
         inputs: prediction_run_params.ModelVariationRequestInputs,
         model_name: Literal["model-variation"],
-        webhook_url: str | NotGiven = NOT_GIVEN,
+        webhook_url: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> PredictionRunResponse:
         """Submit a prediction request for AI-powered fashion processing.
 
@@ -702,13 +702,13 @@ class AsyncPredictionsResource(AsyncAPIResource):
         *,
         inputs: prediction_run_params.ModelSwapRequestInputs,
         model_name: Literal["model-swap"],
-        webhook_url: str | NotGiven = NOT_GIVEN,
+        webhook_url: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> PredictionRunResponse:
         """Submit a prediction request for AI-powered fashion processing.
 
@@ -747,13 +747,13 @@ class AsyncPredictionsResource(AsyncAPIResource):
         *,
         inputs: prediction_run_params.ReframeRequestInputs,
         model_name: Literal["reframe"],
-        webhook_url: str | NotGiven = NOT_GIVEN,
+        webhook_url: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> PredictionRunResponse:
         """Submit a prediction request for AI-powered fashion processing.
 
@@ -791,13 +791,13 @@ class AsyncPredictionsResource(AsyncAPIResource):
         *,
         inputs: prediction_run_params.BackgroundChangeRequestInputs,
         model_name: Literal["background-change"],
-        webhook_url: str | NotGiven = NOT_GIVEN,
+        webhook_url: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> PredictionRunResponse:
         """Submit a prediction request for AI-powered fashion processing.
 
@@ -835,13 +835,13 @@ class AsyncPredictionsResource(AsyncAPIResource):
         *,
         inputs: prediction_run_params.BackgroundRemoveRequestInputs,
         model_name: Literal["background-remove"],
-        webhook_url: str | NotGiven = NOT_GIVEN,
+        webhook_url: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> PredictionRunResponse:
         """Submit a prediction request for AI-powered fashion processing.
 
@@ -893,13 +893,13 @@ class AsyncPredictionsResource(AsyncAPIResource):
         | Literal["reframe"]
         | Literal["background-change"]
         | Literal["background-remove"],
-        webhook_url: str | NotGiven = NOT_GIVEN,
+        webhook_url: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> PredictionRunResponse:
         return await self._post(
             "/v1/run",
@@ -931,7 +931,7 @@ class AsyncPredictionsResource(AsyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> PredictionStatusResponse:
         """Poll for the status of a specific prediction using its ID.
 
