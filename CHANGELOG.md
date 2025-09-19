@@ -1,5 +1,23 @@
 # Changelog
 
+## 0.3.0 (2025-09-19)
+
+Full Changelog: [v0.2.0...v0.3.0](https://github.com/fashn-AI/fashn-python-sdk/compare/v0.2.0...v0.3.0)
+
+### Features
+
+* **api:** api update ([7f876c9](https://github.com/fashn-AI/fashn-python-sdk/commit/7f876c9b44079101a58a7166808a633004e95741))
+* improve future compat with pydantic v3 ([3fc2f9d](https://github.com/fashn-AI/fashn-python-sdk/commit/3fc2f9dc6403acbe64e80a1178a0347d17092ac3))
+* **types:** replace List[str] with SequenceNotStr in params ([286ef4e](https://github.com/fashn-AI/fashn-python-sdk/commit/286ef4ef48e6d46aec17dfd6d3dda97a45f882bd))
+
+
+### Chores
+
+* **internal:** move mypy configurations to `pyproject.toml` file ([d8f2828](https://github.com/fashn-AI/fashn-python-sdk/commit/d8f28288999deebb4157b3aadec57b66c16ac23a))
+* **internal:** update pydantic dependency ([3c83614](https://github.com/fashn-AI/fashn-python-sdk/commit/3c836141967893376cf27455b557502ffb4df84b))
+* **tests:** simplify `get_platform` test ([79d1616](https://github.com/fashn-AI/fashn-python-sdk/commit/79d1616da404997d756b09df97a52d4c2f968bb9))
+* **types:** change optional parameter type from NotGiven to Omit ([a4f7331](https://github.com/fashn-AI/fashn-python-sdk/commit/a4f73319526bf71f8d2deaad423cd9a063d0cf27))
+
 ## 0.2.0 (2025-09-02)
 
 Full Changelog: [v0.1.2...v0.2.0](https://github.com/fashn-AI/fashn-python-sdk/compare/v0.1.2...v0.2.0)
