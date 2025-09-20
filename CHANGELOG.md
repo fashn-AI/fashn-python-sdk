@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.3.1 (2025-09-20)
+
+Full Changelog: [v0.3.0...v0.3.1](https://github.com/fashn-AI/fashn-python-sdk/compare/v0.3.0...v0.3.1)
+
+### Chores
+
+* do not install brew dependencies in ./scripts/bootstrap by default ([fecc0e9](https://github.com/fashn-AI/fashn-python-sdk/commit/fecc0e985d812a6b9fad8fd45bb89e7ef2c77858))
+
 ## 0.3.0 (2025-09-19)
 
 Full Changelog: [v0.2.0...v0.3.0](https://github.com/fashn-AI/fashn-python-sdk/compare/v0.2.0...v0.3.0)
