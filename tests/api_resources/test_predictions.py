@@ -101,9 +101,11 @@ class TestPredictions:
             inputs={
                 "product_image": "https://example.com/product.jpg",
                 "aspect_ratio": "1:1",
+                "image_prompt": "https://example.com/inspiration.jpg",
                 "model_image": "https://example.com/person.jpg",
                 "output_format": "png",
                 "prompt": "professional office setting",
+                "resolution": "1k",
                 "return_base64": True,
                 "seed": 0,
             },
@@ -661,9 +663,11 @@ class TestAsyncPredictions:
             inputs={
                 "product_image": "https://example.com/product.jpg",
                 "aspect_ratio": "1:1",
+                "image_prompt": "https://example.com/inspiration.jpg",
                 "model_image": "https://example.com/person.jpg",
                 "output_format": "png",
                 "prompt": "professional office setting",
+                "resolution": "1k",
                 "return_base64": True,
                 "seed": 0,
             },
