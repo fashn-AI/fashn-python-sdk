@@ -176,6 +176,12 @@ class ProductToModelRequestInputs(TypedDict, total=False):
     **Default:** product_image's aspect ratio (standard mode only)
     """
 
+    image_prompt: str
+    """
+    Optional URL or base64 of an inspiration image to guide pose, environment, and
+    lighting while keeping the final edit product-centric.
+    """
+
     model_image: str
     """URL or base64 encoded image of the person to wear the product.
 
@@ -203,6 +209,9 @@ class ProductToModelRequestInputs(TypedDict, total=False):
 
     **Default:** None
     """
+
+    resolution: Literal["1k", "4k"]
+    """Resolution setting for the output image."""
 
     return_base64: bool
     """
