@@ -2,6 +2,8 @@
 
 from __future__ import annotations
 
+import time
+from typing import Any, cast
 from typing_extensions import Literal, overload
 
 import httpx
@@ -17,14 +19,147 @@ from .._response import (
     async_to_raw_response_wrapper,
     async_to_streamed_response_wrapper,
 )
+from .._constants import DEFAULT_MAX_RETRIES
 from .._base_client import make_request_options
 from ..types.prediction_run_response import PredictionRunResponse
 from ..types.prediction_status_response import PredictionStatusResponse
+from ..types.prediction_subscribe_params import (
+    EnqueuedCallback,
+    QueueUpdateCallback,
+    PredictionSubscribeParams,
+)
+from ..types.prediction_subscribe_response import PredictionSubscribeResponse
 
 __all__ = ["PredictionsResource", "AsyncPredictionsResource"]
 
 
+DEFAULT_POLL_INTERVAL_MS = 1000
+DEFAULT_TIMEOUT_MS = 5 * 60 * 1000
+
+
+## Note: use the publicly exported type
+
+
 class PredictionsResource(SyncAPIResource):
+    def subscribe(
+        self,
+        params: PredictionSubscribeParams,
+        *,
+        poll_interval: int | None = None,
+        timeout: int | None = None,
+        max_retries: int | None = None,
+        on_enqueued: EnqueuedCallback | None = None,
+        on_queue_update: QueueUpdateCallback | None = None,
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        request_timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> PredictionSubscribeResponse:
+        # Resolve subscribe options from kwargs (TS-style defaults)
+        poll_interval_ms = poll_interval if poll_interval is not None else DEFAULT_POLL_INTERVAL_MS
+        subscribe_timeout_ms = timeout if timeout is not None else DEFAULT_TIMEOUT_MS
+        effective_max_retries = max_retries if max_retries is not None else DEFAULT_MAX_RETRIES
+
+        if on_enqueued is None and callable(params.get("on_enqueued")):
+            on_enqueued = cast(EnqueuedCallback, params.get("on_enqueued"))
+        if on_queue_update is None and callable(params.get("on_queue_update")):
+            on_queue_update = cast(QueueUpdateCallback, params.get("on_queue_update"))
+
+        # Prepare run args
+        inputs_any: Any = params.get("inputs")
+        model_name_any: Any = params.get("model_name")
+        webhook_url_any: Any = params.get("webhook_url", omit)
+
+        run_result = self.run(
+            inputs=inputs_any,
+            model_name=model_name_any,
+            webhook_url=webhook_url_any,
+            extra_headers=extra_headers,
+            extra_query=extra_query,
+            extra_body=extra_body,
+            timeout=request_timeout,
+        )
+
+        prediction_id: str = run_result.id
+        if on_enqueued:
+            on_enqueued(prediction_id)
+
+        return self._poll_status(
+            prediction_id=prediction_id,
+            poll_interval_ms=poll_interval_ms,
+            subscribe_timeout_ms=subscribe_timeout_ms,
+            max_retries=effective_max_retries,
+            on_queue_update=on_queue_update,
+            extra_headers=extra_headers,
+            extra_query=extra_query,
+            extra_body=extra_body,
+            timeout=request_timeout,
+        )
+
+    def _poll_status(
+        self,
+        *,
+        prediction_id: str,
+        poll_interval_ms: int,
+        subscribe_timeout_ms: int,
+        max_retries: int,
+        on_queue_update: QueueUpdateCallback | None,
+        extra_headers: Headers | None,
+        extra_query: Query | None,
+        extra_body: Body | None,
+        timeout: float | httpx.Timeout | None | NotGiven,
+    ) -> PredictionSubscribeResponse:
+        poll_interval_ms = poll_interval_ms if poll_interval_ms > 0 else DEFAULT_POLL_INTERVAL_MS
+        deadline = time.monotonic() + (subscribe_timeout_ms / 1000) if subscribe_timeout_ms else None
+
+        status_options = make_request_options(
+            extra_headers=extra_headers,
+            extra_query=extra_query,
+            extra_body=extra_body,
+            timeout=timeout,
+        )
+        status_options["max_retries"] = max_retries
+
+        while True:
+            status = self._get(
+                f"/v1/status/{prediction_id}",
+                options=status_options,
+                cast_to=PredictionStatusResponse,
+            )
+
+            if on_queue_update:
+                on_queue_update(status)
+
+            if status.status not in {"starting", "in_queue", "processing"}:
+                terminal_status = cast(
+                    Literal["completed", "failed", "canceled", "time_out"],
+                    status.status,
+                )
+                return PredictionSubscribeResponse(
+                    id=status.id,
+                    status=terminal_status,
+                    error=status.error,
+                    output=status.output,
+                )
+
+            if deadline and time.monotonic() >= deadline:
+                timeout_status_for_callback = PredictionStatusResponse(
+                    id=prediction_id,
+                    status="time_out",
+                    error=None,
+                    output=None,
+                )
+                if on_queue_update:
+                    on_queue_update(timeout_status_for_callback)
+                return PredictionSubscribeResponse(
+                    id=prediction_id,
+                    status="time_out",
+                    error=None,
+                    output=None,
+                )
+
+            self._sleep(poll_interval_ms / 1000)
+
     @cached_property
     def with_raw_response(self) -> PredictionsResourceWithRawResponse:
         """
@@ -556,6 +691,122 @@ class PredictionsResource(SyncAPIResource):
 
 
 class AsyncPredictionsResource(AsyncAPIResource):
+    async def subscribe(
+        self,
+        params: PredictionSubscribeParams,
+        *,
+        poll_interval: int | None = None,
+        timeout_ms: int | None = None,
+        max_retries: int | None = None,
+        on_enqueued: EnqueuedCallback | None = None,
+        on_queue_update: QueueUpdateCallback | None = None,
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        request_timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> PredictionSubscribeResponse:
+        poll_interval_ms = poll_interval if poll_interval is not None else DEFAULT_POLL_INTERVAL_MS
+        subscribe_timeout_ms = timeout_ms if timeout_ms is not None else DEFAULT_TIMEOUT_MS
+        effective_max_retries = max_retries if max_retries is not None else DEFAULT_MAX_RETRIES
+
+        if on_enqueued is None and callable(params.get("on_enqueued")):
+            on_enqueued = cast(EnqueuedCallback, params.get("on_enqueued"))
+        if on_queue_update is None and callable(params.get("on_queue_update")):
+            on_queue_update = cast(QueueUpdateCallback, params.get("on_queue_update"))
+
+        inputs_any: Any = params.get("inputs")
+        model_name_any: Any = params.get("model_name")
+        webhook_url_any: Any = params.get("webhook_url", omit)
+
+        run_result = await self.run(
+            inputs=inputs_any,
+            model_name=model_name_any,
+            webhook_url=webhook_url_any,
+            extra_headers=extra_headers,
+            extra_query=extra_query,
+            extra_body=extra_body,
+            timeout=request_timeout,
+        )
+
+        prediction_id: str = run_result.id
+        if on_enqueued:
+            on_enqueued(prediction_id)
+
+        return await self._poll_status(
+            prediction_id=prediction_id,
+            poll_interval_ms=poll_interval_ms,
+            subscribe_timeout_ms=subscribe_timeout_ms,
+            max_retries=effective_max_retries,
+            on_queue_update=on_queue_update,
+            extra_headers=extra_headers,
+            extra_query=extra_query,
+            extra_body=extra_body,
+            timeout=request_timeout,
+        )
+
+    async def _poll_status(
+        self,
+        *,
+        prediction_id: str,
+        poll_interval_ms: int,
+        subscribe_timeout_ms: int,
+        max_retries: int,
+        on_queue_update: QueueUpdateCallback | None,
+        extra_headers: Headers | None,
+        extra_query: Query | None,
+        extra_body: Body | None,
+        timeout: float | httpx.Timeout | None | NotGiven,
+    ) -> PredictionSubscribeResponse:
+        poll_interval_ms = poll_interval_ms if poll_interval_ms > 0 else DEFAULT_POLL_INTERVAL_MS
+        deadline = time.monotonic() + (subscribe_timeout_ms / 1000) if subscribe_timeout_ms else None
+
+        status_options = make_request_options(
+            extra_headers=extra_headers,
+            extra_query=extra_query,
+            extra_body=extra_body,
+            timeout=timeout,
+        )
+        status_options["max_retries"] = max_retries
+
+        while True:
+            status = await self._get(
+                f"/v1/status/{prediction_id}",
+                options=status_options,
+                cast_to=PredictionStatusResponse,
+            )
+
+            if on_queue_update:
+                on_queue_update(status)
+
+            if status.status not in {"starting", "in_queue", "processing"}:
+                terminal_status = cast(
+                    Literal["completed", "failed", "canceled", "time_out"],
+                    status.status,
+                )
+                return PredictionSubscribeResponse(
+                    id=status.id,
+                    status=terminal_status,
+                    error=status.error,
+                    output=status.output,
+                )
+
+            if deadline and time.monotonic() >= deadline:
+                timeout_status_for_callback = PredictionStatusResponse(
+                    id=prediction_id,
+                    status="time_out",
+                    error=None,
+                    output=None,
+                )
+                if on_queue_update:
+                    on_queue_update(timeout_status_for_callback)
+                return PredictionSubscribeResponse(
+                    id=prediction_id,
+                    status="time_out",
+                    error=None,
+                    output=None,
+                )
+
+            await self._sleep(poll_interval_ms / 1000)
     @cached_property
     def with_raw_response(self) -> AsyncPredictionsResourceWithRawResponse:
         """
