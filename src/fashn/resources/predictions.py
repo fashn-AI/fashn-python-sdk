@@ -26,7 +26,6 @@ from ..types.prediction_status_response import PredictionStatusResponse
 from ..types.prediction_subscribe_params import (
     EnqueuedCallback,
     QueueUpdateCallback,
-    PredictionSubscribeParams,
 )
 from ..types.prediction_subscribe_response import PredictionSubscribeResponse
 
@@ -41,10 +40,190 @@ DEFAULT_TIMEOUT_MS = 5 * 60 * 1000
 
 
 class PredictionsResource(SyncAPIResource):
+    @overload
     def subscribe(
         self,
-        params: PredictionSubscribeParams,
         *,
+        inputs: prediction_run_params.TryOnRequestInputs,
+        model_name: Literal["tryon-v1.6"],
+        webhook_url: str | Omit = omit,
+        poll_interval: int | None = None,
+        timeout: int | None = None,
+        max_retries: int | None = None,
+        on_enqueued: EnqueuedCallback | None = None,
+        on_queue_update: QueueUpdateCallback | None = None,
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        request_timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> PredictionSubscribeResponse: ...
+
+    @overload
+    def subscribe(
+        self,
+        *,
+        inputs: prediction_run_params.ProductToModelRequestInputs,
+        model_name: Literal["product-to-model"],
+        webhook_url: str | Omit = omit,
+        poll_interval: int | None = None,
+        timeout: int | None = None,
+        max_retries: int | None = None,
+        on_enqueued: EnqueuedCallback | None = None,
+        on_queue_update: QueueUpdateCallback | None = None,
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        request_timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> PredictionSubscribeResponse: ...
+
+    @overload
+    def subscribe(
+        self,
+        *,
+        inputs: prediction_run_params.FaceToModelRequestInputs,
+        model_name: Literal["face-to-model"],
+        webhook_url: str | Omit = omit,
+        poll_interval: int | None = None,
+        timeout: int | None = None,
+        max_retries: int | None = None,
+        on_enqueued: EnqueuedCallback | None = None,
+        on_queue_update: QueueUpdateCallback | None = None,
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        request_timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> PredictionSubscribeResponse: ...
+
+    @overload
+    def subscribe(
+        self,
+        *,
+        inputs: prediction_run_params.ModelCreateRequestInputs,
+        model_name: Literal["model-create"],
+        webhook_url: str | Omit = omit,
+        poll_interval: int | None = None,
+        timeout: int | None = None,
+        max_retries: int | None = None,
+        on_enqueued: EnqueuedCallback | None = None,
+        on_queue_update: QueueUpdateCallback | None = None,
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        request_timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> PredictionSubscribeResponse: ...
+
+    @overload
+    def subscribe(
+        self,
+        *,
+        inputs: prediction_run_params.ModelVariationRequestInputs,
+        model_name: Literal["model-variation"],
+        webhook_url: str | Omit = omit,
+        poll_interval: int | None = None,
+        timeout: int | None = None,
+        max_retries: int | None = None,
+        on_enqueued: EnqueuedCallback | None = None,
+        on_queue_update: QueueUpdateCallback | None = None,
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        request_timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> PredictionSubscribeResponse: ...
+
+    @overload
+    def subscribe(
+        self,
+        *,
+        inputs: prediction_run_params.ModelSwapRequestInputs,
+        model_name: Literal["model-swap"],
+        webhook_url: str | Omit = omit,
+        poll_interval: int | None = None,
+        timeout: int | None = None,
+        max_retries: int | None = None,
+        on_enqueued: EnqueuedCallback | None = None,
+        on_queue_update: QueueUpdateCallback | None = None,
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        request_timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> PredictionSubscribeResponse: ...
+
+    @overload
+    def subscribe(
+        self,
+        *,
+        inputs: prediction_run_params.ReframeRequestInputs,
+        model_name: Literal["reframe"],
+        webhook_url: str | Omit = omit,
+        poll_interval: int | None = None,
+        timeout: int | None = None,
+        max_retries: int | None = None,
+        on_enqueued: EnqueuedCallback | None = None,
+        on_queue_update: QueueUpdateCallback | None = None,
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        request_timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> PredictionSubscribeResponse: ...
+
+    @overload
+    def subscribe(
+        self,
+        *,
+        inputs: prediction_run_params.BackgroundChangeRequestInputs,
+        model_name: Literal["background-change"],
+        webhook_url: str | Omit = omit,
+        poll_interval: int | None = None,
+        timeout: int | None = None,
+        max_retries: int | None = None,
+        on_enqueued: EnqueuedCallback | None = None,
+        on_queue_update: QueueUpdateCallback | None = None,
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        request_timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> PredictionSubscribeResponse: ...
+
+    @overload
+    def subscribe(
+        self,
+        *,
+        inputs: prediction_run_params.BackgroundRemoveRequestInputs,
+        model_name: Literal["background-remove"],
+        webhook_url: str | Omit = omit,
+        poll_interval: int | None = None,
+        timeout: int | None = None,
+        max_retries: int | None = None,
+        on_enqueued: EnqueuedCallback | None = None,
+        on_queue_update: QueueUpdateCallback | None = None,
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        request_timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> PredictionSubscribeResponse: ...
+
+    def subscribe(
+        self,
+        *,
+        inputs: prediction_run_params.TryOnRequestInputs
+        | prediction_run_params.ProductToModelRequestInputs
+        | prediction_run_params.FaceToModelRequestInputs
+        | prediction_run_params.ModelCreateRequestInputs
+        | prediction_run_params.ModelVariationRequestInputs
+        | prediction_run_params.ModelSwapRequestInputs
+        | prediction_run_params.ReframeRequestInputs
+        | prediction_run_params.BackgroundChangeRequestInputs
+        | prediction_run_params.BackgroundRemoveRequestInputs,
+        model_name: Literal["tryon-v1.6"]
+        | Literal["product-to-model"]
+        | Literal["face-to-model"]
+        | Literal["model-create"]
+        | Literal["model-variation"]
+        | Literal["model-swap"]
+        | Literal["reframe"]
+        | Literal["background-change"]
+        | Literal["background-remove"],
+        webhook_url: str | Omit = omit,
         poll_interval: int | None = None,
         timeout: int | None = None,
         max_retries: int | None = None,
@@ -55,25 +234,34 @@ class PredictionsResource(SyncAPIResource):
         extra_body: Body | None = None,
         request_timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> PredictionSubscribeResponse:
+        """Run a prediction and poll until completion with real-time updates.
+
+        Combines `run` and repeated `status` polling into a single call.
+
+        Args:
+          inputs: Typed inputs matching the selected `model_name`.
+          model_name: One of the supported model names; determines the `inputs` type.
+          webhook_url: Optional webhook URL to receive completion notifications.
+          poll_interval: Polling interval in milliseconds. Defaults to 1000ms.
+          timeout: Overall subscribe timeout in milliseconds. Defaults to 300000ms.
+          max_retries: Maximum retry attempts for the status HTTP request. Defaults to client default.
+          on_enqueued: Callback invoked once the request ID is available.
+          on_queue_update: Callback invoked on every status update.
+          request_timeout: Per-request HTTP timeout for run/status calls.
+        """
         # Resolve subscribe options from kwargs (TS-style defaults)
         poll_interval_ms = poll_interval if poll_interval is not None else DEFAULT_POLL_INTERVAL_MS
-        subscribe_timeout_ms = timeout if timeout is not None else DEFAULT_TIMEOUT_MS
-        effective_max_retries = max_retries if max_retries is not None else DEFAULT_MAX_RETRIES
+        subscribe_timeout_ms = (
+            timeout if (timeout is not None and timeout > 0) else DEFAULT_TIMEOUT_MS
+        )
+        effective_max_retries = (
+            max_retries if (max_retries is not None and max_retries >= 0) else DEFAULT_MAX_RETRIES
+        )
 
-        if on_enqueued is None and callable(params.get("on_enqueued")):
-            on_enqueued = cast(EnqueuedCallback, params.get("on_enqueued"))
-        if on_queue_update is None and callable(params.get("on_queue_update")):
-            on_queue_update = cast(QueueUpdateCallback, params.get("on_queue_update"))
-
-        # Prepare run args
-        inputs_any: Any = params.get("inputs")
-        model_name_any: Any = params.get("model_name")
-        webhook_url_any: Any = params.get("webhook_url", omit)
-
-        run_result = self.run(
-            inputs=inputs_any,
-            model_name=model_name_any,
-            webhook_url=webhook_url_any,
+        run_result: PredictionRunResponse = self.run(
+            inputs=cast(Any, inputs),
+            model_name=cast(Any, model_name),
+            webhook_url=webhook_url,
             extra_headers=extra_headers,
             extra_query=extra_query,
             extra_body=extra_body,
@@ -691,12 +879,192 @@ class PredictionsResource(SyncAPIResource):
 
 
 class AsyncPredictionsResource(AsyncAPIResource):
+    @overload
     async def subscribe(
         self,
-        params: PredictionSubscribeParams,
         *,
+        inputs: prediction_run_params.TryOnRequestInputs,
+        model_name: Literal["tryon-v1.6"],
+        webhook_url: str | Omit = omit,
         poll_interval: int | None = None,
-        timeout_ms: int | None = None,
+        timeout: int | None = None,
+        max_retries: int | None = None,
+        on_enqueued: EnqueuedCallback | None = None,
+        on_queue_update: QueueUpdateCallback | None = None,
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        request_timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> PredictionSubscribeResponse: ...
+
+    @overload
+    async def subscribe(
+        self,
+        *,
+        inputs: prediction_run_params.ProductToModelRequestInputs,
+        model_name: Literal["product-to-model"],
+        webhook_url: str | Omit = omit,
+        poll_interval: int | None = None,
+        timeout: int | None = None,
+        max_retries: int | None = None,
+        on_enqueued: EnqueuedCallback | None = None,
+        on_queue_update: QueueUpdateCallback | None = None,
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        request_timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> PredictionSubscribeResponse: ...
+
+    @overload
+    async def subscribe(
+        self,
+        *,
+        inputs: prediction_run_params.FaceToModelRequestInputs,
+        model_name: Literal["face-to-model"],
+        webhook_url: str | Omit = omit,
+        poll_interval: int | None = None,
+        timeout: int | None = None,
+        max_retries: int | None = None,
+        on_enqueued: EnqueuedCallback | None = None,
+        on_queue_update: QueueUpdateCallback | None = None,
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        request_timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> PredictionSubscribeResponse: ...
+
+    @overload
+    async def subscribe(
+        self,
+        *,
+        inputs: prediction_run_params.ModelCreateRequestInputs,
+        model_name: Literal["model-create"],
+        webhook_url: str | Omit = omit,
+        poll_interval: int | None = None,
+        timeout: int | None = None,
+        max_retries: int | None = None,
+        on_enqueued: EnqueuedCallback | None = None,
+        on_queue_update: QueueUpdateCallback | None = None,
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        request_timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> PredictionSubscribeResponse: ...
+
+    @overload
+    async def subscribe(
+        self,
+        *,
+        inputs: prediction_run_params.ModelVariationRequestInputs,
+        model_name: Literal["model-variation"],
+        webhook_url: str | Omit = omit,
+        poll_interval: int | None = None,
+        timeout: int | None = None,
+        max_retries: int | None = None,
+        on_enqueued: EnqueuedCallback | None = None,
+        on_queue_update: QueueUpdateCallback | None = None,
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        request_timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> PredictionSubscribeResponse: ...
+
+    @overload
+    async def subscribe(
+        self,
+        *,
+        inputs: prediction_run_params.ModelSwapRequestInputs,
+        model_name: Literal["model-swap"],
+        webhook_url: str | Omit = omit,
+        poll_interval: int | None = None,
+        timeout: int | None = None,
+        max_retries: int | None = None,
+        on_enqueued: EnqueuedCallback | None = None,
+        on_queue_update: QueueUpdateCallback | None = None,
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        request_timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> PredictionSubscribeResponse: ...
+
+    @overload
+    async def subscribe(
+        self,
+        *,
+        inputs: prediction_run_params.ReframeRequestInputs,
+        model_name: Literal["reframe"],
+        webhook_url: str | Omit = omit,
+        poll_interval: int | None = None,
+        timeout: int | None = None,
+        max_retries: int | None = None,
+        on_enqueued: EnqueuedCallback | None = None,
+        on_queue_update: QueueUpdateCallback | None = None,
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        request_timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> PredictionSubscribeResponse: ...
+
+    @overload
+    async def subscribe(
+        self,
+        *,
+        inputs: prediction_run_params.BackgroundChangeRequestInputs,
+        model_name: Literal["background-change"],
+        webhook_url: str | Omit = omit,
+        poll_interval: int | None = None,
+        timeout: int | None = None,
+        max_retries: int | None = None,
+        on_enqueued: EnqueuedCallback | None = None,
+        on_queue_update: QueueUpdateCallback | None = None,
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        request_timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> PredictionSubscribeResponse: ...
+
+    @overload
+    async def subscribe(
+        self,
+        *,
+        inputs: prediction_run_params.BackgroundRemoveRequestInputs,
+        model_name: Literal["background-remove"],
+        webhook_url: str | Omit = omit,
+        poll_interval: int | None = None,
+        timeout: int | None = None,
+        max_retries: int | None = None,
+        on_enqueued: EnqueuedCallback | None = None,
+        on_queue_update: QueueUpdateCallback | None = None,
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        request_timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> PredictionSubscribeResponse: ...
+
+    async def subscribe(
+        self,
+        *,
+        inputs: prediction_run_params.TryOnRequestInputs
+        | prediction_run_params.ProductToModelRequestInputs
+        | prediction_run_params.FaceToModelRequestInputs
+        | prediction_run_params.ModelCreateRequestInputs
+        | prediction_run_params.ModelVariationRequestInputs
+        | prediction_run_params.ModelSwapRequestInputs
+        | prediction_run_params.ReframeRequestInputs
+        | prediction_run_params.BackgroundChangeRequestInputs
+        | prediction_run_params.BackgroundRemoveRequestInputs,
+        model_name: Literal["tryon-v1.6"]
+        | Literal["product-to-model"]
+        | Literal["face-to-model"]
+        | Literal["model-create"]
+        | Literal["model-variation"]
+        | Literal["model-swap"]
+        | Literal["reframe"]
+        | Literal["background-change"]
+        | Literal["background-remove"],
+        webhook_url: str | Omit = omit,
+        poll_interval: int | None = None,
+        timeout: int | None = None,
         max_retries: int | None = None,
         on_enqueued: EnqueuedCallback | None = None,
         on_queue_update: QueueUpdateCallback | None = None,
@@ -705,23 +1073,33 @@ class AsyncPredictionsResource(AsyncAPIResource):
         extra_body: Body | None = None,
         request_timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> PredictionSubscribeResponse:
+        """Run a prediction and poll until completion with real-time updates.
+
+        Async variant combining `run` and repeated `status` polling into a single call.
+
+        Args:
+          inputs: Typed inputs matching the selected `model_name`.
+          model_name: One of the supported model names; determines the `inputs` type.
+          webhook_url: Optional webhook URL to receive completion notifications.
+          poll_interval: Polling interval in milliseconds. Defaults to 1000ms.
+          timeout: Overall subscribe timeout in milliseconds. Defaults to 300000ms.
+          max_retries: Maximum retry attempts for the status HTTP request. Defaults to client default.
+          on_enqueued: Callback invoked once the request ID is available.
+          on_queue_update: Callback invoked on every status update.
+          request_timeout: Per-request HTTP timeout for run/status calls.
+        """
         poll_interval_ms = poll_interval if poll_interval is not None else DEFAULT_POLL_INTERVAL_MS
-        subscribe_timeout_ms = timeout_ms if timeout_ms is not None else DEFAULT_TIMEOUT_MS
-        effective_max_retries = max_retries if max_retries is not None else DEFAULT_MAX_RETRIES
+        subscribe_timeout_ms = (
+            timeout if (timeout is not None and timeout > 0) else DEFAULT_TIMEOUT_MS
+        )
+        effective_max_retries = (
+            max_retries if (max_retries is not None and max_retries >= 0) else DEFAULT_MAX_RETRIES
+        )
 
-        if on_enqueued is None and callable(params.get("on_enqueued")):
-            on_enqueued = cast(EnqueuedCallback, params.get("on_enqueued"))
-        if on_queue_update is None and callable(params.get("on_queue_update")):
-            on_queue_update = cast(QueueUpdateCallback, params.get("on_queue_update"))
-
-        inputs_any: Any = params.get("inputs")
-        model_name_any: Any = params.get("model_name")
-        webhook_url_any: Any = params.get("webhook_url", omit)
-
-        run_result = await self.run(
-            inputs=inputs_any,
-            model_name=model_name_any,
-            webhook_url=webhook_url_any,
+        run_result: PredictionRunResponse = await self.run(
+            inputs=cast(Any, inputs),
+            model_name=cast(Any, model_name),
+            webhook_url=webhook_url,
             extra_headers=extra_headers,
             extra_query=extra_query,
             extra_body=extra_body,
@@ -769,7 +1147,7 @@ class AsyncPredictionsResource(AsyncAPIResource):
         status_options["max_retries"] = max_retries
 
         while True:
-            status = await self._get(
+            status: PredictionStatusResponse = await self._get(
                 f"/v1/status/{prediction_id}",
                 options=status_options,
                 cast_to=PredictionStatusResponse,
@@ -1330,13 +1708,14 @@ class AsyncPredictionsResource(AsyncAPIResource):
         """
         if not id:
             raise ValueError(f"Expected a non-empty value for `id` but received {id!r}")
-        return await self._get(
+        resp: PredictionStatusResponse = await self._get(
             f"/v1/status/{id}",
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
             cast_to=PredictionStatusResponse,
         )
+        return resp
 
 
 class PredictionsResourceWithRawResponse:
