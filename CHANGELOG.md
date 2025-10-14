@@ -1,5 +1,28 @@
 # Changelog
 
+## 0.4.0 (2025-10-14)
+
+Full Changelog: [v0.3.0...v0.4.0](https://github.com/fashn-AI/fashn-python-sdk/compare/v0.3.0...v0.4.0)
+
+### Features
+
+* add subscribe method to readme ([646b54e](https://github.com/fashn-AI/fashn-python-sdk/commit/646b54e4144616bb66e1786ffd7240e024f81934))
+* **api:** api update ([f2cee2f](https://github.com/fashn-AI/fashn-python-sdk/commit/f2cee2f380bab897f5dfd670e9b7b46cc7e44fd8))
+* **api:** increase exponential backoff ([58f4dda](https://github.com/fashn-AI/fashn-python-sdk/commit/58f4ddac6953aeb62bda0ca6a6e4d8141bd5db4d))
+* improve subscribe types ([69e957f](https://github.com/fashn-AI/fashn-python-sdk/commit/69e957f546ed478c97686fa16277ca5ceac6c8e3))
+* subscribe method ([36bc09d](https://github.com/fashn-AI/fashn-python-sdk/commit/36bc09dfb2c795596b21f63a673a3fca502263e8))
+
+
+### Bug Fixes
+
+* code improvement ([daba9da](https://github.com/fashn-AI/fashn-python-sdk/commit/daba9da1dc5dffa0354df576a6fe7180469e7ca9))
+
+
+### Chores
+
+* do not install brew dependencies in ./scripts/bootstrap by default ([fecc0e9](https://github.com/fashn-AI/fashn-python-sdk/commit/fecc0e985d812a6b9fad8fd45bb89e7ef2c77858))
+* **internal:** detect missing future annotations with ruff ([77108a8](https://github.com/fashn-AI/fashn-python-sdk/commit/77108a88d071abac0dfbcf0b0718f4de15a410a1))
+
 ## 0.3.0 (2025-09-19)
 
 Full Changelog: [v0.2.0...v0.3.0](https://github.com/fashn-AI/fashn-python-sdk/compare/v0.2.0...v0.3.0)
