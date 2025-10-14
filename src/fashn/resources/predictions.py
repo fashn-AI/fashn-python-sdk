@@ -1708,14 +1708,13 @@ class AsyncPredictionsResource(AsyncAPIResource):
         """
         if not id:
             raise ValueError(f"Expected a non-empty value for `id` but received {id!r}")
-        resp: PredictionStatusResponse = await self._get(
+        return await self._get(
             f"/v1/status/{id}",
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
             cast_to=PredictionStatusResponse,
         )
-        return resp
 
 
 class PredictionsResourceWithRawResponse:
