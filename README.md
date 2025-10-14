@@ -28,14 +28,31 @@ pip install fashn
 
 The full API of this library can be found in [api.md](api.md).
 
+### Quick start
+
 ```python
 import os
 from fashn import Fashn
 
-client = Fashn(
-    api_key=os.environ.get("FASHN_API_KEY"),  # This is the default and can be omitted
+client = Fashn(api_key=os.environ.get("FASHN_API_KEY"))
+
+result = client.predictions.subscribe(
+    model_name="tryon-v1.6",
+    inputs={
+        "garment_image": "https://example.com/garment.jpg",
+        "model_image": "https://example.com/model.jpg",
+    },
+    on_enqueued=lambda pid: print("queued:", pid),
+    on_queue_update=lambda status: print("status:", status.status),
 )
 
+print(result.status)
+print(result.output)
+```
+
+You can still call the lower-level endpoints separately:
+
+```python
 response = client.predictions.run(
     inputs={
         "garment_image": "https://example.com/garment.jpg",
@@ -43,7 +60,7 @@ response = client.predictions.run(
     },
     model_name="tryon-v1.6",
 )
-print(response.id)
+status = client.predictions.status(response.id)
 ```
 
 While you can provide an `api_key` keyword argument,
@@ -53,28 +70,26 @@ so that your API Key is not stored in source control.
 
 ## Async usage
 
-Simply import `AsyncFashn` instead of `Fashn` and use `await` with each API call:
+Simply import `AsyncFashn` instead of `Fashn` and use `await` with each API call.
 
 ```python
 import os
 import asyncio
 from fashn import AsyncFashn
 
-client = AsyncFashn(
-    api_key=os.environ.get("FASHN_API_KEY"),  # This is the default and can be omitted
-)
-
+client = AsyncFashn(api_key=os.environ.get("FASHN_API_KEY"))
 
 async def main() -> None:
-    response = await client.predictions.run(
+    result = await client.predictions.subscribe(
+        model_name="tryon-v1.6",
         inputs={
             "garment_image": "https://example.com/garment.jpg",
             "model_image": "https://example.com/model.jpg",
         },
-        model_name="tryon-v1.6",
+        on_enqueued=lambda pid: print("queued:", pid),
+        on_queue_update=lambda status: print("status:", status.status),
     )
-    print(response.id)
-
+    print(result.status)
 
 asyncio.run(main())
 ```
@@ -105,15 +120,14 @@ async def main() -> None:
         api_key="My API Key",
         http_client=DefaultAioHttpClient(),
     ) as client:
-        response = await client.predictions.run(
+        result = await client.predictions.subscribe(
+            model_name="tryon-v1.6",
             inputs={
                 "garment_image": "https://example.com/garment.jpg",
                 "model_image": "https://example.com/model.jpg",
             },
-            model_name="tryon-v1.6",
         )
-        print(response.id)
-
+        print(result.status)
 
 asyncio.run(main())
 ```
@@ -143,7 +157,7 @@ response = client.predictions.run(
     },
     model_name="tryon-v1.6",
 )
-print(response.inputs)
+print(response.id)
 ```
 
 ## Handling errors
@@ -162,12 +176,12 @@ from fashn import Fashn
 client = Fashn()
 
 try:
-    client.predictions.run(
+    client.predictions.subscribe(
+        model_name="tryon-v1.6",
         inputs={
             "garment_image": "https://example.com/garment.jpg",
             "model_image": "https://example.com/model.jpg",
         },
-        model_name="tryon-v1.6",
     )
 except fashn.APIConnectionError as e:
     print("The server could not be reached")
@@ -205,10 +219,7 @@ You can use the `max_retries` option to configure or disable retry settings:
 from fashn import Fashn
 
 # Configure the default for all requests:
-client = Fashn(
-    # default is 2
-    max_retries=0,
-)
+client = Fashn(max_retries=0)  # default is 2
 
 # Or, configure per-request:
 client.with_options(max_retries=5).predictions.run(
@@ -229,15 +240,10 @@ which accepts a float or an [`httpx.Timeout`](https://www.python-httpx.org/advan
 from fashn import Fashn
 
 # Configure the default for all requests:
-client = Fashn(
-    # 20 seconds (default is 1 minute)
-    timeout=20.0,
-)
+client = Fashn(timeout=20.0)  # 20 seconds (default is 1 minute)
 
 # More granular control:
-client = Fashn(
-    timeout=httpx.Timeout(60.0, read=5.0, write=10.0, connect=2.0),
-)
+client = Fashn(timeout=httpx.Timeout(60.0, read=5.0, write=10.0, connect=2.0))
 
 # Override per-request:
 client.with_options(timeout=5.0).predictions.run(
