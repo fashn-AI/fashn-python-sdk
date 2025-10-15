@@ -34,6 +34,7 @@ __all__ = ["PredictionsResource", "AsyncPredictionsResource"]
 
 DEFAULT_POLL_INTERVAL_MS = 1000
 DEFAULT_TIMEOUT_MS = 5 * 60 * 1000
+CREDITS_USED_HEADER = "x-fashn-credits-used"
 
 
 ## Note: use the publicly exported type
@@ -309,11 +310,14 @@ class PredictionsResource(SyncAPIResource):
         status_options["max_retries"] = max_retries
 
         while True:
-            status = self._get(
-                f"/v1/status/{prediction_id}",
-                options=status_options,
-                cast_to=PredictionStatusResponse,
+            raw_response = self.with_raw_response.status(
+                prediction_id,
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
             )
+            status = raw_response.parse()
 
             if on_queue_update:
                 on_queue_update(status)
@@ -323,11 +327,20 @@ class PredictionsResource(SyncAPIResource):
                     Literal["completed", "failed", "canceled", "time_out"],
                     status.status,
                 )
+                credits_used_header = raw_response.headers.get(CREDITS_USED_HEADER)
+                credits_used: int | None = None
+                try:
+                    if credits_used_header is not None:
+                        credits_used = int(credits_used_header)
+                except Exception:
+                    credits_used = None
+
                 return PredictionSubscribeResponse(
                     id=status.id,
                     status=terminal_status,
                     error=status.error,
                     output=status.output,
+                    credits_used=credits_used,
                 )
 
             if deadline and time.monotonic() >= deadline:
@@ -1205,11 +1218,15 @@ class AsyncPredictionsResource(AsyncAPIResource):
         status_options["max_retries"] = max_retries
 
         while True:
-            status: PredictionStatusResponse = await self._get(
-                f"/v1/status/{prediction_id}",
-                options=status_options,
-                cast_to=PredictionStatusResponse,
+            # Use raw response to access headers for credits used
+            raw_response = await self.with_raw_response.status(
+                prediction_id,
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
             )
+            status: PredictionStatusResponse = await raw_response.parse()
 
             if on_queue_update:
                 on_queue_update(status)
@@ -1219,11 +1236,20 @@ class AsyncPredictionsResource(AsyncAPIResource):
                     Literal["completed", "failed", "canceled", "time_out"],
                     status.status,
                 )
+                credits_used_header = raw_response.headers.get(CREDITS_USED_HEADER)
+                credits_used: int | None = None
+                try:
+                    if credits_used_header is not None:
+                        credits_used = int(credits_used_header)
+                except Exception:
+                    credits_used = None
+
                 return PredictionSubscribeResponse(
                     id=status.id,
                     status=terminal_status,
                     error=status.error,
                     output=status.output,
+                    credits_used=credits_used,
                 )
 
             if deadline and time.monotonic() >= deadline:
