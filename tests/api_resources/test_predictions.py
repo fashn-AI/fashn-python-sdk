@@ -533,6 +533,59 @@ class TestPredictions:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
+    def test_method_run_overload_10(self, client: Fashn) -> None:
+        prediction = client.predictions.run(
+            inputs={"image": "https://example.com/photo.jpg"},
+            model_name="image-to-video",
+        )
+        assert_matches_type(PredictionRunResponse, prediction, path=["response"])
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    def test_method_run_with_all_params_overload_10(self, client: Fashn) -> None:
+        prediction = client.predictions.run(
+            inputs={
+                "image": "https://example.com/photo.jpg",
+                "duration": 5,
+                "negative_prompt": "negative_prompt",
+                "prompt": "prompt",
+                "resolution": "480p",
+            },
+            model_name="image-to-video",
+            webhook_url="https://example.com/webhook",
+        )
+        assert_matches_type(PredictionRunResponse, prediction, path=["response"])
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    def test_raw_response_run_overload_10(self, client: Fashn) -> None:
+        response = client.predictions.with_raw_response.run(
+            inputs={"image": "https://example.com/photo.jpg"},
+            model_name="image-to-video",
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        prediction = response.parse()
+        assert_matches_type(PredictionRunResponse, prediction, path=["response"])
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    def test_streaming_response_run_overload_10(self, client: Fashn) -> None:
+        with client.predictions.with_streaming_response.run(
+            inputs={"image": "https://example.com/photo.jpg"},
+            model_name="image-to-video",
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            prediction = response.parse()
+            assert_matches_type(PredictionRunResponse, prediction, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
     def test_method_status(self, client: Fashn) -> None:
         prediction = client.predictions.status(
             "123a87r9-4129-4bb3-be18-9c9fb5bd7fc1-u1",
@@ -1084,6 +1137,59 @@ class TestAsyncPredictions:
         async with async_client.predictions.with_streaming_response.run(
             inputs={"image": "https://example.com/image.jpg"},
             model_name="background-remove",
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            prediction = await response.parse()
+            assert_matches_type(PredictionRunResponse, prediction, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    async def test_method_run_overload_10(self, async_client: AsyncFashn) -> None:
+        prediction = await async_client.predictions.run(
+            inputs={"image": "https://example.com/photo.jpg"},
+            model_name="image-to-video",
+        )
+        assert_matches_type(PredictionRunResponse, prediction, path=["response"])
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    async def test_method_run_with_all_params_overload_10(self, async_client: AsyncFashn) -> None:
+        prediction = await async_client.predictions.run(
+            inputs={
+                "image": "https://example.com/photo.jpg",
+                "duration": 5,
+                "negative_prompt": "negative_prompt",
+                "prompt": "prompt",
+                "resolution": "480p",
+            },
+            model_name="image-to-video",
+            webhook_url="https://example.com/webhook",
+        )
+        assert_matches_type(PredictionRunResponse, prediction, path=["response"])
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    async def test_raw_response_run_overload_10(self, async_client: AsyncFashn) -> None:
+        response = await async_client.predictions.with_raw_response.run(
+            inputs={"image": "https://example.com/photo.jpg"},
+            model_name="image-to-video",
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        prediction = await response.parse()
+        assert_matches_type(PredictionRunResponse, prediction, path=["response"])
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    async def test_streaming_response_run_overload_10(self, async_client: AsyncFashn) -> None:
+        async with async_client.predictions.with_streaming_response.run(
+            inputs={"image": "https://example.com/photo.jpg"},
+            model_name="image-to-video",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"

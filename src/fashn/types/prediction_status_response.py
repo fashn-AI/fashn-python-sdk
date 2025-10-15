@@ -105,4 +105,7 @@ class PredictionStatusResponse(BaseModel):
     """Current status of the prediction"""
 
     output: Union[List[str], List[str], None] = None
-    """Generated images - format depends on original request's return_base64 setting"""
+    """
+    Generated media - for images, outputs are either CDN URLs or base64 (when
+    requested); for videos, outputs are CDN MP4 URLs
+    """
