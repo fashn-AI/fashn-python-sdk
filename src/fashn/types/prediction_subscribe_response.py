@@ -16,4 +16,5 @@ class PredictionSubscribeResponse(BaseModel):
     error: Optional[Error] = None
     status: Literal["completed", "failed", "canceled", "time_out"]
     output: Union[List[str], List[str], None] = None
+    credits_used: Optional[int] = None
 
