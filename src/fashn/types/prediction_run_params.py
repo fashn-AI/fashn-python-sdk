@@ -25,6 +25,8 @@ __all__ = [
     "BackgroundChangeRequestInputs",
     "BackgroundRemoveRequest",
     "BackgroundRemoveRequestInputs",
+    "ImageToVideoRequest",
+    "ImageToVideoRequestInputs",
 ]
 
 
@@ -745,6 +747,46 @@ class BackgroundRemoveRequestInputs(TypedDict, total=False):
     """
 
 
+class ImageToVideoRequest(TypedDict, total=False):
+    inputs: Required[ImageToVideoRequestInputs]
+
+    model_name: Required[Literal["image-to-video"]]
+    """
+    Image to Video turns a single image into a short motion clip, with tasteful
+    camera work and model movements tailored for fashion.
+    """
+
+    webhook_url: str
+    """Optional webhook URL to receive completion notifications"""
+
+
+class ImageToVideoRequestInputs(TypedDict, total=False):
+    image: Required[str]
+    """Source image to animate into a short video.
+
+    Base64 images must include the proper prefix (e.g.,
+    `data:image/jpg;base64,<YOUR_BASE64>`)
+    """
+
+    duration: Literal[5, 10]
+    """Duration of the generated video in seconds."""
+
+    negative_prompt: str
+    """Optional cues to avoid undesirable motion or framing."""
+
+    prompt: str
+    """Optional motion guidance.
+
+    Detailed prompting is not recommended because motion is difficult to control
+    precisely. For the best results, leave this field empty and allow the system to
+    plan motion automatically. If you include guidance, keep it short and concrete
+    (e.g., "raising hand to touch face").
+    """
+
+    resolution: Literal["480p", "720p", "1080p"]
+    """Target video resolution used by the internal video engine."""
+
+
 PredictionRunParams: TypeAlias = Union[
     TryOnRequest,
     ProductToModelRequest,
@@ -755,4 +797,5 @@ PredictionRunParams: TypeAlias = Union[
     ReframeRequest,
     BackgroundChangeRequest,
     BackgroundRemoveRequest,
+    ImageToVideoRequest,
 ]
