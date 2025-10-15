@@ -1,5 +1,14 @@
 # Changelog
 
+## 0.5.0 (2025-10-15)
+
+Full Changelog: [v0.4.0...v0.5.0](https://github.com/fashn-AI/fashn-python-sdk/compare/v0.4.0...v0.5.0)
+
+### Features
+
+* **api:** api update ([df2f734](https://github.com/fashn-AI/fashn-python-sdk/commit/df2f7341c02b3cc54d3aebdd9da428fa5d991bed))
+* return credits used information on .subscribe response ([0bc5bd3](https://github.com/fashn-AI/fashn-python-sdk/commit/0bc5bd387547fef6b979dc96bcb7520e2ac98cd8))
+
 ## 0.4.0 (2025-10-14)
 
 Full Changelog: [v0.3.0...v0.4.0](https://github.com/fashn-AI/fashn-python-sdk/compare/v0.3.0...v0.4.0)
