@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.5.1 (2025-10-16)
+
+Full Changelog: [v0.5.0...v0.5.1](https://github.com/fashn-AI/fashn-python-sdk/compare/v0.5.0...v0.5.1)
+
+### Bug Fixes
+
+* add error details to time_out ([5f35072](https://github.com/fashn-AI/fashn-python-sdk/commit/5f35072dc703907f5a8cebf82b2391e9d0b2f132))
+
 ## 0.5.0 (2025-10-15)
 
 Full Changelog: [v0.4.0...v0.5.0](https://github.com/fashn-AI/fashn-python-sdk/compare/v0.4.0...v0.5.0)
