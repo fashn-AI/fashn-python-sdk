@@ -22,7 +22,7 @@ from .._response import (
 from .._constants import DEFAULT_MAX_RETRIES
 from .._base_client import make_request_options
 from ..types.prediction_run_response import PredictionRunResponse
-from ..types.prediction_status_response import PredictionStatusResponse
+from ..types.prediction_status_response import Error, PredictionStatusResponse
 from ..types.prediction_subscribe_params import (
     EnqueuedCallback,
     QueueUpdateCallback,
@@ -347,7 +347,10 @@ class PredictionsResource(SyncAPIResource):
                 timeout_status_for_callback = PredictionStatusResponse(
                     id=prediction_id,
                     status="time_out",
-                    error=None,
+                    error=Error(
+                        name="PollingTimeout",
+                        message="Prediction polling timed out.",
+                    ),
                     output=None,
                 )
                 if on_queue_update:
@@ -355,7 +358,10 @@ class PredictionsResource(SyncAPIResource):
                 return PredictionSubscribeResponse(
                     id=prediction_id,
                     status="time_out",
-                    error=None,
+                    error=Error(
+                        name="PollingTimeout",
+                        message="Prediction polling timed out.",
+                    ),
                     output=None,
                 )
 
@@ -1256,7 +1262,10 @@ class AsyncPredictionsResource(AsyncAPIResource):
                 timeout_status_for_callback = PredictionStatusResponse(
                     id=prediction_id,
                     status="time_out",
-                    error=None,
+                    error=Error(
+                        name="PollingTimeout",
+                        message="Prediction polling timed out.",
+                    ),
                     output=None,
                 )
                 if on_queue_update:
@@ -1264,7 +1273,10 @@ class AsyncPredictionsResource(AsyncAPIResource):
                 return PredictionSubscribeResponse(
                     id=prediction_id,
                     status="time_out",
-                    error=None,
+                    error=Error(
+                        name="PollingTimeout",
+                        message="Prediction polling timed out.",
+                    ),
                     output=None,
                 )
 

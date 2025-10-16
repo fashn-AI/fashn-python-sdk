@@ -22,6 +22,7 @@ class Error(BaseModel):
         "ThirdPartyError",
         "3rdPartyProviderError",
         "InternalServerError",
+        "PollingTimeout",
     ]
     """Error type/category with troubleshooting guidance:
 
@@ -91,6 +92,11 @@ class Error(BaseModel):
     - _Cause_: Unexpected server-side failure
     - _Solution_: Retry request. Contact support@fashn.ai with prediction ID if
       persists
+
+    **PollingTimeout** - Request timed out (fallback error type)
+
+    - _Cause_: Request timed out before completion
+    - _Solution_: Retry request or increase the timeout parameter
     """
 
 
