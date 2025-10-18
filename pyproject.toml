@@ -39,7 +39,7 @@ Homepage = "https://github.com/fashn-AI/fashn-python-sdk"
 Repository = "https://github.com/fashn-AI/fashn-python-sdk"
 
 [project.optional-dependencies]
-aiohttp = ["aiohttp", "httpx_aiohttp>=0.1.8"]
+aiohttp = ["aiohttp", "httpx_aiohttp>=0.1.9"]
 
 [tool.rye]
 managed = true
