@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.5.2 (2025-10-18)
+
+Full Changelog: [v0.5.1...v0.5.2](https://github.com/fashn-AI/fashn-python-sdk/compare/v0.5.1...v0.5.2)
+
+### Chores
+
+* bump `httpx-aiohttp` version to 0.1.9 ([1ca3adb](https://github.com/fashn-AI/fashn-python-sdk/commit/1ca3adb8ee1213a45dbed667bcce82daf4e46e62))
+
 ## 0.5.1 (2025-10-16)
 
 Full Changelog: [v0.5.0...v0.5.1](https://github.com/fashn-AI/fashn-python-sdk/compare/v0.5.0...v0.5.1)
