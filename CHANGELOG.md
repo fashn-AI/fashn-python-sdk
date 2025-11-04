@@ -1,5 +1,20 @@
 # Changelog
 
+## 0.5.2 (2025-11-04)
+
+Full Changelog: [v0.5.1...v0.5.2](https://github.com/fashn-AI/fashn-python-sdk/compare/v0.5.1...v0.5.2)
+
+### Bug Fixes
+
+* **client:** close streams without requiring full consumption ([7f2a317](https://github.com/fashn-AI/fashn-python-sdk/commit/7f2a317e7d260ab21533ede03a34512f0e5606fe))
+
+
+### Chores
+
+* bump `httpx-aiohttp` version to 0.1.9 ([1ca3adb](https://github.com/fashn-AI/fashn-python-sdk/commit/1ca3adb8ee1213a45dbed667bcce82daf4e46e62))
+* **internal/tests:** avoid race condition with implicit client cleanup ([fae7724](https://github.com/fashn-AI/fashn-python-sdk/commit/fae77243aa7878d870f90cfa1aec174c9200c49e))
+* **internal:** grammar fix (it's -&gt; its) ([d9db081](https://github.com/fashn-AI/fashn-python-sdk/commit/d9db0817a2d06ddd03709abf98b52e387af2ac03))
+
 ## 0.5.1 (2025-10-16)
 
 Full Changelog: [v0.5.0...v0.5.1](https://github.com/fashn-AI/fashn-python-sdk/compare/v0.5.0...v0.5.1)
