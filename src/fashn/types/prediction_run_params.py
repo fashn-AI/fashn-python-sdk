@@ -27,6 +27,8 @@ __all__ = [
     "BackgroundRemoveRequestInputs",
     "ImageToVideoRequest",
     "ImageToVideoRequestInputs",
+    "EditRequest",
+    "EditRequestInputs",
 ]
 
 
@@ -787,6 +789,76 @@ class ImageToVideoRequestInputs(TypedDict, total=False):
     """Target video resolution used by the internal video engine."""
 
 
+class EditRequest(TypedDict, total=False):
+    inputs: Required[EditRequestInputs]
+
+    model_name: Required[Literal["edit"]]
+    """
+    Versatile post-processing to restyle shots, adjust views, and fix details while
+    preserving identity and product fidelity.
+    """
+
+    webhook_url: str
+    """Optional webhook URL to receive completion notifications"""
+
+
+class EditRequestInputs(TypedDict, total=False):
+    image: Required[str]
+    """Source image to edit.
+
+    The AI will apply the requested modifications based on your prompt while
+    preserving the overall composition and identity of the image.
+
+    Base64 images must include the proper prefix (e.g.,
+    `data:image/jpg;base64,<YOUR_BASE64>`)
+    """
+
+    prompt: Required[str]
+    """Natural language description of the edit to apply.
+
+    Be specific about what you want to change.
+
+    **Examples:** "change the dress to red", "add sunglasses", "make the background
+    a beach sunset", "change the shirt to a floral pattern"
+    """
+
+    num_images: int
+    """Number of images to generate in a single run.
+
+    Image generation has a random element in it, so trying multiple images at once
+    increases the chances of getting a good result.
+    """
+
+    output_format: Literal["png", "jpeg"]
+    """Specifies the desired output image format.
+
+    - `png`: Delivers the highest quality image, ideal for use cases such as content
+      creation where quality is paramount.
+    - `jpeg`: Provides a faster response with a slightly compressed image, more
+      suitable for real-time applications.
+    """
+
+    resolution: Literal["1k", "4k"]
+    """Resolution setting for the output image."""
+
+    return_base64: bool
+    """
+    When set to `true`, the API will return the generated image as a base64-encoded
+    string instead of a CDN URL. The base64 string will be prefixed according to the
+    `output_format` (e.g., `data:image/png;base64,...` or
+    `data:image/jpeg;base64,...`). This option offers enhanced privacy as
+    user-generated outputs are not stored on our servers when `return_base64` is
+    enabled.
+    """
+
+    seed: int
+    """Sets random operations to a fixed state.
+
+    Use the same seed to reproduce results with the same inputs, or different seed
+    to force different results.
+    """
+
+
 PredictionRunParams: TypeAlias = Union[
     TryOnRequest,
     ProductToModelRequest,
@@ -798,4 +870,5 @@ PredictionRunParams: TypeAlias = Union[
     BackgroundChangeRequest,
     BackgroundRemoveRequest,
     ImageToVideoRequest,
+    EditRequest,
 ]
