@@ -9,6 +9,8 @@ __all__ = ["PredictionStatusResponse", "Error"]
 
 
 class Error(BaseModel):
+    """Structured error object with name and message fields"""
+
     message: str
     """Detailed error message explaining the specific failure"""
 
