@@ -822,6 +822,16 @@ class EditRequestInputs(TypedDict, total=False):
     a beach sunset", "change the shirt to a floral pattern"
     """
 
+    image_context: str
+    """Optional URL or base64 of a context image to guide the edit.
+
+    This image provides additional visual context that influences how the edit is
+    applied.
+
+    Base64 images must include the proper prefix (e.g.,
+    `data:image/jpg;base64,<YOUR_BASE64>`)
+    """
+
     num_images: int
     """Number of images to generate in a single run.
 
