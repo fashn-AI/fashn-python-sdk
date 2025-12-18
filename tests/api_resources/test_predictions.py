@@ -603,6 +603,7 @@ class TestPredictions:
             inputs={
                 "image": "https://example.com/fashion-model.jpg",
                 "prompt": "change the dress to red",
+                "image_context": "https://example.com/context-reference.jpg",
                 "num_images": 1,
                 "output_format": "png",
                 "resolution": "1k",
@@ -1282,6 +1283,7 @@ class TestAsyncPredictions:
             inputs={
                 "image": "https://example.com/fashion-model.jpg",
                 "prompt": "change the dress to red",
+                "image_context": "https://example.com/context-reference.jpg",
                 "num_images": 1,
                 "output_format": "png",
                 "resolution": "1k",
