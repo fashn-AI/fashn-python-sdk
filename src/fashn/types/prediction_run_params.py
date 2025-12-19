@@ -832,6 +832,16 @@ class EditRequestInputs(TypedDict, total=False):
     `data:image/jpg;base64,<YOUR_BASE64>`)
     """
 
+    mask: str
+    """
+    Optional mask image where white (255) marks regions to edit and black (0) areas
+    remain unchanged. When provided, the edit will only affect the masked regions,
+    enabling precise local edits.
+
+    Base64 images must include the proper prefix (e.g.,
+    `data:image/png;base64,<YOUR_BASE64>`)
+    """
+
     num_images: int
     """Number of images to generate in a single run.
 
