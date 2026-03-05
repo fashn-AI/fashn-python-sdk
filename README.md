@@ -110,6 +110,7 @@ pip install fashn[aiohttp]
 Then you can enable it by instantiating the client with `http_client=DefaultAioHttpClient()`:
 
 ```python
+import os
 import asyncio
 from fashn import DefaultAioHttpClient
 from fashn import AsyncFashn
@@ -117,7 +118,7 @@ from fashn import AsyncFashn
 
 async def main() -> None:
     async with AsyncFashn(
-        api_key="My API Key",
+        api_key=os.environ.get("FASHN_API_KEY"),  # This is the default and can be omitted
         http_client=DefaultAioHttpClient(),
     ) as client:
         result = await client.predictions.subscribe(
@@ -433,7 +434,7 @@ print(fashn.__version__)
 
 ## Requirements
 
-Python 3.8 or higher.
+Python 3.9 or higher.
 
 ## Contributing
 

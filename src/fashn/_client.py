@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 import os
-from typing import Any, Mapping
+from typing import TYPE_CHECKING, Any, Mapping
 from typing_extensions import Self, override
 
 import httpx
@@ -20,8 +20,8 @@ from ._types import (
     not_given,
 )
 from ._utils import is_given, get_async_library
+from ._compat import cached_property
 from ._version import __version__
-from .resources import predictions
 from ._streaming import Stream as Stream, AsyncStream as AsyncStream
 from ._exceptions import FashnError, APIStatusError
 from ._base_client import (
@@ -30,14 +30,14 @@ from ._base_client import (
     AsyncAPIClient,
 )
 
+if TYPE_CHECKING:
+    from .resources import predictions
+    from .resources.predictions import PredictionsResource, AsyncPredictionsResource
+
 __all__ = ["Timeout", "Transport", "ProxiesTypes", "RequestOptions", "Fashn", "AsyncFashn", "Client", "AsyncClient"]
 
 
 class Fashn(SyncAPIClient):
-    predictions: predictions.PredictionsResource
-    with_raw_response: FashnWithRawResponse
-    with_streaming_response: FashnWithStreamedResponse
-
     # client options
     api_key: str
 
@@ -92,9 +92,20 @@ class Fashn(SyncAPIClient):
             _strict_response_validation=_strict_response_validation,
         )
 
-        self.predictions = predictions.PredictionsResource(self)
-        self.with_raw_response = FashnWithRawResponse(self)
-        self.with_streaming_response = FashnWithStreamedResponse(self)
+    @cached_property
+    def predictions(self) -> PredictionsResource:
+        """AI prediction operations"""
+        from .resources.predictions import PredictionsResource
+
+        return PredictionsResource(self)
+
+    @cached_property
+    def with_raw_response(self) -> FashnWithRawResponse:
+        return FashnWithRawResponse(self)
+
+    @cached_property
+    def with_streaming_response(self) -> FashnWithStreamedResponse:
+        return FashnWithStreamedResponse(self)
 
     @property
     @override
@@ -202,10 +213,6 @@ class Fashn(SyncAPIClient):
 
 
 class AsyncFashn(AsyncAPIClient):
-    predictions: predictions.AsyncPredictionsResource
-    with_raw_response: AsyncFashnWithRawResponse
-    with_streaming_response: AsyncFashnWithStreamedResponse
-
     # client options
     api_key: str
 
@@ -260,9 +267,20 @@ class AsyncFashn(AsyncAPIClient):
             _strict_response_validation=_strict_response_validation,
         )
 
-        self.predictions = predictions.AsyncPredictionsResource(self)
-        self.with_raw_response = AsyncFashnWithRawResponse(self)
-        self.with_streaming_response = AsyncFashnWithStreamedResponse(self)
+    @cached_property
+    def predictions(self) -> AsyncPredictionsResource:
+        """AI prediction operations"""
+        from .resources.predictions import AsyncPredictionsResource
+
+        return AsyncPredictionsResource(self)
+
+    @cached_property
+    def with_raw_response(self) -> AsyncFashnWithRawResponse:
+        return AsyncFashnWithRawResponse(self)
+
+    @cached_property
+    def with_streaming_response(self) -> AsyncFashnWithStreamedResponse:
+        return AsyncFashnWithStreamedResponse(self)
 
     @property
     @override
@@ -370,23 +388,59 @@ class AsyncFashn(AsyncAPIClient):
 
 
 class FashnWithRawResponse:
+    _client: Fashn
+
     def __init__(self, client: Fashn) -> None:
-        self.predictions = predictions.PredictionsResourceWithRawResponse(client.predictions)
+        self._client = client
+
+    @cached_property
+    def predictions(self) -> predictions.PredictionsResourceWithRawResponse:
+        """AI prediction operations"""
+        from .resources.predictions import PredictionsResourceWithRawResponse
+
+        return PredictionsResourceWithRawResponse(self._client.predictions)
 
 
 class AsyncFashnWithRawResponse:
+    _client: AsyncFashn
+
     def __init__(self, client: AsyncFashn) -> None:
-        self.predictions = predictions.AsyncPredictionsResourceWithRawResponse(client.predictions)
+        self._client = client
+
+    @cached_property
+    def predictions(self) -> predictions.AsyncPredictionsResourceWithRawResponse:
+        """AI prediction operations"""
+        from .resources.predictions import AsyncPredictionsResourceWithRawResponse
+
+        return AsyncPredictionsResourceWithRawResponse(self._client.predictions)
 
 
 class FashnWithStreamedResponse:
+    _client: Fashn
+
     def __init__(self, client: Fashn) -> None:
-        self.predictions = predictions.PredictionsResourceWithStreamingResponse(client.predictions)
+        self._client = client
+
+    @cached_property
+    def predictions(self) -> predictions.PredictionsResourceWithStreamingResponse:
+        """AI prediction operations"""
+        from .resources.predictions import PredictionsResourceWithStreamingResponse
+
+        return PredictionsResourceWithStreamingResponse(self._client.predictions)
 
 
 class AsyncFashnWithStreamedResponse:
+    _client: AsyncFashn
+
     def __init__(self, client: AsyncFashn) -> None:
-        self.predictions = predictions.AsyncPredictionsResourceWithStreamingResponse(client.predictions)
+        self._client = client
+
+    @cached_property
+    def predictions(self) -> predictions.AsyncPredictionsResourceWithStreamingResponse:
+        """AI prediction operations"""
+        from .resources.predictions import AsyncPredictionsResourceWithStreamingResponse
+
+        return AsyncPredictionsResourceWithStreamingResponse(self._client.predictions)
 
 
 Client = Fashn

@@ -27,6 +27,8 @@ __all__ = [
     "BackgroundRemoveRequestInputs",
     "ImageToVideoRequest",
     "ImageToVideoRequestInputs",
+    "EditRequest",
+    "EditRequestInputs",
 ]
 
 
@@ -571,30 +573,57 @@ class ReframeRequest(TypedDict, total=False):
 
 
 class ReframeRequestInputs(TypedDict, total=False):
+    aspect_ratio: Required[Literal["21:9", "1:1", "4:3", "3:2", "2:3", "5:4", "4:5", "3:4", "16:9", "9:16"]]
+    """Target aspect ratio for the reframed image.
+
+    The AI determines whether expansion or cropping is more appropriate based on the
+    current image content and dimensions.
+
+    **Behavior:**
+
+    - If target is wider than source → may expand horizontally or crop vertically
+    - If target is taller than source → may expand vertically or crop horizontally
+    - If source already matches target (within 2% tolerance) → returns an error
+
+    **Supported Aspect Ratios**
+
+    Each aspect ratio corresponds to a specific resolution optimized for ~1MP
+    output:
+
+    | Aspect Ratio | Resolution  | Use Case                      |
+    | ------------ | ----------- | ----------------------------- |
+    | 21:9         | 1568 × 672  | Ultra-wide cinematic          |
+    | 1:1          | 1024 × 1024 | Square format, social media   |
+    | 4:3          | 1176 × 880  | Traditional landscape         |
+    | 3:2          | 1248 × 832  | Standard landscape            |
+    | 2:3          | 832 × 1248  | Portrait, fashion photography |
+    | 5:4          | 1144 × 912  | Instagram landscape           |
+    | 4:5          | 912 × 1144  | Instagram portrait            |
+    | 3:4          | 880 × 1176  | Standard portrait             |
+    | 16:9         | 1360 × 760  | Horizontal video format       |
+    | 9:16         | 760 × 1360  | Vertical video format         |
+    """
+
     image: Required[str]
-    """Source image to extend or reframe.
+    """Source image to reframe to a new aspect ratio.
 
-    The AI will intelligently generate new content to expand the image based on the
-    selected mode and parameters.
+    The AI will intelligently analyze the image content and decide whether to expand
+    (outpainting/zoom-out) or crop (zoom-in) based on subject position, content
+    density, and edge details.
 
-    Resolution Handling: Output resolution is limited to 1MP. If your image is
-    already at or above this size, it will be downsampled so that, after any
-    extensions are applied, the final result fits within the 1MP limit.
+    Resolution Handling: Output resolution is limited to ~1MP. If your image is
+    already at or above this size, it will be downsampled so that, after reframing,
+    the final result fits within the 1MP limit.
 
     Base64 Format: Base64 images must include the proper prefix (e.g.,
     data:image/jpg;base64,<YOUR_BASE64>)
     """
 
-    mode: Literal["direction", "aspect_ratio"]
-    """Selects the reframing operation mode.
+    num_images: int
+    """Number of images to generate in a single run.
 
-    - `direction` - Directed zoom-out: extend image in specific directions to reveal
-      more content.
-    - `aspect_ratio` - Canvas adjustment: transform image to match a target aspect
-      ratio.
-
-    **Note: direction mode requires target_direction, aspect_ratio mode requires
-    target_aspect_ratio.**"
+    Image generation has a random element in it, so trying multiple images at once
+    increases the chances of getting a good result.
     """
 
     output_format: Literal["png", "jpeg"]
@@ -621,41 +650,6 @@ class ReframeRequestInputs(TypedDict, total=False):
 
     Use the same seed to reproduce results with the same inputs, or different seed
     to force different results.
-    """
-
-    target_aspect_ratio: Literal["1:1", "2:3", "3:2", "3:4", "4:3", "4:5", "5:4", "9:16", "16:9"]
-    """Target aspect ratio for the output canvas when using mode: 'aspect_ratio'.
-
-    This parameter is ignored when mode: 'direction'.
-
-    **Supported Aspect Ratios**
-
-    Each aspect ratio corresponds to a specific resolution optimized for ~1MP
-    output:
-
-    | Aspect Ratio | Resolution  | Use Case                      |
-    | ------------ | ----------- | ----------------------------- |
-    | 1:1          | 1024 × 1024 | Square format, social media   |
-    | 2:3          | 832 × 1248  | Portrait, fashion photography |
-    | 3:2          | 1248 × 832  | Standard landscape            |
-    | 3:4          | 880 × 1176  | Standard portrait             |
-    | 4:3          | 1176 × 880  | Traditional landscape         |
-    | 4:5          | 912 × 1144  | Instagram portrait            |
-    | 5:4          | 1144 × 912  | Instagram landscape           |
-    | 9:16         | 760 × 1360  | Vertical video format         |
-    | 16:9         | 1360 × 760  | Horizontal video format       |
-    """
-
-    target_direction: Literal["both", "down", "up"]
-    """Direction of image extension when using mode: 'direction'.
-
-    This parameter is ignored when mode: 'aspect_ratio'.
-
-    - `both` - Expand in both directions (zoom out effect).
-    - `down` - Expand only downward (reveal lower content, e.g., show full body from
-      upper body shot).
-    - `up` - Expand only upward (reveal upper content, e.g., show face from headless
-      shot).
     """
 
 
@@ -787,6 +781,96 @@ class ImageToVideoRequestInputs(TypedDict, total=False):
     """Target video resolution used by the internal video engine."""
 
 
+class EditRequest(TypedDict, total=False):
+    inputs: Required[EditRequestInputs]
+
+    model_name: Required[Literal["edit"]]
+    """
+    Versatile post-processing to restyle shots, adjust views, and fix details while
+    preserving identity and product fidelity.
+    """
+
+    webhook_url: str
+    """Optional webhook URL to receive completion notifications"""
+
+
+class EditRequestInputs(TypedDict, total=False):
+    image: Required[str]
+    """Source image to edit.
+
+    The AI will apply the requested modifications based on your prompt while
+    preserving the overall composition and identity of the image.
+
+    Base64 images must include the proper prefix (e.g.,
+    `data:image/jpg;base64,<YOUR_BASE64>`)
+    """
+
+    prompt: Required[str]
+    """Natural language description of the edit to apply.
+
+    Be specific about what you want to change.
+
+    **Examples:** "change the dress to red", "add sunglasses", "make the background
+    a beach sunset", "change the shirt to a floral pattern"
+    """
+
+    image_context: str
+    """Optional URL or base64 of a context image to guide the edit.
+
+    This image provides additional visual context that influences how the edit is
+    applied.
+
+    Base64 images must include the proper prefix (e.g.,
+    `data:image/jpg;base64,<YOUR_BASE64>`)
+    """
+
+    mask: str
+    """
+    Optional mask image where white (255) marks regions to edit and black (0) areas
+    remain unchanged. When provided, the edit will only affect the masked regions,
+    enabling precise local edits.
+
+    Base64 images must include the proper prefix (e.g.,
+    `data:image/png;base64,<YOUR_BASE64>`)
+    """
+
+    num_images: int
+    """Number of images to generate in a single run.
+
+    Image generation has a random element in it, so trying multiple images at once
+    increases the chances of getting a good result.
+    """
+
+    output_format: Literal["png", "jpeg"]
+    """Specifies the desired output image format.
+
+    - `png`: Delivers the highest quality image, ideal for use cases such as content
+      creation where quality is paramount.
+    - `jpeg`: Provides a faster response with a slightly compressed image, more
+      suitable for real-time applications.
+    """
+
+    resolution: Literal["1k", "4k"]
+    """Resolution setting for the output image."""
+
+    return_base64: bool
+    """
+    When set to `true`, the API will return the generated image as a base64-encoded
+    string instead of a CDN URL. The base64 string will be prefixed according to the
+    `output_format` (e.g., `data:image/png;base64,...` or
+    `data:image/jpeg;base64,...`). This option offers enhanced privacy as
+    user-generated outputs are not stored on our servers when `return_base64` is
+    enabled.
+    """
+
+    seed: int
+    """Sets random operations to a fixed state.
+
+    Use the same seed to reproduce results with the same inputs, or different seed
+    to force different results.
+    """
+
+
 PredictionRunParams: TypeAlias = Union[
     TryOnRequest,
     ProductToModelRequest,
@@ -798,4 +882,5 @@ PredictionRunParams: TypeAlias = Union[
     BackgroundChangeRequest,
     BackgroundRemoveRequest,
     ImageToVideoRequest,
+    EditRequest,
 ]
