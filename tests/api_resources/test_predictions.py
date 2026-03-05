@@ -17,7 +17,7 @@ base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
 class TestPredictions:
     parametrize = pytest.mark.parametrize("client", [False, True], indirect=True, ids=["loose", "strict"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_run_overload_1(self, client: Fashn) -> None:
         prediction = client.predictions.run(
@@ -29,7 +29,7 @@ class TestPredictions:
         )
         assert_matches_type(PredictionRunResponse, prediction, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_run_with_all_params_overload_1(self, client: Fashn) -> None:
         prediction = client.predictions.run(
@@ -51,7 +51,7 @@ class TestPredictions:
         )
         assert_matches_type(PredictionRunResponse, prediction, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_raw_response_run_overload_1(self, client: Fashn) -> None:
         response = client.predictions.with_raw_response.run(
@@ -67,7 +67,7 @@ class TestPredictions:
         prediction = response.parse()
         assert_matches_type(PredictionRunResponse, prediction, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_streaming_response_run_overload_1(self, client: Fashn) -> None:
         with client.predictions.with_streaming_response.run(
@@ -85,7 +85,7 @@ class TestPredictions:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_run_overload_2(self, client: Fashn) -> None:
         prediction = client.predictions.run(
@@ -94,7 +94,7 @@ class TestPredictions:
         )
         assert_matches_type(PredictionRunResponse, prediction, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_run_with_all_params_overload_2(self, client: Fashn) -> None:
         prediction = client.predictions.run(
@@ -114,7 +114,7 @@ class TestPredictions:
         )
         assert_matches_type(PredictionRunResponse, prediction, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_raw_response_run_overload_2(self, client: Fashn) -> None:
         response = client.predictions.with_raw_response.run(
@@ -127,7 +127,7 @@ class TestPredictions:
         prediction = response.parse()
         assert_matches_type(PredictionRunResponse, prediction, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_streaming_response_run_overload_2(self, client: Fashn) -> None:
         with client.predictions.with_streaming_response.run(
@@ -142,7 +142,7 @@ class TestPredictions:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_run_overload_3(self, client: Fashn) -> None:
         prediction = client.predictions.run(
@@ -151,7 +151,7 @@ class TestPredictions:
         )
         assert_matches_type(PredictionRunResponse, prediction, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_run_with_all_params_overload_3(self, client: Fashn) -> None:
         prediction = client.predictions.run(
@@ -168,7 +168,7 @@ class TestPredictions:
         )
         assert_matches_type(PredictionRunResponse, prediction, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_raw_response_run_overload_3(self, client: Fashn) -> None:
         response = client.predictions.with_raw_response.run(
@@ -181,7 +181,7 @@ class TestPredictions:
         prediction = response.parse()
         assert_matches_type(PredictionRunResponse, prediction, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_streaming_response_run_overload_3(self, client: Fashn) -> None:
         with client.predictions.with_streaming_response.run(
@@ -196,7 +196,7 @@ class TestPredictions:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_run_overload_4(self, client: Fashn) -> None:
         prediction = client.predictions.run(
@@ -205,7 +205,7 @@ class TestPredictions:
         )
         assert_matches_type(PredictionRunResponse, prediction, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_run_with_all_params_overload_4(self, client: Fashn) -> None:
         prediction = client.predictions.run(
@@ -225,7 +225,7 @@ class TestPredictions:
         )
         assert_matches_type(PredictionRunResponse, prediction, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_raw_response_run_overload_4(self, client: Fashn) -> None:
         response = client.predictions.with_raw_response.run(
@@ -238,7 +238,7 @@ class TestPredictions:
         prediction = response.parse()
         assert_matches_type(PredictionRunResponse, prediction, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_streaming_response_run_overload_4(self, client: Fashn) -> None:
         with client.predictions.with_streaming_response.run(
@@ -253,7 +253,7 @@ class TestPredictions:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_run_overload_5(self, client: Fashn) -> None:
         prediction = client.predictions.run(
@@ -262,7 +262,7 @@ class TestPredictions:
         )
         assert_matches_type(PredictionRunResponse, prediction, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_run_with_all_params_overload_5(self, client: Fashn) -> None:
         prediction = client.predictions.run(
@@ -279,7 +279,7 @@ class TestPredictions:
         )
         assert_matches_type(PredictionRunResponse, prediction, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_raw_response_run_overload_5(self, client: Fashn) -> None:
         response = client.predictions.with_raw_response.run(
@@ -292,7 +292,7 @@ class TestPredictions:
         prediction = response.parse()
         assert_matches_type(PredictionRunResponse, prediction, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_streaming_response_run_overload_5(self, client: Fashn) -> None:
         with client.predictions.with_streaming_response.run(
@@ -307,7 +307,7 @@ class TestPredictions:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_run_overload_6(self, client: Fashn) -> None:
         prediction = client.predictions.run(
@@ -316,7 +316,7 @@ class TestPredictions:
         )
         assert_matches_type(PredictionRunResponse, prediction, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_run_with_all_params_overload_6(self, client: Fashn) -> None:
         prediction = client.predictions.run(
@@ -335,7 +335,7 @@ class TestPredictions:
         )
         assert_matches_type(PredictionRunResponse, prediction, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_raw_response_run_overload_6(self, client: Fashn) -> None:
         response = client.predictions.with_raw_response.run(
@@ -348,7 +348,7 @@ class TestPredictions:
         prediction = response.parse()
         assert_matches_type(PredictionRunResponse, prediction, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_streaming_response_run_overload_6(self, client: Fashn) -> None:
         with client.predictions.with_streaming_response.run(
@@ -363,7 +363,7 @@ class TestPredictions:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_run_overload_7(self, client: Fashn) -> None:
         prediction = client.predictions.run(
@@ -375,7 +375,7 @@ class TestPredictions:
         )
         assert_matches_type(PredictionRunResponse, prediction, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_run_with_all_params_overload_7(self, client: Fashn) -> None:
         prediction = client.predictions.run(
@@ -392,7 +392,7 @@ class TestPredictions:
         )
         assert_matches_type(PredictionRunResponse, prediction, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_raw_response_run_overload_7(self, client: Fashn) -> None:
         response = client.predictions.with_raw_response.run(
@@ -408,7 +408,7 @@ class TestPredictions:
         prediction = response.parse()
         assert_matches_type(PredictionRunResponse, prediction, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_streaming_response_run_overload_7(self, client: Fashn) -> None:
         with client.predictions.with_streaming_response.run(
@@ -426,7 +426,7 @@ class TestPredictions:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_run_overload_8(self, client: Fashn) -> None:
         prediction = client.predictions.run(
@@ -438,7 +438,7 @@ class TestPredictions:
         )
         assert_matches_type(PredictionRunResponse, prediction, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_run_with_all_params_overload_8(self, client: Fashn) -> None:
         prediction = client.predictions.run(
@@ -455,7 +455,7 @@ class TestPredictions:
         )
         assert_matches_type(PredictionRunResponse, prediction, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_raw_response_run_overload_8(self, client: Fashn) -> None:
         response = client.predictions.with_raw_response.run(
@@ -471,7 +471,7 @@ class TestPredictions:
         prediction = response.parse()
         assert_matches_type(PredictionRunResponse, prediction, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_streaming_response_run_overload_8(self, client: Fashn) -> None:
         with client.predictions.with_streaming_response.run(
@@ -489,7 +489,7 @@ class TestPredictions:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_run_overload_9(self, client: Fashn) -> None:
         prediction = client.predictions.run(
@@ -498,7 +498,7 @@ class TestPredictions:
         )
         assert_matches_type(PredictionRunResponse, prediction, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_run_with_all_params_overload_9(self, client: Fashn) -> None:
         prediction = client.predictions.run(
@@ -511,7 +511,7 @@ class TestPredictions:
         )
         assert_matches_type(PredictionRunResponse, prediction, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_raw_response_run_overload_9(self, client: Fashn) -> None:
         response = client.predictions.with_raw_response.run(
@@ -524,7 +524,7 @@ class TestPredictions:
         prediction = response.parse()
         assert_matches_type(PredictionRunResponse, prediction, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_streaming_response_run_overload_9(self, client: Fashn) -> None:
         with client.predictions.with_streaming_response.run(
@@ -539,7 +539,7 @@ class TestPredictions:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_run_overload_10(self, client: Fashn) -> None:
         prediction = client.predictions.run(
@@ -548,7 +548,7 @@ class TestPredictions:
         )
         assert_matches_type(PredictionRunResponse, prediction, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_run_with_all_params_overload_10(self, client: Fashn) -> None:
         prediction = client.predictions.run(
@@ -564,7 +564,7 @@ class TestPredictions:
         )
         assert_matches_type(PredictionRunResponse, prediction, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_raw_response_run_overload_10(self, client: Fashn) -> None:
         response = client.predictions.with_raw_response.run(
@@ -577,7 +577,7 @@ class TestPredictions:
         prediction = response.parse()
         assert_matches_type(PredictionRunResponse, prediction, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_streaming_response_run_overload_10(self, client: Fashn) -> None:
         with client.predictions.with_streaming_response.run(
@@ -592,7 +592,7 @@ class TestPredictions:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_run_overload_11(self, client: Fashn) -> None:
         prediction = client.predictions.run(
@@ -604,7 +604,7 @@ class TestPredictions:
         )
         assert_matches_type(PredictionRunResponse, prediction, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_run_with_all_params_overload_11(self, client: Fashn) -> None:
         prediction = client.predictions.run(
@@ -624,7 +624,7 @@ class TestPredictions:
         )
         assert_matches_type(PredictionRunResponse, prediction, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_raw_response_run_overload_11(self, client: Fashn) -> None:
         response = client.predictions.with_raw_response.run(
@@ -640,7 +640,7 @@ class TestPredictions:
         prediction = response.parse()
         assert_matches_type(PredictionRunResponse, prediction, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_streaming_response_run_overload_11(self, client: Fashn) -> None:
         with client.predictions.with_streaming_response.run(
@@ -658,7 +658,7 @@ class TestPredictions:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_status(self, client: Fashn) -> None:
         prediction = client.predictions.status(
@@ -666,7 +666,7 @@ class TestPredictions:
         )
         assert_matches_type(PredictionStatusResponse, prediction, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_raw_response_status(self, client: Fashn) -> None:
         response = client.predictions.with_raw_response.status(
@@ -678,7 +678,7 @@ class TestPredictions:
         prediction = response.parse()
         assert_matches_type(PredictionStatusResponse, prediction, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_streaming_response_status(self, client: Fashn) -> None:
         with client.predictions.with_streaming_response.status(
@@ -692,7 +692,7 @@ class TestPredictions:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_path_params_status(self, client: Fashn) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `id` but received ''"):
@@ -706,7 +706,7 @@ class TestAsyncPredictions:
         "async_client", [False, True, {"http_client": "aiohttp"}], indirect=True, ids=["loose", "strict", "aiohttp"]
     )
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_run_overload_1(self, async_client: AsyncFashn) -> None:
         prediction = await async_client.predictions.run(
@@ -718,7 +718,7 @@ class TestAsyncPredictions:
         )
         assert_matches_type(PredictionRunResponse, prediction, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_run_with_all_params_overload_1(self, async_client: AsyncFashn) -> None:
         prediction = await async_client.predictions.run(
@@ -740,7 +740,7 @@ class TestAsyncPredictions:
         )
         assert_matches_type(PredictionRunResponse, prediction, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_raw_response_run_overload_1(self, async_client: AsyncFashn) -> None:
         response = await async_client.predictions.with_raw_response.run(
@@ -756,7 +756,7 @@ class TestAsyncPredictions:
         prediction = await response.parse()
         assert_matches_type(PredictionRunResponse, prediction, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_streaming_response_run_overload_1(self, async_client: AsyncFashn) -> None:
         async with async_client.predictions.with_streaming_response.run(
@@ -774,7 +774,7 @@ class TestAsyncPredictions:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_run_overload_2(self, async_client: AsyncFashn) -> None:
         prediction = await async_client.predictions.run(
@@ -783,7 +783,7 @@ class TestAsyncPredictions:
         )
         assert_matches_type(PredictionRunResponse, prediction, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_run_with_all_params_overload_2(self, async_client: AsyncFashn) -> None:
         prediction = await async_client.predictions.run(
@@ -803,7 +803,7 @@ class TestAsyncPredictions:
         )
         assert_matches_type(PredictionRunResponse, prediction, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_raw_response_run_overload_2(self, async_client: AsyncFashn) -> None:
         response = await async_client.predictions.with_raw_response.run(
@@ -816,7 +816,7 @@ class TestAsyncPredictions:
         prediction = await response.parse()
         assert_matches_type(PredictionRunResponse, prediction, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_streaming_response_run_overload_2(self, async_client: AsyncFashn) -> None:
         async with async_client.predictions.with_streaming_response.run(
@@ -831,7 +831,7 @@ class TestAsyncPredictions:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_run_overload_3(self, async_client: AsyncFashn) -> None:
         prediction = await async_client.predictions.run(
@@ -840,7 +840,7 @@ class TestAsyncPredictions:
         )
         assert_matches_type(PredictionRunResponse, prediction, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_run_with_all_params_overload_3(self, async_client: AsyncFashn) -> None:
         prediction = await async_client.predictions.run(
@@ -857,7 +857,7 @@ class TestAsyncPredictions:
         )
         assert_matches_type(PredictionRunResponse, prediction, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_raw_response_run_overload_3(self, async_client: AsyncFashn) -> None:
         response = await async_client.predictions.with_raw_response.run(
@@ -870,7 +870,7 @@ class TestAsyncPredictions:
         prediction = await response.parse()
         assert_matches_type(PredictionRunResponse, prediction, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_streaming_response_run_overload_3(self, async_client: AsyncFashn) -> None:
         async with async_client.predictions.with_streaming_response.run(
@@ -885,7 +885,7 @@ class TestAsyncPredictions:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_run_overload_4(self, async_client: AsyncFashn) -> None:
         prediction = await async_client.predictions.run(
@@ -894,7 +894,7 @@ class TestAsyncPredictions:
         )
         assert_matches_type(PredictionRunResponse, prediction, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_run_with_all_params_overload_4(self, async_client: AsyncFashn) -> None:
         prediction = await async_client.predictions.run(
@@ -914,7 +914,7 @@ class TestAsyncPredictions:
         )
         assert_matches_type(PredictionRunResponse, prediction, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_raw_response_run_overload_4(self, async_client: AsyncFashn) -> None:
         response = await async_client.predictions.with_raw_response.run(
@@ -927,7 +927,7 @@ class TestAsyncPredictions:
         prediction = await response.parse()
         assert_matches_type(PredictionRunResponse, prediction, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_streaming_response_run_overload_4(self, async_client: AsyncFashn) -> None:
         async with async_client.predictions.with_streaming_response.run(
@@ -942,7 +942,7 @@ class TestAsyncPredictions:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_run_overload_5(self, async_client: AsyncFashn) -> None:
         prediction = await async_client.predictions.run(
@@ -951,7 +951,7 @@ class TestAsyncPredictions:
         )
         assert_matches_type(PredictionRunResponse, prediction, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_run_with_all_params_overload_5(self, async_client: AsyncFashn) -> None:
         prediction = await async_client.predictions.run(
@@ -968,7 +968,7 @@ class TestAsyncPredictions:
         )
         assert_matches_type(PredictionRunResponse, prediction, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_raw_response_run_overload_5(self, async_client: AsyncFashn) -> None:
         response = await async_client.predictions.with_raw_response.run(
@@ -981,7 +981,7 @@ class TestAsyncPredictions:
         prediction = await response.parse()
         assert_matches_type(PredictionRunResponse, prediction, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_streaming_response_run_overload_5(self, async_client: AsyncFashn) -> None:
         async with async_client.predictions.with_streaming_response.run(
@@ -996,7 +996,7 @@ class TestAsyncPredictions:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_run_overload_6(self, async_client: AsyncFashn) -> None:
         prediction = await async_client.predictions.run(
@@ -1005,7 +1005,7 @@ class TestAsyncPredictions:
         )
         assert_matches_type(PredictionRunResponse, prediction, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_run_with_all_params_overload_6(self, async_client: AsyncFashn) -> None:
         prediction = await async_client.predictions.run(
@@ -1024,7 +1024,7 @@ class TestAsyncPredictions:
         )
         assert_matches_type(PredictionRunResponse, prediction, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_raw_response_run_overload_6(self, async_client: AsyncFashn) -> None:
         response = await async_client.predictions.with_raw_response.run(
@@ -1037,7 +1037,7 @@ class TestAsyncPredictions:
         prediction = await response.parse()
         assert_matches_type(PredictionRunResponse, prediction, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_streaming_response_run_overload_6(self, async_client: AsyncFashn) -> None:
         async with async_client.predictions.with_streaming_response.run(
@@ -1052,7 +1052,7 @@ class TestAsyncPredictions:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_run_overload_7(self, async_client: AsyncFashn) -> None:
         prediction = await async_client.predictions.run(
@@ -1064,7 +1064,7 @@ class TestAsyncPredictions:
         )
         assert_matches_type(PredictionRunResponse, prediction, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_run_with_all_params_overload_7(self, async_client: AsyncFashn) -> None:
         prediction = await async_client.predictions.run(
@@ -1081,7 +1081,7 @@ class TestAsyncPredictions:
         )
         assert_matches_type(PredictionRunResponse, prediction, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_raw_response_run_overload_7(self, async_client: AsyncFashn) -> None:
         response = await async_client.predictions.with_raw_response.run(
@@ -1097,7 +1097,7 @@ class TestAsyncPredictions:
         prediction = await response.parse()
         assert_matches_type(PredictionRunResponse, prediction, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_streaming_response_run_overload_7(self, async_client: AsyncFashn) -> None:
         async with async_client.predictions.with_streaming_response.run(
@@ -1115,7 +1115,7 @@ class TestAsyncPredictions:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_run_overload_8(self, async_client: AsyncFashn) -> None:
         prediction = await async_client.predictions.run(
@@ -1127,7 +1127,7 @@ class TestAsyncPredictions:
         )
         assert_matches_type(PredictionRunResponse, prediction, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_run_with_all_params_overload_8(self, async_client: AsyncFashn) -> None:
         prediction = await async_client.predictions.run(
@@ -1144,7 +1144,7 @@ class TestAsyncPredictions:
         )
         assert_matches_type(PredictionRunResponse, prediction, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_raw_response_run_overload_8(self, async_client: AsyncFashn) -> None:
         response = await async_client.predictions.with_raw_response.run(
@@ -1160,7 +1160,7 @@ class TestAsyncPredictions:
         prediction = await response.parse()
         assert_matches_type(PredictionRunResponse, prediction, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_streaming_response_run_overload_8(self, async_client: AsyncFashn) -> None:
         async with async_client.predictions.with_streaming_response.run(
@@ -1178,7 +1178,7 @@ class TestAsyncPredictions:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_run_overload_9(self, async_client: AsyncFashn) -> None:
         prediction = await async_client.predictions.run(
@@ -1187,7 +1187,7 @@ class TestAsyncPredictions:
         )
         assert_matches_type(PredictionRunResponse, prediction, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_run_with_all_params_overload_9(self, async_client: AsyncFashn) -> None:
         prediction = await async_client.predictions.run(
@@ -1200,7 +1200,7 @@ class TestAsyncPredictions:
         )
         assert_matches_type(PredictionRunResponse, prediction, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_raw_response_run_overload_9(self, async_client: AsyncFashn) -> None:
         response = await async_client.predictions.with_raw_response.run(
@@ -1213,7 +1213,7 @@ class TestAsyncPredictions:
         prediction = await response.parse()
         assert_matches_type(PredictionRunResponse, prediction, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_streaming_response_run_overload_9(self, async_client: AsyncFashn) -> None:
         async with async_client.predictions.with_streaming_response.run(
@@ -1228,7 +1228,7 @@ class TestAsyncPredictions:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_run_overload_10(self, async_client: AsyncFashn) -> None:
         prediction = await async_client.predictions.run(
@@ -1237,7 +1237,7 @@ class TestAsyncPredictions:
         )
         assert_matches_type(PredictionRunResponse, prediction, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_run_with_all_params_overload_10(self, async_client: AsyncFashn) -> None:
         prediction = await async_client.predictions.run(
@@ -1253,7 +1253,7 @@ class TestAsyncPredictions:
         )
         assert_matches_type(PredictionRunResponse, prediction, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_raw_response_run_overload_10(self, async_client: AsyncFashn) -> None:
         response = await async_client.predictions.with_raw_response.run(
@@ -1266,7 +1266,7 @@ class TestAsyncPredictions:
         prediction = await response.parse()
         assert_matches_type(PredictionRunResponse, prediction, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_streaming_response_run_overload_10(self, async_client: AsyncFashn) -> None:
         async with async_client.predictions.with_streaming_response.run(
@@ -1281,7 +1281,7 @@ class TestAsyncPredictions:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_run_overload_11(self, async_client: AsyncFashn) -> None:
         prediction = await async_client.predictions.run(
@@ -1293,7 +1293,7 @@ class TestAsyncPredictions:
         )
         assert_matches_type(PredictionRunResponse, prediction, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_run_with_all_params_overload_11(self, async_client: AsyncFashn) -> None:
         prediction = await async_client.predictions.run(
@@ -1313,7 +1313,7 @@ class TestAsyncPredictions:
         )
         assert_matches_type(PredictionRunResponse, prediction, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_raw_response_run_overload_11(self, async_client: AsyncFashn) -> None:
         response = await async_client.predictions.with_raw_response.run(
@@ -1329,7 +1329,7 @@ class TestAsyncPredictions:
         prediction = await response.parse()
         assert_matches_type(PredictionRunResponse, prediction, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_streaming_response_run_overload_11(self, async_client: AsyncFashn) -> None:
         async with async_client.predictions.with_streaming_response.run(
@@ -1347,7 +1347,7 @@ class TestAsyncPredictions:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_status(self, async_client: AsyncFashn) -> None:
         prediction = await async_client.predictions.status(
@@ -1355,7 +1355,7 @@ class TestAsyncPredictions:
         )
         assert_matches_type(PredictionStatusResponse, prediction, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_raw_response_status(self, async_client: AsyncFashn) -> None:
         response = await async_client.predictions.with_raw_response.status(
@@ -1367,7 +1367,7 @@ class TestAsyncPredictions:
         prediction = await response.parse()
         assert_matches_type(PredictionStatusResponse, prediction, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_streaming_response_status(self, async_client: AsyncFashn) -> None:
         async with async_client.predictions.with_streaming_response.status(
@@ -1381,7 +1381,7 @@ class TestAsyncPredictions:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_path_params_status(self, async_client: AsyncFashn) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `id` but received ''"):

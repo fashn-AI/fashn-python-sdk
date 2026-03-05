@@ -25,6 +25,8 @@ __all__ = ["PredictionsResource", "AsyncPredictionsResource"]
 
 
 class PredictionsResource(SyncAPIResource):
+    """AI prediction operations"""
+
     @cached_property
     def with_raw_response(self) -> PredictionsResourceWithRawResponse:
         """
@@ -674,6 +676,8 @@ class PredictionsResource(SyncAPIResource):
 
 
 class AsyncPredictionsResource(AsyncAPIResource):
+    """AI prediction operations"""
+
     @cached_property
     def with_raw_response(self) -> AsyncPredictionsResourceWithRawResponse:
         """
