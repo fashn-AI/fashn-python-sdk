@@ -41,6 +41,7 @@ CREDITS_USED_HEADER = "x-fashn-credits-used"
 
 
 class PredictionsResource(SyncAPIResource):
+    """AI prediction operations"""
     @overload
     def subscribe(
         self,
@@ -1016,6 +1017,8 @@ class PredictionsResource(SyncAPIResource):
 
 
 class AsyncPredictionsResource(AsyncAPIResource):
+    """AI prediction operations"""
+
     @overload
     async def subscribe(
         self,
