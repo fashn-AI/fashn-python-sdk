@@ -1,5 +1,40 @@
 # Changelog
 
+## 0.6.0 (2026-03-05)
+
+Full Changelog: [v0.5.1...v0.6.0](https://github.com/fashn-AI/fashn-python-sdk/compare/v0.5.1...v0.6.0)
+
+### Features
+
+* **api:** api update ([6a37d54](https://github.com/fashn-AI/fashn-python-sdk/commit/6a37d54930e4a5d2a8104729b8e95616cc56d2b2))
+* **api:** api update ([6e05eed](https://github.com/fashn-AI/fashn-python-sdk/commit/6e05eed508d1b5169878ae1f2e0db5bc4e9f701c))
+* **api:** api update ([1b202d7](https://github.com/fashn-AI/fashn-python-sdk/commit/1b202d744e0b3b63f73b91c25517450c06ac3788))
+* **api:** api update ([1d48316](https://github.com/fashn-AI/fashn-python-sdk/commit/1d4831692c89407350c9354ed429d8c130237b6e))
+
+
+### Bug Fixes
+
+* **client:** close streams without requiring full consumption ([7f2a317](https://github.com/fashn-AI/fashn-python-sdk/commit/7f2a317e7d260ab21533ede03a34512f0e5606fe))
+* compat with Python 3.14 ([0ebd493](https://github.com/fashn-AI/fashn-python-sdk/commit/0ebd493f5e52fa10309be08f903aec130b788545))
+* **compat:** update signatures of `model_dump` and `model_dump_json` for Pydantic v1 ([02e60a5](https://github.com/fashn-AI/fashn-python-sdk/commit/02e60a5a2183f4e5b59b8026e7b7b3cc14d1045c))
+* ensure streams are always closed ([c42ad27](https://github.com/fashn-AI/fashn-python-sdk/commit/c42ad278ce0d9de79d7f67fc219148ed95002bc0))
+* **types:** allow pyright to infer TypedDict types within SequenceNotStr ([3187855](https://github.com/fashn-AI/fashn-python-sdk/commit/318785576a99bc3ab99e92ca33efcb38f35db5bc))
+
+
+### Chores
+
+* add missing docstrings ([3e29ffc](https://github.com/fashn-AI/fashn-python-sdk/commit/3e29ffcd2cd8e00828120746e534970f92242db3))
+* add Python 3.14 classifier and testing ([d214363](https://github.com/fashn-AI/fashn-python-sdk/commit/d214363530ebd44f7aab7edc4be0701135527bd1))
+* bump `httpx-aiohttp` version to 0.1.9 ([1ca3adb](https://github.com/fashn-AI/fashn-python-sdk/commit/1ca3adb8ee1213a45dbed667bcce82daf4e46e62))
+* configure new SDK language ([9d24d33](https://github.com/fashn-AI/fashn-python-sdk/commit/9d24d33bc8f91630593f2ec7f3062b795879880d))
+* **deps:** mypy 1.18.1 has a regression, pin to 1.17 ([d19fca5](https://github.com/fashn-AI/fashn-python-sdk/commit/d19fca5446149c51099bbd24a2c66df9e54bb7e4))
+* **docs:** use environment variables for authentication in code snippets ([ce72987](https://github.com/fashn-AI/fashn-python-sdk/commit/ce729878af36fe5a632e25bfee9c922c44d246cd))
+* **internal/tests:** avoid race condition with implicit client cleanup ([fae7724](https://github.com/fashn-AI/fashn-python-sdk/commit/fae77243aa7878d870f90cfa1aec174c9200c49e))
+* **internal:** add missing files argument to base client ([e0a4b27](https://github.com/fashn-AI/fashn-python-sdk/commit/e0a4b277ab86c3d6e277b474ff788648e653c90a))
+* **internal:** grammar fix (it's -&gt; its) ([d9db081](https://github.com/fashn-AI/fashn-python-sdk/commit/d9db0817a2d06ddd03709abf98b52e387af2ac03))
+* **package:** drop Python 3.8 support ([ad4cdda](https://github.com/fashn-AI/fashn-python-sdk/commit/ad4cddad58cfc1ae717233193c9450ab8d981543))
+* update lockfile ([d5dd0bd](https://github.com/fashn-AI/fashn-python-sdk/commit/d5dd0bd5166d2409743e5d4bca6e78141e762fbe))
+
 ## 0.5.1 (2025-10-16)
 
 Full Changelog: [v0.5.0...v0.5.1](https://github.com/fashn-AI/fashn-python-sdk/compare/v0.5.0...v0.5.1)
