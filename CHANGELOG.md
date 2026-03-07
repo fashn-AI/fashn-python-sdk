@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.6.1 (2026-03-07)
+
+Full Changelog: [v0.6.0...v0.6.1](https://github.com/fashn-AI/fashn-python-sdk/compare/v0.6.0...v0.6.1)
+
+### Chores
+
+* **ci:** skip uploading artifacts on stainless-internal branches ([2f7216d](https://github.com/fashn-AI/fashn-python-sdk/commit/2f7216d6d0eb62f28275e52f770a9b35017a7bb1))
+
 ## 0.6.0 (2026-03-05)
 
 Full Changelog: [v0.5.1...v0.6.0](https://github.com/fashn-AI/fashn-python-sdk/compare/v0.5.1...v0.6.0)
