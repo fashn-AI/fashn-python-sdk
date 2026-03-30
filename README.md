@@ -43,10 +43,10 @@ client = Fashn(
 
 response = client.predictions.run(
     inputs={
-        "garment_image": "https://example.com/garment.jpg",
         "model_image": "https://example.com/model.jpg",
+        "product_image": "https://example.com/garment.jpg",
     },
-    model_name="tryon-v1.6",
+    model_name="tryon-max",
 )
 print(response.id)
 ```
@@ -73,10 +73,10 @@ client = AsyncFashn(
 async def main() -> None:
     response = await client.predictions.run(
         inputs={
-            "garment_image": "https://example.com/garment.jpg",
             "model_image": "https://example.com/model.jpg",
+            "product_image": "https://example.com/garment.jpg",
         },
-        model_name="tryon-v1.6",
+        model_name="tryon-max",
     )
     print(response.id)
 
@@ -113,10 +113,10 @@ async def main() -> None:
     ) as client:
         response = await client.predictions.run(
             inputs={
-                "garment_image": "https://example.com/garment.jpg",
                 "model_image": "https://example.com/model.jpg",
+                "product_image": "https://example.com/garment.jpg",
             },
-            model_name="tryon-v1.6",
+            model_name="tryon-max",
         )
         print(response.id)
 
@@ -144,10 +144,10 @@ client = Fashn()
 
 response = client.predictions.run(
     inputs={
-        "garment_image": "https://example.com/garment.jpg",
         "model_image": "https://example.com/model.jpg",
+        "product_image": "https://example.com/garment.jpg",
     },
-    model_name="tryon-v1.6",
+    model_name="tryon-max",
 )
 print(response.inputs)
 ```
@@ -170,10 +170,10 @@ client = Fashn()
 try:
     client.predictions.run(
         inputs={
-            "garment_image": "https://example.com/garment.jpg",
             "model_image": "https://example.com/model.jpg",
+            "product_image": "https://example.com/garment.jpg",
         },
-        model_name="tryon-v1.6",
+        model_name="tryon-max",
     )
 except fashn.APIConnectionError as e:
     print("The server could not be reached")
@@ -219,10 +219,10 @@ client = Fashn(
 # Or, configure per-request:
 client.with_options(max_retries=5).predictions.run(
     inputs={
-        "garment_image": "https://example.com/garment.jpg",
         "model_image": "https://example.com/model.jpg",
+        "product_image": "https://example.com/garment.jpg",
     },
-    model_name="tryon-v1.6",
+    model_name="tryon-max",
 )
 ```
 
@@ -248,10 +248,10 @@ client = Fashn(
 # Override per-request:
 client.with_options(timeout=5.0).predictions.run(
     inputs={
-        "garment_image": "https://example.com/garment.jpg",
         "model_image": "https://example.com/model.jpg",
+        "product_image": "https://example.com/garment.jpg",
     },
-    model_name="tryon-v1.6",
+    model_name="tryon-max",
 )
 ```
 
@@ -295,10 +295,10 @@ from fashn import Fashn
 client = Fashn()
 response = client.predictions.with_raw_response.run(
     inputs={
-        "garment_image": "https://example.com/garment.jpg",
         "model_image": "https://example.com/model.jpg",
+        "product_image": "https://example.com/garment.jpg",
     },
-    model_name="tryon-v1.6",
+    model_name="tryon-max",
 )
 print(response.headers.get('X-My-Header'))
 
@@ -319,10 +319,10 @@ To stream the response body, use `.with_streaming_response` instead, which requi
 ```python
 with client.predictions.with_streaming_response.run(
     inputs={
-        "garment_image": "https://example.com/garment.jpg",
         "model_image": "https://example.com/model.jpg",
+        "product_image": "https://example.com/garment.jpg",
     },
-    model_name="tryon-v1.6",
+    model_name="tryon-max",
 ) as response:
     print(response.headers.get("X-My-Header"))
 

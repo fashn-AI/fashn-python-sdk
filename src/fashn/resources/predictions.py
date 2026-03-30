@@ -50,6 +50,55 @@ class PredictionsResource(SyncAPIResource):
     def run(
         self,
         *,
+        inputs: prediction_run_params.TryOnMaxRequestInputs,
+        model_name: Literal["tryon-max"],
+        webhook_url: str | Omit = omit,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> PredictionRunResponse:
+        """Submit a prediction request for AI-powered fashion processing.
+
+        Supports multiple
+        model types including:
+
+        - Try-on max (tryon-max)
+        - Virtual try-on v1.6 (tryon-v1.6)
+        - Model creation (model-create)
+        - Model swap (model-swap)
+        - Product to model (product-to-model)
+        - Face to model (face-to-model)
+        - Background operations (background-remove, background-change)
+        - Image reframing (reframe)
+        - Image to video (image-to-video)
+        - Image editing (edit)
+
+        All requests use the versioned format with model_name and inputs structure.
+
+        Args:
+          model_name: Premium virtual try-on built for AI fashion photoshoots and publishable
+              e-commerce content. Places products onto model images with enhanced fidelity,
+              producing images suitable for PDPs, catalogs, and marketing assets.
+
+          webhook_url: Optional webhook URL to receive completion notifications
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        ...
+
+    @overload
+    def run(
+        self,
+        *,
         inputs: prediction_run_params.TryOnRequestInputs,
         model_name: Literal["tryon-v1.6"],
         webhook_url: str | Omit = omit,
@@ -65,9 +114,9 @@ class PredictionsResource(SyncAPIResource):
         Supports multiple
         model types including:
 
-        - Virtual try-on (tryon-v1.6)
+        - Try-on max (tryon-max)
+        - Virtual try-on v1.6 (tryon-v1.6)
         - Model creation (model-create)
-        - Model variation (model-variation)
         - Model swap (model-swap)
         - Product to model (product-to-model)
         - Face to model (face-to-model)
@@ -113,9 +162,9 @@ class PredictionsResource(SyncAPIResource):
         Supports multiple
         model types including:
 
-        - Virtual try-on (tryon-v1.6)
+        - Try-on max (tryon-max)
+        - Virtual try-on v1.6 (tryon-v1.6)
         - Model creation (model-create)
-        - Model variation (model-variation)
         - Model swap (model-swap)
         - Product to model (product-to-model)
         - Face to model (face-to-model)
@@ -162,9 +211,9 @@ class PredictionsResource(SyncAPIResource):
         Supports multiple
         model types including:
 
-        - Virtual try-on (tryon-v1.6)
+        - Try-on max (tryon-max)
+        - Virtual try-on v1.6 (tryon-v1.6)
         - Model creation (model-create)
-        - Model variation (model-variation)
         - Model swap (model-swap)
         - Product to model (product-to-model)
         - Face to model (face-to-model)
@@ -212,9 +261,9 @@ class PredictionsResource(SyncAPIResource):
         Supports multiple
         model types including:
 
-        - Virtual try-on (tryon-v1.6)
+        - Try-on max (tryon-max)
+        - Virtual try-on v1.6 (tryon-v1.6)
         - Model creation (model-create)
-        - Model variation (model-variation)
         - Model swap (model-swap)
         - Product to model (product-to-model)
         - Face to model (face-to-model)
@@ -227,53 +276,6 @@ class PredictionsResource(SyncAPIResource):
 
         Args:
           model_name: Model creation endpoint
-
-          webhook_url: Optional webhook URL to receive completion notifications
-
-          extra_headers: Send extra headers
-
-          extra_query: Add additional query parameters to the request
-
-          extra_body: Add additional JSON properties to the request
-
-          timeout: Override the client-level default timeout for this request, in seconds
-        """
-        ...
-
-    @overload
-    def run(
-        self,
-        *,
-        inputs: prediction_run_params.ModelVariationRequestInputs,
-        model_name: Literal["model-variation"],
-        webhook_url: str | Omit = omit,
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> PredictionRunResponse:
-        """Submit a prediction request for AI-powered fashion processing.
-
-        Supports multiple
-        model types including:
-
-        - Virtual try-on (tryon-v1.6)
-        - Model creation (model-create)
-        - Model variation (model-variation)
-        - Model swap (model-swap)
-        - Product to model (product-to-model)
-        - Face to model (face-to-model)
-        - Background operations (background-remove, background-change)
-        - Image reframing (reframe)
-        - Image to video (image-to-video)
-        - Image editing (edit)
-
-        All requests use the versioned format with model_name and inputs structure.
-
-        Args:
-          model_name: Model variation endpoint for creating variations from existing model images
 
           webhook_url: Optional webhook URL to receive completion notifications
 
@@ -306,9 +308,9 @@ class PredictionsResource(SyncAPIResource):
         Supports multiple
         model types including:
 
-        - Virtual try-on (tryon-v1.6)
+        - Try-on max (tryon-max)
+        - Virtual try-on v1.6 (tryon-v1.6)
         - Model creation (model-create)
-        - Model variation (model-variation)
         - Model swap (model-swap)
         - Product to model (product-to-model)
         - Face to model (face-to-model)
@@ -354,9 +356,9 @@ class PredictionsResource(SyncAPIResource):
         Supports multiple
         model types including:
 
-        - Virtual try-on (tryon-v1.6)
+        - Try-on max (tryon-max)
+        - Virtual try-on v1.6 (tryon-v1.6)
         - Model creation (model-create)
-        - Model variation (model-variation)
         - Model swap (model-swap)
         - Product to model (product-to-model)
         - Face to model (face-to-model)
@@ -401,9 +403,9 @@ class PredictionsResource(SyncAPIResource):
         Supports multiple
         model types including:
 
-        - Virtual try-on (tryon-v1.6)
+        - Try-on max (tryon-max)
+        - Virtual try-on v1.6 (tryon-v1.6)
         - Model creation (model-create)
-        - Model variation (model-variation)
         - Model swap (model-swap)
         - Product to model (product-to-model)
         - Face to model (face-to-model)
@@ -448,9 +450,9 @@ class PredictionsResource(SyncAPIResource):
         Supports multiple
         model types including:
 
-        - Virtual try-on (tryon-v1.6)
+        - Try-on max (tryon-max)
+        - Virtual try-on v1.6 (tryon-v1.6)
         - Model creation (model-create)
-        - Model variation (model-variation)
         - Model swap (model-swap)
         - Product to model (product-to-model)
         - Face to model (face-to-model)
@@ -495,9 +497,9 @@ class PredictionsResource(SyncAPIResource):
         Supports multiple
         model types including:
 
-        - Virtual try-on (tryon-v1.6)
+        - Try-on max (tryon-max)
+        - Virtual try-on v1.6 (tryon-v1.6)
         - Model creation (model-create)
-        - Model variation (model-variation)
         - Model swap (model-swap)
         - Product to model (product-to-model)
         - Face to model (face-to-model)
@@ -543,9 +545,9 @@ class PredictionsResource(SyncAPIResource):
         Supports multiple
         model types including:
 
-        - Virtual try-on (tryon-v1.6)
+        - Try-on max (tryon-max)
+        - Virtual try-on v1.6 (tryon-v1.6)
         - Model creation (model-create)
-        - Model variation (model-variation)
         - Model swap (model-swap)
         - Product to model (product-to-model)
         - Face to model (face-to-model)
@@ -576,22 +578,22 @@ class PredictionsResource(SyncAPIResource):
     def run(
         self,
         *,
-        inputs: prediction_run_params.TryOnRequestInputs
+        inputs: prediction_run_params.TryOnMaxRequestInputs
+        | prediction_run_params.TryOnRequestInputs
         | prediction_run_params.ProductToModelRequestInputs
         | prediction_run_params.FaceToModelRequestInputs
         | prediction_run_params.ModelCreateRequestInputs
-        | prediction_run_params.ModelVariationRequestInputs
         | prediction_run_params.ModelSwapRequestInputs
         | prediction_run_params.ReframeRequestInputs
         | prediction_run_params.BackgroundChangeRequestInputs
         | prediction_run_params.BackgroundRemoveRequestInputs
         | prediction_run_params.ImageToVideoRequestInputs
         | prediction_run_params.EditRequestInputs,
-        model_name: Literal["tryon-v1.6"]
+        model_name: Literal["tryon-max"]
+        | Literal["tryon-v1.6"]
         | Literal["product-to-model"]
         | Literal["face-to-model"]
         | Literal["model-create"]
-        | Literal["model-variation"]
         | Literal["model-swap"]
         | Literal["reframe"]
         | Literal["background-change"]
@@ -701,6 +703,55 @@ class AsyncPredictionsResource(AsyncAPIResource):
     async def run(
         self,
         *,
+        inputs: prediction_run_params.TryOnMaxRequestInputs,
+        model_name: Literal["tryon-max"],
+        webhook_url: str | Omit = omit,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> PredictionRunResponse:
+        """Submit a prediction request for AI-powered fashion processing.
+
+        Supports multiple
+        model types including:
+
+        - Try-on max (tryon-max)
+        - Virtual try-on v1.6 (tryon-v1.6)
+        - Model creation (model-create)
+        - Model swap (model-swap)
+        - Product to model (product-to-model)
+        - Face to model (face-to-model)
+        - Background operations (background-remove, background-change)
+        - Image reframing (reframe)
+        - Image to video (image-to-video)
+        - Image editing (edit)
+
+        All requests use the versioned format with model_name and inputs structure.
+
+        Args:
+          model_name: Premium virtual try-on built for AI fashion photoshoots and publishable
+              e-commerce content. Places products onto model images with enhanced fidelity,
+              producing images suitable for PDPs, catalogs, and marketing assets.
+
+          webhook_url: Optional webhook URL to receive completion notifications
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        ...
+
+    @overload
+    async def run(
+        self,
+        *,
         inputs: prediction_run_params.TryOnRequestInputs,
         model_name: Literal["tryon-v1.6"],
         webhook_url: str | Omit = omit,
@@ -716,9 +767,9 @@ class AsyncPredictionsResource(AsyncAPIResource):
         Supports multiple
         model types including:
 
-        - Virtual try-on (tryon-v1.6)
+        - Try-on max (tryon-max)
+        - Virtual try-on v1.6 (tryon-v1.6)
         - Model creation (model-create)
-        - Model variation (model-variation)
         - Model swap (model-swap)
         - Product to model (product-to-model)
         - Face to model (face-to-model)
@@ -764,9 +815,9 @@ class AsyncPredictionsResource(AsyncAPIResource):
         Supports multiple
         model types including:
 
-        - Virtual try-on (tryon-v1.6)
+        - Try-on max (tryon-max)
+        - Virtual try-on v1.6 (tryon-v1.6)
         - Model creation (model-create)
-        - Model variation (model-variation)
         - Model swap (model-swap)
         - Product to model (product-to-model)
         - Face to model (face-to-model)
@@ -813,9 +864,9 @@ class AsyncPredictionsResource(AsyncAPIResource):
         Supports multiple
         model types including:
 
-        - Virtual try-on (tryon-v1.6)
+        - Try-on max (tryon-max)
+        - Virtual try-on v1.6 (tryon-v1.6)
         - Model creation (model-create)
-        - Model variation (model-variation)
         - Model swap (model-swap)
         - Product to model (product-to-model)
         - Face to model (face-to-model)
@@ -863,9 +914,9 @@ class AsyncPredictionsResource(AsyncAPIResource):
         Supports multiple
         model types including:
 
-        - Virtual try-on (tryon-v1.6)
+        - Try-on max (tryon-max)
+        - Virtual try-on v1.6 (tryon-v1.6)
         - Model creation (model-create)
-        - Model variation (model-variation)
         - Model swap (model-swap)
         - Product to model (product-to-model)
         - Face to model (face-to-model)
@@ -878,53 +929,6 @@ class AsyncPredictionsResource(AsyncAPIResource):
 
         Args:
           model_name: Model creation endpoint
-
-          webhook_url: Optional webhook URL to receive completion notifications
-
-          extra_headers: Send extra headers
-
-          extra_query: Add additional query parameters to the request
-
-          extra_body: Add additional JSON properties to the request
-
-          timeout: Override the client-level default timeout for this request, in seconds
-        """
-        ...
-
-    @overload
-    async def run(
-        self,
-        *,
-        inputs: prediction_run_params.ModelVariationRequestInputs,
-        model_name: Literal["model-variation"],
-        webhook_url: str | Omit = omit,
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> PredictionRunResponse:
-        """Submit a prediction request for AI-powered fashion processing.
-
-        Supports multiple
-        model types including:
-
-        - Virtual try-on (tryon-v1.6)
-        - Model creation (model-create)
-        - Model variation (model-variation)
-        - Model swap (model-swap)
-        - Product to model (product-to-model)
-        - Face to model (face-to-model)
-        - Background operations (background-remove, background-change)
-        - Image reframing (reframe)
-        - Image to video (image-to-video)
-        - Image editing (edit)
-
-        All requests use the versioned format with model_name and inputs structure.
-
-        Args:
-          model_name: Model variation endpoint for creating variations from existing model images
 
           webhook_url: Optional webhook URL to receive completion notifications
 
@@ -957,9 +961,9 @@ class AsyncPredictionsResource(AsyncAPIResource):
         Supports multiple
         model types including:
 
-        - Virtual try-on (tryon-v1.6)
+        - Try-on max (tryon-max)
+        - Virtual try-on v1.6 (tryon-v1.6)
         - Model creation (model-create)
-        - Model variation (model-variation)
         - Model swap (model-swap)
         - Product to model (product-to-model)
         - Face to model (face-to-model)
@@ -1005,9 +1009,9 @@ class AsyncPredictionsResource(AsyncAPIResource):
         Supports multiple
         model types including:
 
-        - Virtual try-on (tryon-v1.6)
+        - Try-on max (tryon-max)
+        - Virtual try-on v1.6 (tryon-v1.6)
         - Model creation (model-create)
-        - Model variation (model-variation)
         - Model swap (model-swap)
         - Product to model (product-to-model)
         - Face to model (face-to-model)
@@ -1052,9 +1056,9 @@ class AsyncPredictionsResource(AsyncAPIResource):
         Supports multiple
         model types including:
 
-        - Virtual try-on (tryon-v1.6)
+        - Try-on max (tryon-max)
+        - Virtual try-on v1.6 (tryon-v1.6)
         - Model creation (model-create)
-        - Model variation (model-variation)
         - Model swap (model-swap)
         - Product to model (product-to-model)
         - Face to model (face-to-model)
@@ -1099,9 +1103,9 @@ class AsyncPredictionsResource(AsyncAPIResource):
         Supports multiple
         model types including:
 
-        - Virtual try-on (tryon-v1.6)
+        - Try-on max (tryon-max)
+        - Virtual try-on v1.6 (tryon-v1.6)
         - Model creation (model-create)
-        - Model variation (model-variation)
         - Model swap (model-swap)
         - Product to model (product-to-model)
         - Face to model (face-to-model)
@@ -1146,9 +1150,9 @@ class AsyncPredictionsResource(AsyncAPIResource):
         Supports multiple
         model types including:
 
-        - Virtual try-on (tryon-v1.6)
+        - Try-on max (tryon-max)
+        - Virtual try-on v1.6 (tryon-v1.6)
         - Model creation (model-create)
-        - Model variation (model-variation)
         - Model swap (model-swap)
         - Product to model (product-to-model)
         - Face to model (face-to-model)
@@ -1194,9 +1198,9 @@ class AsyncPredictionsResource(AsyncAPIResource):
         Supports multiple
         model types including:
 
-        - Virtual try-on (tryon-v1.6)
+        - Try-on max (tryon-max)
+        - Virtual try-on v1.6 (tryon-v1.6)
         - Model creation (model-create)
-        - Model variation (model-variation)
         - Model swap (model-swap)
         - Product to model (product-to-model)
         - Face to model (face-to-model)
@@ -1227,22 +1231,22 @@ class AsyncPredictionsResource(AsyncAPIResource):
     async def run(
         self,
         *,
-        inputs: prediction_run_params.TryOnRequestInputs
+        inputs: prediction_run_params.TryOnMaxRequestInputs
+        | prediction_run_params.TryOnRequestInputs
         | prediction_run_params.ProductToModelRequestInputs
         | prediction_run_params.FaceToModelRequestInputs
         | prediction_run_params.ModelCreateRequestInputs
-        | prediction_run_params.ModelVariationRequestInputs
         | prediction_run_params.ModelSwapRequestInputs
         | prediction_run_params.ReframeRequestInputs
         | prediction_run_params.BackgroundChangeRequestInputs
         | prediction_run_params.BackgroundRemoveRequestInputs
         | prediction_run_params.ImageToVideoRequestInputs
         | prediction_run_params.EditRequestInputs,
-        model_name: Literal["tryon-v1.6"]
+        model_name: Literal["tryon-max"]
+        | Literal["tryon-v1.6"]
         | Literal["product-to-model"]
         | Literal["face-to-model"]
         | Literal["model-create"]
-        | Literal["model-variation"]
         | Literal["model-swap"]
         | Literal["reframe"]
         | Literal["background-change"]
