@@ -580,6 +580,7 @@ class TestPredictions:
             inputs={
                 "image": "https://example.com/photo.jpg",
                 "duration": 5,
+                "end_image": "https://example.com/end-frame.jpg",
                 "negative_prompt": "negative_prompt",
                 "prompt": "prompt",
                 "resolution": "480p",
@@ -1297,6 +1298,7 @@ class TestAsyncPredictions:
             inputs={
                 "image": "https://example.com/photo.jpg",
                 "duration": 5,
+                "end_image": "https://example.com/end-frame.jpg",
                 "negative_prompt": "negative_prompt",
                 "prompt": "prompt",
                 "resolution": "480p",
