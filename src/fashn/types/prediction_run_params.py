@@ -840,6 +840,18 @@ class ImageToVideoRequestInputs(TypedDict, total=False):
     duration: Literal[5, 10]
     """Duration of the generated video in seconds."""
 
+    end_image: str
+    """Optional image to use as the final frame of the generated video.
+
+    When provided, the video smoothly transitions from the `image` (start frame) to
+    `end_image` (end frame) over the clip duration.
+
+    Only supported with `resolution: "1080p"`.
+
+    Base64 images must include the proper prefix (e.g.,
+    `data:image/jpg;base64,<YOUR_BASE64>`).
+    """
+
     negative_prompt: str
     """Optional cues to avoid undesirable motion or framing."""
 
