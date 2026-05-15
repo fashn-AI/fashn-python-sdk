@@ -7,6 +7,8 @@ from typing_extensions import Literal, Required, TypeAlias, TypedDict
 
 __all__ = [
     "PredictionRunParams",
+    "TryOnMaxRequest",
+    "TryOnMaxRequestInputs",
     "TryOnRequest",
     "TryOnRequestInputs",
     "ProductToModelRequest",
@@ -15,8 +17,6 @@ __all__ = [
     "FaceToModelRequestInputs",
     "ModelCreateRequest",
     "ModelCreateRequestInputs",
-    "ModelVariationRequest",
-    "ModelVariationRequestInputs",
     "ModelSwapRequest",
     "ModelSwapRequestInputs",
     "ReframeRequest",
@@ -30,6 +30,91 @@ __all__ = [
     "EditRequest",
     "EditRequestInputs",
 ]
+
+
+class TryOnMaxRequest(TypedDict, total=False):
+    inputs: Required[TryOnMaxRequestInputs]
+
+    model_name: Required[Literal["tryon-max"]]
+    """
+    Premium virtual try-on built for AI fashion photoshoots and publishable
+    e-commerce content. Places products onto model images with enhanced fidelity,
+    producing images suitable for PDPs, catalogs, and marketing assets.
+    """
+
+    webhook_url: str
+    """Optional webhook URL to receive completion notifications"""
+
+
+class TryOnMaxRequestInputs(TypedDict, total=False):
+    model_image: Required[str]
+    """URL or base64 encoded image of the person to wear the product.
+
+    The try-on process preserves the model's identity, pose, and styling while
+    seamlessly integrating the product. Base64 images must include the proper prefix
+    (e.g., data:image/jpg;base64,<YOUR_BASE64>)
+    """
+
+    product_image: Required[str]
+    """
+    URL or base64 encoded image of the product (garment, accessory, etc.) to place
+    on the model. Base64 images must include the proper prefix (e.g.,
+    data:image/jpg;base64,<YOUR_BASE64>)
+    """
+
+    aspect_ratio: Literal["21:9", "1:1", "4:3", "3:2", "2:3", "5:4", "4:5", "3:4", "16:9", "9:16"]
+    """Optional aspect ratio for the output image."""
+
+    generation_mode: Literal["balanced", "quality"]
+    """Sets the generation quality level.
+
+    'quality' produces the most detailed and realistic output but takes longer to
+    process and costs more credits. 'fast' prioritizes speed and lower cost.
+    """
+
+    num_images: int
+    """Number of images to generate in a single run.
+
+    Image generation has a random element in it, so trying multiple images at once
+    increases the chances of getting a good result.
+    """
+
+    output_format: Literal["png", "jpeg"]
+    """Specifies the desired output image format.
+
+    - `png`: Delivers the highest quality image, ideal for use cases such as content
+      creation where quality is paramount.
+    - `jpeg`: Provides a faster response with a slightly compressed image, more
+      suitable for real-time applications.
+    """
+
+    prompt: str
+    """Optional instructions to customize the try-on result.
+
+    Use this to adjust how the product is worn or make minor styling changes.
+
+    **Examples:** "remove scarf", "tuck in shirt", "roll up sleeves", "open jacket"
+    """
+
+    resolution: Literal["1k", "2k", "4k"]
+    """Resolution setting for the output image."""
+
+    return_base64: bool
+    """
+    When set to `true`, the API will return the generated image as a base64-encoded
+    string instead of a CDN URL. The base64 string will be prefixed according to the
+    `output_format` (e.g., `data:image/png;base64,...` or
+    `data:image/jpeg;base64,...`). This option offers enhanced privacy as
+    user-generated outputs are not stored on our servers when `return_base64` is
+    enabled.
+    """
+
+    seed: int
+    """Sets random operations to a fixed state.
+
+    Use the same seed to reproduce results with the same inputs, or different seed
+    to force different results.
+    """
 
 
 class TryOnRequest(TypedDict, total=False):
@@ -180,6 +265,13 @@ class ProductToModelRequestInputs(TypedDict, total=False):
     **Default:** product_image's aspect ratio (standard mode only)
     """
 
+    generation_mode: Literal["fast", "balanced", "quality"]
+    """Sets the generation quality level.
+
+    'quality' produces the most detailed and realistic output but takes longer to
+    process and costs more credits. 'fast' prioritizes speed and lower cost.
+    """
+
     image_prompt: str
     """
     Optional URL or base64 of an inspiration image to guide pose, environment, and
@@ -214,7 +306,7 @@ class ProductToModelRequestInputs(TypedDict, total=False):
     **Default:** None
     """
 
-    resolution: Literal["1k", "4k"]
+    resolution: Literal["1k", "2k", "4k"]
     """Resolution setting for the output image."""
 
     return_base64: bool
@@ -270,6 +362,16 @@ class FaceToModelRequestInputs(TypedDict, total=False):
     **Default:** `2:3`
     """
 
+    generation_mode: Literal["fast", "balanced", "quality"]
+    """Sets the generation quality level.
+
+    'quality' produces the most detailed and realistic output but takes longer to
+    process and costs more credits. 'fast' prioritizes speed and lower cost.
+    """
+
+    num_images: int
+    """Number of images to generate in a single run."""
+
     output_format: Literal["png", "jpeg"]
     """Specifies the output image format.
 
@@ -289,6 +391,9 @@ class FaceToModelRequestInputs(TypedDict, total=False):
 
     **Default:** Empty string
     """
+
+    resolution: Literal["1k", "2k", "4k"]
+    """Resolution setting for the output image."""
 
     return_base64: bool
     """
@@ -352,11 +457,28 @@ class ModelCreateRequestInputs(TypedDict, total=False):
     | 9:16         | 760 × 1360  | Vertical video format         |
     """
 
-    disable_prompt_enhancement: bool
-    """Disable prompt enhancement.
+    face_reference: str
+    """Optional face reference image to guide facial features in the generated model.
 
-    When true, the prompt will be used as is, or a default prompt will be used if no
-    prompt is provided.
+    When provided, the generated person will resemble the face in this image.
+
+    Base64 images must include the proper prefix (e.g.,
+    data:image/jpg;base64,<YOUR_BASE64>)
+    """
+
+    face_reference_mode: Literal["match_base", "match_reference"]
+    """Controls how the face reference is applied.
+
+    - `match_base` adapts the reference face to match the base image's style and
+      lighting.
+    - `match_reference` preserves the reference face as closely as possible.
+    """
+
+    generation_mode: Literal["fast", "balanced", "quality"]
+    """Sets the generation quality level.
+
+    'quality' produces the most detailed and realistic output but takes longer to
+    process and costs more credits. 'fast' prioritizes speed and lower cost.
     """
 
     image_reference: str
@@ -367,21 +489,17 @@ class ModelCreateRequestInputs(TypedDict, total=False):
 
     Processing Behavior:
 
-    - Aspect Ratio: Output automatically matches the reference image's dimensions.
-    - Guidance Type: Controlled by the reference_type parameter (pose or silhouette)
-    - Image Processing: Automatically resized while preserving aspect ratio
+    - Aspect Ratio: When image_reference is provided and aspect_ratio is omitted,
+      the output matches the reference image's dimensions. If aspect_ratio is
+      explicitly set, it overrides the reference image's proportions.
+    - Image Processing: Automatically resized while preserving aspect ratio.
 
     Base64 images must include the proper prefix (e.g.,
     data:image/jpg;base64,<YOUR_BASE64>)
     """
 
-    lora_url: str
-    """
-    URL to a FLUX-based LoRA weights file (.safetensors) for custom identity
-    generation. When provided, the LoRA will be loaded and applied during generation
-    to maintain consistent character appearance across generations. Must be
-    FLUX-compatible LoRA weights in .safetensors format, under 256MB.
-    """
+    num_images: int
+    """Number of images to generate."""
 
     output_format: Literal["png", "jpeg"]
     """Specifies the desired output image format.
@@ -392,64 +510,8 @@ class ModelCreateRequestInputs(TypedDict, total=False):
       suitable for real-time applications.
     """
 
-    reference_type: Literal["pose", "silhouette"]
-    """Type of reference to use when image_reference is provided.
-
-    - `pose` matches the body position and stance from the reference image.
-    - `silhouette` matches the outline and shape from the reference image.
-
-    **Default is applied only if image_reference is provided**
-    """
-
-    return_base64: bool
-    """
-    When set to `true`, the API will return the generated image as a base64-encoded
-    string instead of a CDN URL. The base64 string will be prefixed according to the
-    `output_format` (e.g., `data:image/png;base64,...` or
-    `data:image/jpeg;base64,...`). This option offers enhanced privacy as
-    user-generated outputs are not stored on our servers when `return_base64` is
-    enabled.
-    """
-
-    seed: int
-    """Random seed for reproducible results"""
-
-
-class ModelVariationRequest(TypedDict, total=False):
-    inputs: Required[ModelVariationRequestInputs]
-
-    model_name: Required[Literal["model-variation"]]
-    """Model variation endpoint for creating variations from existing model images"""
-
-    webhook_url: str
-    """Optional webhook URL to receive completion notifications"""
-
-
-class ModelVariationRequestInputs(TypedDict, total=False):
-    model_image: Required[str]
-    """Source fashion model image to create variations from.
-
-    The variation will maintain the core composition while introducing controlled
-    modifications. Base64 images must include the proper prefix (e.g.,
-    data:image/jpg;base64,<YOUR_BASE64>)
-    """
-
-    lora_url: str
-    """
-    URL to a FLUX-based LoRA weights file (.safetensors) for custom identity
-    generation. When provided, the LoRA will be loaded and applied during generation
-    to maintain consistent character appearance across generations. Must be
-    FLUX-compatible LoRA weights in .safetensors format, under 256MB.
-    """
-
-    output_format: Literal["png", "jpeg"]
-    """Specifies the desired output image format.
-
-    - `png`: Delivers the highest quality image, ideal for use cases such as content
-      creation where quality is paramount.
-    - `jpeg`: Provides a faster response with a slightly compressed image, more
-      suitable for real-time applications.
-    """
+    resolution: Literal["1k", "2k", "4k"]
+    """Resolution setting for the output image."""
 
     return_base64: bool
     """
@@ -466,15 +528,6 @@ class ModelVariationRequestInputs(TypedDict, total=False):
 
     Use the same seed to reproduce results with the same inputs, or different seed
     to force different results.
-    """
-
-    variation_strength: Literal["subtle", "strong"]
-    """Controls the intensity of variations applied to the source image.
-
-    - `subtle` - Minor adjustments that preserve most of the original
-      characteristics while introducing small variations.
-    - `strong` - More significant modifications that create noticeable differences
-      while maintaining the core composition.
     """
 
 
@@ -500,31 +553,36 @@ class ModelSwapRequestInputs(TypedDict, total=False):
     data:image/jpg;base64,<YOUR_BASE64>)
     """
 
-    background_change: bool
-    """
-    Controls whether the background should be modified according to the prompt or
-    preserved from the original image. When enabled, include background descriptions
-    in your prompt.
+    aspect_ratio: Literal["21:9", "1:1", "4:3", "3:2", "2:3", "5:4", "4:5", "3:4", "16:9", "9:16"]
+    """Optional aspect ratio for the output image."""
 
-    - `true` - Background will be changed according to the prompt description.
-    - `false` - Original background will be preserved exactly as in the source
-      image.
-    """
+    face_reference: str
+    """Optional face reference image to guide facial features of the replacement
+    person.
 
-    disable_prompt_enhancement: bool
-    """Disable prompt enhancement.
+    When provided, the new person will resemble the face in this image.
 
-    When true, the prompt will be used exactly as provided, or a default prompt will
-    be used if no prompt is provided.
+    Base64 images must include the proper prefix (e.g.,
+    data:image/jpg;base64,<YOUR_BASE64>)
     """
 
-    lora_url: str
+    face_reference_mode: Literal["match_base", "match_reference"]
+    """Controls how the face reference is applied.
+
+    - `match_base` adapts the reference face to match the base image's style and
+      lighting.
+    - `match_reference` preserves the reference face as closely as possible.
     """
-    URL to a FLUX-based LoRA weights file (.safetensors) for custom identity
-    generation. When provided, the LoRA will be loaded and applied during generation
-    to maintain consistent character appearance across generations. Must be
-    FLUX-compatible LoRA weights in .safetensors format, under 256MB.
+
+    generation_mode: Literal["fast", "balanced", "quality"]
+    """Sets the generation quality level.
+
+    'quality' produces the most detailed and realistic output but takes longer to
+    process and costs more credits. 'fast' prioritizes speed and lower cost.
     """
+
+    num_images: int
+    """Number of images to generate."""
 
     output_format: Literal["png", "jpeg"]
     """Specifies the desired output image format.
@@ -543,6 +601,9 @@ class ModelSwapRequestInputs(TypedDict, total=False):
 
     **Default: Empty string (Random identity change)**
     """
+
+    resolution: Literal["1k", "2k", "4k"]
+    """Resolution setting for the output image."""
 
     return_base64: bool
     """
@@ -619,6 +680,13 @@ class ReframeRequestInputs(TypedDict, total=False):
     data:image/jpg;base64,<YOUR_BASE64>)
     """
 
+    generation_mode: Literal["fast", "balanced", "quality"]
+    """Sets the generation quality level.
+
+    'quality' produces the most detailed and realistic output but takes longer to
+    process and costs more credits. 'fast' prioritizes speed and lower cost.
+    """
+
     num_images: int
     """Number of images to generate in a single run.
 
@@ -679,11 +747,15 @@ class BackgroundChangeRequestInputs(TypedDict, total=False):
     description and harmonizes it with the preserved foreground subject.
     """
 
-    disable_prompt_enhancement: bool
-    """Disable prompt enhancement for the background description.
+    generation_mode: Literal["fast", "balanced", "quality"]
+    """Sets the generation quality level.
 
-    When `true`, the background prompt will be used exactly as provided.
+    'quality' produces the most detailed and realistic output but takes longer to
+    process and costs more credits. 'fast' prioritizes speed and lower cost.
     """
+
+    num_images: int
+    """Number of images to generate in a single run."""
 
     output_format: Literal["png", "jpeg"]
     """Specifies the output image format.
@@ -693,6 +765,9 @@ class BackgroundChangeRequestInputs(TypedDict, total=False):
     - `jpeg`: Provides a faster response with a slightly compressed image, more
       suitable for real-time applications.
     """
+
+    resolution: Literal["1k", "2k", "4k"]
+    """Resolution setting for the output image."""
 
     return_base64: bool
     """
@@ -780,6 +855,13 @@ class ImageToVideoRequestInputs(TypedDict, total=False):
     resolution: Literal["480p", "720p", "1080p"]
     """Target video resolution used by the internal video engine."""
 
+    seed: int
+    """Sets random operations to a fixed state.
+
+    Use the same seed to reproduce results with the same inputs, or different seed
+    to force different results.
+    """
+
 
 class EditRequest(TypedDict, total=False):
     inputs: Required[EditRequestInputs]
@@ -812,6 +894,16 @@ class EditRequestInputs(TypedDict, total=False):
 
     **Examples:** "change the dress to red", "add sunglasses", "make the background
     a beach sunset", "change the shirt to a floral pattern"
+    """
+
+    aspect_ratio: Literal["21:9", "1:1", "4:3", "3:2", "2:3", "5:4", "4:5", "3:4", "16:9", "9:16"]
+    """Optional aspect ratio for the output image."""
+
+    generation_mode: Literal["fast", "balanced", "quality"]
+    """Sets the generation quality level.
+
+    'quality' produces the most detailed and realistic output but takes longer to
+    process and costs more credits. 'fast' prioritizes speed and lower cost.
     """
 
     image_context: str
@@ -850,7 +942,7 @@ class EditRequestInputs(TypedDict, total=False):
       suitable for real-time applications.
     """
 
-    resolution: Literal["1k", "4k"]
+    resolution: Literal["1k", "2k", "4k"]
     """Resolution setting for the output image."""
 
     return_base64: bool
@@ -872,11 +964,11 @@ class EditRequestInputs(TypedDict, total=False):
 
 
 PredictionRunParams: TypeAlias = Union[
+    TryOnMaxRequest,
     TryOnRequest,
     ProductToModelRequest,
     FaceToModelRequest,
     ModelCreateRequest,
-    ModelVariationRequest,
     ModelSwapRequest,
     ReframeRequest,
     BackgroundChangeRequest,

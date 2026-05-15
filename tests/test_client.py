@@ -854,10 +854,10 @@ class TestFashn:
         with pytest.raises(APITimeoutError):
             client.predictions.with_streaming_response.run(
                 inputs={
-                    "garment_image": "https://example.com/garment.jpg",
                     "model_image": "https://example.com/model.jpg",
+                    "product_image": "https://example.com/garment.jpg",
                 },
-                model_name="tryon-v1.6",
+                model_name="tryon-max",
             ).__enter__()
 
         assert _get_open_connections(client) == 0
@@ -870,10 +870,10 @@ class TestFashn:
         with pytest.raises(APIStatusError):
             client.predictions.with_streaming_response.run(
                 inputs={
-                    "garment_image": "https://example.com/garment.jpg",
                     "model_image": "https://example.com/model.jpg",
+                    "product_image": "https://example.com/garment.jpg",
                 },
-                model_name="tryon-v1.6",
+                model_name="tryon-max",
             ).__enter__()
         assert _get_open_connections(client) == 0
 
@@ -905,10 +905,10 @@ class TestFashn:
 
         response = client.predictions.with_raw_response.run(
             inputs={
-                "garment_image": "https://example.com/garment.jpg",
                 "model_image": "https://example.com/model.jpg",
+                "product_image": "https://example.com/garment.jpg",
             },
-            model_name="tryon-v1.6",
+            model_name="tryon-max",
         )
 
         assert response.retries_taken == failures_before_success
@@ -933,10 +933,10 @@ class TestFashn:
 
         response = client.predictions.with_raw_response.run(
             inputs={
-                "garment_image": "https://example.com/garment.jpg",
                 "model_image": "https://example.com/model.jpg",
+                "product_image": "https://example.com/garment.jpg",
             },
-            model_name="tryon-v1.6",
+            model_name="tryon-max",
             extra_headers={"x-stainless-retry-count": Omit()},
         )
 
@@ -963,10 +963,10 @@ class TestFashn:
 
         response = client.predictions.with_raw_response.run(
             inputs={
-                "garment_image": "https://example.com/garment.jpg",
                 "model_image": "https://example.com/model.jpg",
+                "product_image": "https://example.com/garment.jpg",
             },
-            model_name="tryon-v1.6",
+            model_name="tryon-max",
             extra_headers={"x-stainless-retry-count": "42"},
         )
 
@@ -1788,10 +1788,10 @@ class TestAsyncFashn:
         with pytest.raises(APITimeoutError):
             await async_client.predictions.with_streaming_response.run(
                 inputs={
-                    "garment_image": "https://example.com/garment.jpg",
                     "model_image": "https://example.com/model.jpg",
+                    "product_image": "https://example.com/garment.jpg",
                 },
-                model_name="tryon-v1.6",
+                model_name="tryon-max",
             ).__aenter__()
 
         assert _get_open_connections(async_client) == 0
@@ -1804,10 +1804,10 @@ class TestAsyncFashn:
         with pytest.raises(APIStatusError):
             await async_client.predictions.with_streaming_response.run(
                 inputs={
-                    "garment_image": "https://example.com/garment.jpg",
                     "model_image": "https://example.com/model.jpg",
+                    "product_image": "https://example.com/garment.jpg",
                 },
-                model_name="tryon-v1.6",
+                model_name="tryon-max",
             ).__aenter__()
         assert _get_open_connections(async_client) == 0
 
@@ -1839,10 +1839,10 @@ class TestAsyncFashn:
 
         response = await client.predictions.with_raw_response.run(
             inputs={
-                "garment_image": "https://example.com/garment.jpg",
                 "model_image": "https://example.com/model.jpg",
+                "product_image": "https://example.com/garment.jpg",
             },
-            model_name="tryon-v1.6",
+            model_name="tryon-max",
         )
 
         assert response.retries_taken == failures_before_success
@@ -1869,10 +1869,10 @@ class TestAsyncFashn:
 
         response = await client.predictions.with_raw_response.run(
             inputs={
-                "garment_image": "https://example.com/garment.jpg",
                 "model_image": "https://example.com/model.jpg",
+                "product_image": "https://example.com/garment.jpg",
             },
-            model_name="tryon-v1.6",
+            model_name="tryon-max",
             extra_headers={"x-stainless-retry-count": Omit()},
         )
 
@@ -1899,10 +1899,10 @@ class TestAsyncFashn:
 
         response = await client.predictions.with_raw_response.run(
             inputs={
-                "garment_image": "https://example.com/garment.jpg",
                 "model_image": "https://example.com/model.jpg",
+                "product_image": "https://example.com/garment.jpg",
             },
-            model_name="tryon-v1.6",
+            model_name="tryon-max",
             extra_headers={"x-stainless-retry-count": "42"},
         )
 

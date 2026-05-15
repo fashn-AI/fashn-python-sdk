@@ -22,6 +22,73 @@ class TestPredictions:
     def test_method_run_overload_1(self, client: Fashn) -> None:
         prediction = client.predictions.run(
             inputs={
+                "model_image": "https://example.com/model.jpg",
+                "product_image": "https://example.com/garment.jpg",
+            },
+            model_name="tryon-max",
+        )
+        assert_matches_type(PredictionRunResponse, prediction, path=["response"])
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    def test_method_run_with_all_params_overload_1(self, client: Fashn) -> None:
+        prediction = client.predictions.run(
+            inputs={
+                "model_image": "https://example.com/model.jpg",
+                "product_image": "https://example.com/garment.jpg",
+                "aspect_ratio": "21:9",
+                "generation_mode": "balanced",
+                "num_images": 1,
+                "output_format": "png",
+                "prompt": "prompt",
+                "resolution": "1k",
+                "return_base64": True,
+                "seed": 0,
+            },
+            model_name="tryon-max",
+            webhook_url="https://example.com/webhook",
+        )
+        assert_matches_type(PredictionRunResponse, prediction, path=["response"])
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    def test_raw_response_run_overload_1(self, client: Fashn) -> None:
+        response = client.predictions.with_raw_response.run(
+            inputs={
+                "model_image": "https://example.com/model.jpg",
+                "product_image": "https://example.com/garment.jpg",
+            },
+            model_name="tryon-max",
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        prediction = response.parse()
+        assert_matches_type(PredictionRunResponse, prediction, path=["response"])
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    def test_streaming_response_run_overload_1(self, client: Fashn) -> None:
+        with client.predictions.with_streaming_response.run(
+            inputs={
+                "model_image": "https://example.com/model.jpg",
+                "product_image": "https://example.com/garment.jpg",
+            },
+            model_name="tryon-max",
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            prediction = response.parse()
+            assert_matches_type(PredictionRunResponse, prediction, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    def test_method_run_overload_2(self, client: Fashn) -> None:
+        prediction = client.predictions.run(
+            inputs={
                 "garment_image": "https://example.com/garment.jpg",
                 "model_image": "https://example.com/model.jpg",
             },
@@ -31,7 +98,7 @@ class TestPredictions:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    def test_method_run_with_all_params_overload_1(self, client: Fashn) -> None:
+    def test_method_run_with_all_params_overload_2(self, client: Fashn) -> None:
         prediction = client.predictions.run(
             inputs={
                 "garment_image": "https://example.com/garment.jpg",
@@ -53,7 +120,7 @@ class TestPredictions:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    def test_raw_response_run_overload_1(self, client: Fashn) -> None:
+    def test_raw_response_run_overload_2(self, client: Fashn) -> None:
         response = client.predictions.with_raw_response.run(
             inputs={
                 "garment_image": "https://example.com/garment.jpg",
@@ -69,7 +136,7 @@ class TestPredictions:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    def test_streaming_response_run_overload_1(self, client: Fashn) -> None:
+    def test_streaming_response_run_overload_2(self, client: Fashn) -> None:
         with client.predictions.with_streaming_response.run(
             inputs={
                 "garment_image": "https://example.com/garment.jpg",
@@ -87,7 +154,7 @@ class TestPredictions:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    def test_method_run_overload_2(self, client: Fashn) -> None:
+    def test_method_run_overload_3(self, client: Fashn) -> None:
         prediction = client.predictions.run(
             inputs={"product_image": "https://example.com/product.jpg"},
             model_name="product-to-model",
@@ -96,11 +163,12 @@ class TestPredictions:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    def test_method_run_with_all_params_overload_2(self, client: Fashn) -> None:
+    def test_method_run_with_all_params_overload_3(self, client: Fashn) -> None:
         prediction = client.predictions.run(
             inputs={
                 "product_image": "https://example.com/product.jpg",
                 "aspect_ratio": "1:1",
+                "generation_mode": "fast",
                 "image_prompt": "https://example.com/inspiration.jpg",
                 "model_image": "https://example.com/person.jpg",
                 "output_format": "png",
@@ -116,64 +184,10 @@ class TestPredictions:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    def test_raw_response_run_overload_2(self, client: Fashn) -> None:
-        response = client.predictions.with_raw_response.run(
-            inputs={"product_image": "https://example.com/product.jpg"},
-            model_name="product-to-model",
-        )
-
-        assert response.is_closed is True
-        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
-        prediction = response.parse()
-        assert_matches_type(PredictionRunResponse, prediction, path=["response"])
-
-    @pytest.mark.skip(reason="Mock server tests are disabled")
-    @parametrize
-    def test_streaming_response_run_overload_2(self, client: Fashn) -> None:
-        with client.predictions.with_streaming_response.run(
-            inputs={"product_image": "https://example.com/product.jpg"},
-            model_name="product-to-model",
-        ) as response:
-            assert not response.is_closed
-            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
-
-            prediction = response.parse()
-            assert_matches_type(PredictionRunResponse, prediction, path=["response"])
-
-        assert cast(Any, response.is_closed) is True
-
-    @pytest.mark.skip(reason="Mock server tests are disabled")
-    @parametrize
-    def test_method_run_overload_3(self, client: Fashn) -> None:
-        prediction = client.predictions.run(
-            inputs={"face_image": "https://example.com/headshot.jpg"},
-            model_name="face-to-model",
-        )
-        assert_matches_type(PredictionRunResponse, prediction, path=["response"])
-
-    @pytest.mark.skip(reason="Mock server tests are disabled")
-    @parametrize
-    def test_method_run_with_all_params_overload_3(self, client: Fashn) -> None:
-        prediction = client.predictions.run(
-            inputs={
-                "face_image": "https://example.com/headshot.jpg",
-                "aspect_ratio": "1:1",
-                "output_format": "png",
-                "prompt": "athletic build",
-                "return_base64": True,
-                "seed": 0,
-            },
-            model_name="face-to-model",
-            webhook_url="https://example.com/webhook",
-        )
-        assert_matches_type(PredictionRunResponse, prediction, path=["response"])
-
-    @pytest.mark.skip(reason="Mock server tests are disabled")
-    @parametrize
     def test_raw_response_run_overload_3(self, client: Fashn) -> None:
         response = client.predictions.with_raw_response.run(
-            inputs={"face_image": "https://example.com/headshot.jpg"},
-            model_name="face-to-model",
+            inputs={"product_image": "https://example.com/product.jpg"},
+            model_name="product-to-model",
         )
 
         assert response.is_closed is True
@@ -185,8 +199,8 @@ class TestPredictions:
     @parametrize
     def test_streaming_response_run_overload_3(self, client: Fashn) -> None:
         with client.predictions.with_streaming_response.run(
-            inputs={"face_image": "https://example.com/headshot.jpg"},
-            model_name="face-to-model",
+            inputs={"product_image": "https://example.com/product.jpg"},
+            model_name="product-to-model",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -200,8 +214,8 @@ class TestPredictions:
     @parametrize
     def test_method_run_overload_4(self, client: Fashn) -> None:
         prediction = client.predictions.run(
-            inputs={"prompt": "A professional model wearing casual clothes"},
-            model_name="model-create",
+            inputs={"face_image": "https://example.com/headshot.jpg"},
+            model_name="face-to-model",
         )
         assert_matches_type(PredictionRunResponse, prediction, path=["response"])
 
@@ -210,17 +224,17 @@ class TestPredictions:
     def test_method_run_with_all_params_overload_4(self, client: Fashn) -> None:
         prediction = client.predictions.run(
             inputs={
-                "prompt": "A professional model wearing casual clothes",
+                "face_image": "https://example.com/headshot.jpg",
                 "aspect_ratio": "1:1",
-                "disable_prompt_enhancement": True,
-                "image_reference": "https://example.com/reference.jpg",
-                "lora_url": "https://example.com/custom_identity.safetensors",
+                "generation_mode": "fast",
+                "num_images": 1,
                 "output_format": "png",
-                "reference_type": "pose",
+                "prompt": "athletic build",
+                "resolution": "1k",
                 "return_base64": True,
                 "seed": 0,
             },
-            model_name="model-create",
+            model_name="face-to-model",
             webhook_url="https://example.com/webhook",
         )
         assert_matches_type(PredictionRunResponse, prediction, path=["response"])
@@ -229,8 +243,8 @@ class TestPredictions:
     @parametrize
     def test_raw_response_run_overload_4(self, client: Fashn) -> None:
         response = client.predictions.with_raw_response.run(
-            inputs={"prompt": "A professional model wearing casual clothes"},
-            model_name="model-create",
+            inputs={"face_image": "https://example.com/headshot.jpg"},
+            model_name="face-to-model",
         )
 
         assert response.is_closed is True
@@ -242,8 +256,8 @@ class TestPredictions:
     @parametrize
     def test_streaming_response_run_overload_4(self, client: Fashn) -> None:
         with client.predictions.with_streaming_response.run(
-            inputs={"prompt": "A professional model wearing casual clothes"},
-            model_name="model-create",
+            inputs={"face_image": "https://example.com/headshot.jpg"},
+            model_name="face-to-model",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -257,8 +271,8 @@ class TestPredictions:
     @parametrize
     def test_method_run_overload_5(self, client: Fashn) -> None:
         prediction = client.predictions.run(
-            inputs={"model_image": "https://example.com/model.jpg"},
-            model_name="model-variation",
+            inputs={"prompt": "A professional model wearing casual clothes"},
+            model_name="model-create",
         )
         assert_matches_type(PredictionRunResponse, prediction, path=["response"])
 
@@ -267,14 +281,19 @@ class TestPredictions:
     def test_method_run_with_all_params_overload_5(self, client: Fashn) -> None:
         prediction = client.predictions.run(
             inputs={
-                "model_image": "https://example.com/model.jpg",
-                "lora_url": "https://example.com/custom_identity.safetensors",
+                "prompt": "A professional model wearing casual clothes",
+                "aspect_ratio": "1:1",
+                "face_reference": "https://example.com/face.jpg",
+                "face_reference_mode": "match_base",
+                "generation_mode": "fast",
+                "image_reference": "https://example.com/reference.jpg",
+                "num_images": 1,
                 "output_format": "png",
+                "resolution": "1k",
                 "return_base64": True,
                 "seed": 0,
-                "variation_strength": "subtle",
             },
-            model_name="model-variation",
+            model_name="model-create",
             webhook_url="https://example.com/webhook",
         )
         assert_matches_type(PredictionRunResponse, prediction, path=["response"])
@@ -283,8 +302,8 @@ class TestPredictions:
     @parametrize
     def test_raw_response_run_overload_5(self, client: Fashn) -> None:
         response = client.predictions.with_raw_response.run(
-            inputs={"model_image": "https://example.com/model.jpg"},
-            model_name="model-variation",
+            inputs={"prompt": "A professional model wearing casual clothes"},
+            model_name="model-create",
         )
 
         assert response.is_closed is True
@@ -296,8 +315,8 @@ class TestPredictions:
     @parametrize
     def test_streaming_response_run_overload_5(self, client: Fashn) -> None:
         with client.predictions.with_streaming_response.run(
-            inputs={"model_image": "https://example.com/model.jpg"},
-            model_name="model-variation",
+            inputs={"prompt": "A professional model wearing casual clothes"},
+            model_name="model-create",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -322,11 +341,14 @@ class TestPredictions:
         prediction = client.predictions.run(
             inputs={
                 "model_image": "https://example.com/model.jpg",
-                "background_change": True,
-                "disable_prompt_enhancement": True,
-                "lora_url": "https://example.com/custom_identity.safetensors",
+                "aspect_ratio": "21:9",
+                "face_reference": "https://example.com/face.jpg",
+                "face_reference_mode": "match_base",
+                "generation_mode": "fast",
+                "num_images": 1,
                 "output_format": "png",
                 "prompt": "Asian woman with long black hair and brown eyes",
+                "resolution": "1k",
                 "return_base64": True,
                 "seed": 0,
             },
@@ -382,6 +404,7 @@ class TestPredictions:
             inputs={
                 "aspect_ratio": "16:9",
                 "image": "https://example.com/image.jpg",
+                "generation_mode": "fast",
                 "num_images": 1,
                 "output_format": "png",
                 "return_base64": True,
@@ -445,8 +468,10 @@ class TestPredictions:
             inputs={
                 "image": "https://example.com/image.jpg",
                 "prompt": "modern office space with large windows",
-                "disable_prompt_enhancement": True,
+                "generation_mode": "fast",
+                "num_images": 1,
                 "output_format": "png",
+                "resolution": "1k",
                 "return_base64": True,
                 "seed": 0,
             },
@@ -558,6 +583,7 @@ class TestPredictions:
                 "negative_prompt": "negative_prompt",
                 "prompt": "prompt",
                 "resolution": "480p",
+                "seed": 0,
             },
             model_name="image-to-video",
             webhook_url="https://example.com/webhook",
@@ -611,6 +637,8 @@ class TestPredictions:
             inputs={
                 "image": "https://example.com/fashion-model.jpg",
                 "prompt": "change the dress to red",
+                "aspect_ratio": "21:9",
+                "generation_mode": "fast",
                 "image_context": "https://example.com/context-reference.jpg",
                 "mask": "https://example.com/mask.png",
                 "num_images": 1,
@@ -711,6 +739,73 @@ class TestAsyncPredictions:
     async def test_method_run_overload_1(self, async_client: AsyncFashn) -> None:
         prediction = await async_client.predictions.run(
             inputs={
+                "model_image": "https://example.com/model.jpg",
+                "product_image": "https://example.com/garment.jpg",
+            },
+            model_name="tryon-max",
+        )
+        assert_matches_type(PredictionRunResponse, prediction, path=["response"])
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    async def test_method_run_with_all_params_overload_1(self, async_client: AsyncFashn) -> None:
+        prediction = await async_client.predictions.run(
+            inputs={
+                "model_image": "https://example.com/model.jpg",
+                "product_image": "https://example.com/garment.jpg",
+                "aspect_ratio": "21:9",
+                "generation_mode": "balanced",
+                "num_images": 1,
+                "output_format": "png",
+                "prompt": "prompt",
+                "resolution": "1k",
+                "return_base64": True,
+                "seed": 0,
+            },
+            model_name="tryon-max",
+            webhook_url="https://example.com/webhook",
+        )
+        assert_matches_type(PredictionRunResponse, prediction, path=["response"])
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    async def test_raw_response_run_overload_1(self, async_client: AsyncFashn) -> None:
+        response = await async_client.predictions.with_raw_response.run(
+            inputs={
+                "model_image": "https://example.com/model.jpg",
+                "product_image": "https://example.com/garment.jpg",
+            },
+            model_name="tryon-max",
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        prediction = await response.parse()
+        assert_matches_type(PredictionRunResponse, prediction, path=["response"])
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    async def test_streaming_response_run_overload_1(self, async_client: AsyncFashn) -> None:
+        async with async_client.predictions.with_streaming_response.run(
+            inputs={
+                "model_image": "https://example.com/model.jpg",
+                "product_image": "https://example.com/garment.jpg",
+            },
+            model_name="tryon-max",
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            prediction = await response.parse()
+            assert_matches_type(PredictionRunResponse, prediction, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    async def test_method_run_overload_2(self, async_client: AsyncFashn) -> None:
+        prediction = await async_client.predictions.run(
+            inputs={
                 "garment_image": "https://example.com/garment.jpg",
                 "model_image": "https://example.com/model.jpg",
             },
@@ -720,7 +815,7 @@ class TestAsyncPredictions:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    async def test_method_run_with_all_params_overload_1(self, async_client: AsyncFashn) -> None:
+    async def test_method_run_with_all_params_overload_2(self, async_client: AsyncFashn) -> None:
         prediction = await async_client.predictions.run(
             inputs={
                 "garment_image": "https://example.com/garment.jpg",
@@ -742,7 +837,7 @@ class TestAsyncPredictions:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    async def test_raw_response_run_overload_1(self, async_client: AsyncFashn) -> None:
+    async def test_raw_response_run_overload_2(self, async_client: AsyncFashn) -> None:
         response = await async_client.predictions.with_raw_response.run(
             inputs={
                 "garment_image": "https://example.com/garment.jpg",
@@ -758,7 +853,7 @@ class TestAsyncPredictions:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    async def test_streaming_response_run_overload_1(self, async_client: AsyncFashn) -> None:
+    async def test_streaming_response_run_overload_2(self, async_client: AsyncFashn) -> None:
         async with async_client.predictions.with_streaming_response.run(
             inputs={
                 "garment_image": "https://example.com/garment.jpg",
@@ -776,7 +871,7 @@ class TestAsyncPredictions:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    async def test_method_run_overload_2(self, async_client: AsyncFashn) -> None:
+    async def test_method_run_overload_3(self, async_client: AsyncFashn) -> None:
         prediction = await async_client.predictions.run(
             inputs={"product_image": "https://example.com/product.jpg"},
             model_name="product-to-model",
@@ -785,11 +880,12 @@ class TestAsyncPredictions:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    async def test_method_run_with_all_params_overload_2(self, async_client: AsyncFashn) -> None:
+    async def test_method_run_with_all_params_overload_3(self, async_client: AsyncFashn) -> None:
         prediction = await async_client.predictions.run(
             inputs={
                 "product_image": "https://example.com/product.jpg",
                 "aspect_ratio": "1:1",
+                "generation_mode": "fast",
                 "image_prompt": "https://example.com/inspiration.jpg",
                 "model_image": "https://example.com/person.jpg",
                 "output_format": "png",
@@ -805,64 +901,10 @@ class TestAsyncPredictions:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    async def test_raw_response_run_overload_2(self, async_client: AsyncFashn) -> None:
-        response = await async_client.predictions.with_raw_response.run(
-            inputs={"product_image": "https://example.com/product.jpg"},
-            model_name="product-to-model",
-        )
-
-        assert response.is_closed is True
-        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
-        prediction = await response.parse()
-        assert_matches_type(PredictionRunResponse, prediction, path=["response"])
-
-    @pytest.mark.skip(reason="Mock server tests are disabled")
-    @parametrize
-    async def test_streaming_response_run_overload_2(self, async_client: AsyncFashn) -> None:
-        async with async_client.predictions.with_streaming_response.run(
-            inputs={"product_image": "https://example.com/product.jpg"},
-            model_name="product-to-model",
-        ) as response:
-            assert not response.is_closed
-            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
-
-            prediction = await response.parse()
-            assert_matches_type(PredictionRunResponse, prediction, path=["response"])
-
-        assert cast(Any, response.is_closed) is True
-
-    @pytest.mark.skip(reason="Mock server tests are disabled")
-    @parametrize
-    async def test_method_run_overload_3(self, async_client: AsyncFashn) -> None:
-        prediction = await async_client.predictions.run(
-            inputs={"face_image": "https://example.com/headshot.jpg"},
-            model_name="face-to-model",
-        )
-        assert_matches_type(PredictionRunResponse, prediction, path=["response"])
-
-    @pytest.mark.skip(reason="Mock server tests are disabled")
-    @parametrize
-    async def test_method_run_with_all_params_overload_3(self, async_client: AsyncFashn) -> None:
-        prediction = await async_client.predictions.run(
-            inputs={
-                "face_image": "https://example.com/headshot.jpg",
-                "aspect_ratio": "1:1",
-                "output_format": "png",
-                "prompt": "athletic build",
-                "return_base64": True,
-                "seed": 0,
-            },
-            model_name="face-to-model",
-            webhook_url="https://example.com/webhook",
-        )
-        assert_matches_type(PredictionRunResponse, prediction, path=["response"])
-
-    @pytest.mark.skip(reason="Mock server tests are disabled")
-    @parametrize
     async def test_raw_response_run_overload_3(self, async_client: AsyncFashn) -> None:
         response = await async_client.predictions.with_raw_response.run(
-            inputs={"face_image": "https://example.com/headshot.jpg"},
-            model_name="face-to-model",
+            inputs={"product_image": "https://example.com/product.jpg"},
+            model_name="product-to-model",
         )
 
         assert response.is_closed is True
@@ -874,8 +916,8 @@ class TestAsyncPredictions:
     @parametrize
     async def test_streaming_response_run_overload_3(self, async_client: AsyncFashn) -> None:
         async with async_client.predictions.with_streaming_response.run(
-            inputs={"face_image": "https://example.com/headshot.jpg"},
-            model_name="face-to-model",
+            inputs={"product_image": "https://example.com/product.jpg"},
+            model_name="product-to-model",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -889,8 +931,8 @@ class TestAsyncPredictions:
     @parametrize
     async def test_method_run_overload_4(self, async_client: AsyncFashn) -> None:
         prediction = await async_client.predictions.run(
-            inputs={"prompt": "A professional model wearing casual clothes"},
-            model_name="model-create",
+            inputs={"face_image": "https://example.com/headshot.jpg"},
+            model_name="face-to-model",
         )
         assert_matches_type(PredictionRunResponse, prediction, path=["response"])
 
@@ -899,17 +941,17 @@ class TestAsyncPredictions:
     async def test_method_run_with_all_params_overload_4(self, async_client: AsyncFashn) -> None:
         prediction = await async_client.predictions.run(
             inputs={
-                "prompt": "A professional model wearing casual clothes",
+                "face_image": "https://example.com/headshot.jpg",
                 "aspect_ratio": "1:1",
-                "disable_prompt_enhancement": True,
-                "image_reference": "https://example.com/reference.jpg",
-                "lora_url": "https://example.com/custom_identity.safetensors",
+                "generation_mode": "fast",
+                "num_images": 1,
                 "output_format": "png",
-                "reference_type": "pose",
+                "prompt": "athletic build",
+                "resolution": "1k",
                 "return_base64": True,
                 "seed": 0,
             },
-            model_name="model-create",
+            model_name="face-to-model",
             webhook_url="https://example.com/webhook",
         )
         assert_matches_type(PredictionRunResponse, prediction, path=["response"])
@@ -918,8 +960,8 @@ class TestAsyncPredictions:
     @parametrize
     async def test_raw_response_run_overload_4(self, async_client: AsyncFashn) -> None:
         response = await async_client.predictions.with_raw_response.run(
-            inputs={"prompt": "A professional model wearing casual clothes"},
-            model_name="model-create",
+            inputs={"face_image": "https://example.com/headshot.jpg"},
+            model_name="face-to-model",
         )
 
         assert response.is_closed is True
@@ -931,8 +973,8 @@ class TestAsyncPredictions:
     @parametrize
     async def test_streaming_response_run_overload_4(self, async_client: AsyncFashn) -> None:
         async with async_client.predictions.with_streaming_response.run(
-            inputs={"prompt": "A professional model wearing casual clothes"},
-            model_name="model-create",
+            inputs={"face_image": "https://example.com/headshot.jpg"},
+            model_name="face-to-model",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -946,8 +988,8 @@ class TestAsyncPredictions:
     @parametrize
     async def test_method_run_overload_5(self, async_client: AsyncFashn) -> None:
         prediction = await async_client.predictions.run(
-            inputs={"model_image": "https://example.com/model.jpg"},
-            model_name="model-variation",
+            inputs={"prompt": "A professional model wearing casual clothes"},
+            model_name="model-create",
         )
         assert_matches_type(PredictionRunResponse, prediction, path=["response"])
 
@@ -956,14 +998,19 @@ class TestAsyncPredictions:
     async def test_method_run_with_all_params_overload_5(self, async_client: AsyncFashn) -> None:
         prediction = await async_client.predictions.run(
             inputs={
-                "model_image": "https://example.com/model.jpg",
-                "lora_url": "https://example.com/custom_identity.safetensors",
+                "prompt": "A professional model wearing casual clothes",
+                "aspect_ratio": "1:1",
+                "face_reference": "https://example.com/face.jpg",
+                "face_reference_mode": "match_base",
+                "generation_mode": "fast",
+                "image_reference": "https://example.com/reference.jpg",
+                "num_images": 1,
                 "output_format": "png",
+                "resolution": "1k",
                 "return_base64": True,
                 "seed": 0,
-                "variation_strength": "subtle",
             },
-            model_name="model-variation",
+            model_name="model-create",
             webhook_url="https://example.com/webhook",
         )
         assert_matches_type(PredictionRunResponse, prediction, path=["response"])
@@ -972,8 +1019,8 @@ class TestAsyncPredictions:
     @parametrize
     async def test_raw_response_run_overload_5(self, async_client: AsyncFashn) -> None:
         response = await async_client.predictions.with_raw_response.run(
-            inputs={"model_image": "https://example.com/model.jpg"},
-            model_name="model-variation",
+            inputs={"prompt": "A professional model wearing casual clothes"},
+            model_name="model-create",
         )
 
         assert response.is_closed is True
@@ -985,8 +1032,8 @@ class TestAsyncPredictions:
     @parametrize
     async def test_streaming_response_run_overload_5(self, async_client: AsyncFashn) -> None:
         async with async_client.predictions.with_streaming_response.run(
-            inputs={"model_image": "https://example.com/model.jpg"},
-            model_name="model-variation",
+            inputs={"prompt": "A professional model wearing casual clothes"},
+            model_name="model-create",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -1011,11 +1058,14 @@ class TestAsyncPredictions:
         prediction = await async_client.predictions.run(
             inputs={
                 "model_image": "https://example.com/model.jpg",
-                "background_change": True,
-                "disable_prompt_enhancement": True,
-                "lora_url": "https://example.com/custom_identity.safetensors",
+                "aspect_ratio": "21:9",
+                "face_reference": "https://example.com/face.jpg",
+                "face_reference_mode": "match_base",
+                "generation_mode": "fast",
+                "num_images": 1,
                 "output_format": "png",
                 "prompt": "Asian woman with long black hair and brown eyes",
+                "resolution": "1k",
                 "return_base64": True,
                 "seed": 0,
             },
@@ -1071,6 +1121,7 @@ class TestAsyncPredictions:
             inputs={
                 "aspect_ratio": "16:9",
                 "image": "https://example.com/image.jpg",
+                "generation_mode": "fast",
                 "num_images": 1,
                 "output_format": "png",
                 "return_base64": True,
@@ -1134,8 +1185,10 @@ class TestAsyncPredictions:
             inputs={
                 "image": "https://example.com/image.jpg",
                 "prompt": "modern office space with large windows",
-                "disable_prompt_enhancement": True,
+                "generation_mode": "fast",
+                "num_images": 1,
                 "output_format": "png",
+                "resolution": "1k",
                 "return_base64": True,
                 "seed": 0,
             },
@@ -1247,6 +1300,7 @@ class TestAsyncPredictions:
                 "negative_prompt": "negative_prompt",
                 "prompt": "prompt",
                 "resolution": "480p",
+                "seed": 0,
             },
             model_name="image-to-video",
             webhook_url="https://example.com/webhook",
@@ -1300,6 +1354,8 @@ class TestAsyncPredictions:
             inputs={
                 "image": "https://example.com/fashion-model.jpg",
                 "prompt": "change the dress to red",
+                "aspect_ratio": "21:9",
+                "generation_mode": "fast",
                 "image_context": "https://example.com/context-reference.jpg",
                 "mask": "https://example.com/mask.png",
                 "num_images": 1,

@@ -37,9 +37,9 @@ from fashn import Fashn
 client = Fashn(api_key=os.environ.get("FASHN_API_KEY"))
 
 result = client.predictions.subscribe(
-    model_name="tryon-v1.6",
+    model_name="tryon-max",
     inputs={
-        "garment_image": "https://example.com/garment.jpg",
+        "product_image": "https://example.com/garment.jpg",
         "model_image": "https://example.com/model.jpg",
     },
     on_enqueued=lambda pid: print("queued:", pid),
@@ -55,10 +55,10 @@ You can still call the lower-level endpoints separately:
 ```python
 response = client.predictions.run(
     inputs={
-        "garment_image": "https://example.com/garment.jpg",
         "model_image": "https://example.com/model.jpg",
+        "product_image": "https://example.com/garment.jpg",
     },
-    model_name="tryon-v1.6",
+    model_name="tryon-max",
 )
 status = client.predictions.status(response.id)
 ```
@@ -81,10 +81,10 @@ client = AsyncFashn(api_key=os.environ.get("FASHN_API_KEY"))
 
 async def main() -> None:
     result = await client.predictions.subscribe(
-        model_name="tryon-v1.6",
+        model_name="tryon-max",
         inputs={
-            "garment_image": "https://example.com/garment.jpg",
             "model_image": "https://example.com/model.jpg",
+            "product_image": "https://example.com/garment.jpg",
         },
         on_enqueued=lambda pid: print("queued:", pid),
         on_queue_update=lambda status: print("status:", status.status),
@@ -122,10 +122,10 @@ async def main() -> None:
         http_client=DefaultAioHttpClient(),
     ) as client:
         result = await client.predictions.subscribe(
-            model_name="tryon-v1.6",
+            model_name="tryon-max",
             inputs={
-                "garment_image": "https://example.com/garment.jpg",
                 "model_image": "https://example.com/model.jpg",
+                "product_image": "https://example.com/garment.jpg",
             },
         )
         print(result.status)
@@ -153,10 +153,10 @@ client = Fashn()
 
 response = client.predictions.run(
     inputs={
-        "garment_image": "https://example.com/garment.jpg",
         "model_image": "https://example.com/model.jpg",
+        "product_image": "https://example.com/garment.jpg",
     },
-    model_name="tryon-v1.6",
+    model_name="tryon-max",
 )
 print(response.id)
 ```
@@ -178,10 +178,10 @@ client = Fashn()
 
 try:
     client.predictions.subscribe(
-        model_name="tryon-v1.6",
+        model_name="tryon-max",
         inputs={
-            "garment_image": "https://example.com/garment.jpg",
             "model_image": "https://example.com/model.jpg",
+            "product_image": "https://example.com/garment.jpg",
         },
     )
 except fashn.APIConnectionError as e:
@@ -225,10 +225,10 @@ client = Fashn(max_retries=0)  # default is 2
 # Or, configure per-request:
 client.with_options(max_retries=5).predictions.run(
     inputs={
-        "garment_image": "https://example.com/garment.jpg",
         "model_image": "https://example.com/model.jpg",
+        "product_image": "https://example.com/garment.jpg",
     },
-    model_name="tryon-v1.6",
+    model_name="tryon-max",
 )
 ```
 
@@ -249,10 +249,10 @@ client = Fashn(timeout=httpx.Timeout(60.0, read=5.0, write=10.0, connect=2.0))
 # Override per-request:
 client.with_options(timeout=5.0).predictions.run(
     inputs={
-        "garment_image": "https://example.com/garment.jpg",
         "model_image": "https://example.com/model.jpg",
+        "product_image": "https://example.com/garment.jpg",
     },
-    model_name="tryon-v1.6",
+    model_name="tryon-max",
 )
 ```
 
@@ -296,10 +296,10 @@ from fashn import Fashn
 client = Fashn()
 response = client.predictions.with_raw_response.run(
     inputs={
-        "garment_image": "https://example.com/garment.jpg",
         "model_image": "https://example.com/model.jpg",
+        "product_image": "https://example.com/garment.jpg",
     },
-    model_name="tryon-v1.6",
+    model_name="tryon-max",
 )
 print(response.headers.get('X-My-Header'))
 
@@ -320,10 +320,10 @@ To stream the response body, use `.with_streaming_response` instead, which requi
 ```python
 with client.predictions.with_streaming_response.run(
     inputs={
-        "garment_image": "https://example.com/garment.jpg",
         "model_image": "https://example.com/model.jpg",
+        "product_image": "https://example.com/garment.jpg",
     },
-    model_name="tryon-v1.6",
+    model_name="tryon-max",
 ) as response:
     print(response.headers.get("X-My-Header"))
 
