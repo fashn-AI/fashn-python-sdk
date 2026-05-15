@@ -18,7 +18,6 @@ class Error(BaseModel):
         "ImageLoadError",
         "ContentModerationError",
         "PoseError",
-        "LoRALoadError",
         "InputValidationError",
         "PipelineError",
         "ThirdPartyError",
@@ -51,13 +50,6 @@ class Error(BaseModel):
 
     - _Cause_: Body pose not detectable in model or garment image
     - _Solution_: Improve image quality following model photo guidelines
-
-    **LoRALoadError** - Failed to load LoRA weights (model-create, model-variation,
-    model-swap only)
-
-    - _Cause_: Cannot download or load LoRA file
-    - _Solution_: Ensure URL is public, file is valid .safetensors under 256MB,
-      compatible with FLUX.1-dev
 
     **InputValidationError** - Invalid parameter combination (reframe only)
 
