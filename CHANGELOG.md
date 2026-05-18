@@ -1,5 +1,45 @@
 # Changelog
 
+## 0.7.0 (2026-05-18)
+
+Full Changelog: [v0.6.0...v0.7.0](https://github.com/fashn-AI/fashn-python-sdk/compare/v0.6.0...v0.7.0)
+
+### Features
+
+* **api:** api update ([e1b440e](https://github.com/fashn-AI/fashn-python-sdk/commit/e1b440e05e4ad6b082e18cfd4e7f056c49e63006))
+* **api:** api update ([a1a6cb7](https://github.com/fashn-AI/fashn-python-sdk/commit/a1a6cb772cd946607d9fbcf3fd23840a78a5b5ad))
+* **internal:** implement indices array format for query and form serialization ([2ad8553](https://github.com/fashn-AI/fashn-python-sdk/commit/2ad8553b3b0f32bb5f953b3ede77d7b9e85c94cc))
+* support setting headers via env ([db06aa1](https://github.com/fashn-AI/fashn-python-sdk/commit/db06aa15f32069c87827c14701c16fd109a9827f))
+
+
+### Bug Fixes
+
+* **client:** preserve hardcoded query params when merging with user params ([a03fa63](https://github.com/fashn-AI/fashn-python-sdk/commit/a03fa6302db29741dfb21e68705f8433799e767c))
+* **deps:** bump minimum typing-extensions version ([f371db9](https://github.com/fashn-AI/fashn-python-sdk/commit/f371db9150fdd1fb62b35b5180c82957b33d6c10))
+* ensure file data are only sent as 1 parameter ([40b2510](https://github.com/fashn-AI/fashn-python-sdk/commit/40b251066a744f93e34b84a296abb92c999d8bd6))
+* **predictions:** sync subscribe() overloads with all supported models ([a94eab3](https://github.com/fashn-AI/fashn-python-sdk/commit/a94eab3d2bfe26798dd5c2062e69136dd8dd40f6))
+* **pydantic:** do not pass `by_alias` unless set ([24078c2](https://github.com/fashn-AI/fashn-python-sdk/commit/24078c2f2d14ae384353332b005b4d1bf6f32ca6))
+* sanitize endpoint path params ([c9c800b](https://github.com/fashn-AI/fashn-python-sdk/commit/c9c800b90a93f3bedb64dcb805db42d114b2a416))
+* use correct field name format for multipart file arrays ([cf6df15](https://github.com/fashn-AI/fashn-python-sdk/commit/cf6df152d0a0fdd0e700684c5363c853986ca5e3))
+
+
+### Performance Improvements
+
+* **client:** optimize file structure copying in multipart requests ([f28a133](https://github.com/fashn-AI/fashn-python-sdk/commit/f28a133be651105500944e3c6a88e4c5561e7848))
+
+
+### Chores
+
+* **ci:** skip lint on metadata-only changes ([0f1e02d](https://github.com/fashn-AI/fashn-python-sdk/commit/0f1e02df1bce5fabc5680ac191c12f75ed1fa4d0))
+* **ci:** skip uploading artifacts on stainless-internal branches ([2f7216d](https://github.com/fashn-AI/fashn-python-sdk/commit/2f7216d6d0eb62f28275e52f770a9b35017a7bb1))
+* **internal:** codegen related update ([66d022e](https://github.com/fashn-AI/fashn-python-sdk/commit/66d022eca7aac5cf3e463128d6190e71a37701d7))
+* **internal:** codegen related update ([10ee22f](https://github.com/fashn-AI/fashn-python-sdk/commit/10ee22fe2fda58d1c17d96c832dd3c8af69f30a7))
+* **internal:** codegen related update ([af155c4](https://github.com/fashn-AI/fashn-python-sdk/commit/af155c47f95c63fbbe5c77ae6edee25313636a5b))
+* **internal:** more robust bootstrap script ([b5c90dd](https://github.com/fashn-AI/fashn-python-sdk/commit/b5c90ddb504d42e506f54ad4887fd0695a299f5e))
+* **internal:** reformat pyproject.toml ([42e397d](https://github.com/fashn-AI/fashn-python-sdk/commit/42e397dcb4be3a55c8a87ce8006f570f2815e3e7))
+* **internal:** tweak CI branches ([37ccb08](https://github.com/fashn-AI/fashn-python-sdk/commit/37ccb08393eeafcf770a0aff863d26048694c1c1))
+* **internal:** update gitignore ([da97841](https://github.com/fashn-AI/fashn-python-sdk/commit/da978417054aa58dc4391cba02065a39661957d3))
+
 ## 0.6.0 (2026-03-05)
 
 Full Changelog: [v0.5.1...v0.6.0](https://github.com/fashn-AI/fashn-python-sdk/compare/v0.5.1...v0.6.0)
