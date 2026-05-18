@@ -46,6 +46,24 @@ class PredictionsResource(SyncAPIResource):
     def subscribe(
         self,
         *,
+        inputs: prediction_run_params.TryOnMaxRequestInputs,
+        model_name: Literal["tryon-max"],
+        webhook_url: str | Omit = omit,
+        poll_interval: int | None = None,
+        timeout: int | None = None,
+        max_retries: int | None = None,
+        on_enqueued: EnqueuedCallback | None = None,
+        on_queue_update: QueueUpdateCallback | None = None,
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        request_timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> PredictionSubscribeResponse: ...
+
+    @overload
+    def subscribe(
+        self,
+        *,
         inputs: prediction_run_params.TryOnRequestInputs,
         model_name: Literal["tryon-v1.6"],
         webhook_url: str | Omit = omit,
@@ -102,24 +120,6 @@ class PredictionsResource(SyncAPIResource):
         *,
         inputs: prediction_run_params.ModelCreateRequestInputs,
         model_name: Literal["model-create"],
-        webhook_url: str | Omit = omit,
-        poll_interval: int | None = None,
-        timeout: int | None = None,
-        max_retries: int | None = None,
-        on_enqueued: EnqueuedCallback | None = None,
-        on_queue_update: QueueUpdateCallback | None = None,
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        request_timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> PredictionSubscribeResponse: ...
-
-    @overload
-    def subscribe(
-        self,
-        *,
-        inputs: prediction_run_params.ModelVariationRequestInputs,
-        model_name: Literal["model-variation"],
         webhook_url: str | Omit = omit,
         poll_interval: int | None = None,
         timeout: int | None = None,
@@ -204,27 +204,67 @@ class PredictionsResource(SyncAPIResource):
         request_timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> PredictionSubscribeResponse: ...
 
+    @overload
     def subscribe(
         self,
         *,
-        inputs: prediction_run_params.TryOnRequestInputs
+        inputs: prediction_run_params.ImageToVideoRequestInputs,
+        model_name: Literal["image-to-video"],
+        webhook_url: str | Omit = omit,
+        poll_interval: int | None = None,
+        timeout: int | None = None,
+        max_retries: int | None = None,
+        on_enqueued: EnqueuedCallback | None = None,
+        on_queue_update: QueueUpdateCallback | None = None,
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        request_timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> PredictionSubscribeResponse: ...
+
+    @overload
+    def subscribe(
+        self,
+        *,
+        inputs: prediction_run_params.EditRequestInputs,
+        model_name: Literal["edit"],
+        webhook_url: str | Omit = omit,
+        poll_interval: int | None = None,
+        timeout: int | None = None,
+        max_retries: int | None = None,
+        on_enqueued: EnqueuedCallback | None = None,
+        on_queue_update: QueueUpdateCallback | None = None,
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        request_timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> PredictionSubscribeResponse: ...
+
+    def subscribe(
+        self,
+        *,
+        inputs: prediction_run_params.TryOnMaxRequestInputs
+        | prediction_run_params.TryOnRequestInputs
         | prediction_run_params.ProductToModelRequestInputs
         | prediction_run_params.FaceToModelRequestInputs
         | prediction_run_params.ModelCreateRequestInputs
-        | prediction_run_params.ModelVariationRequestInputs
         | prediction_run_params.ModelSwapRequestInputs
         | prediction_run_params.ReframeRequestInputs
         | prediction_run_params.BackgroundChangeRequestInputs
-        | prediction_run_params.BackgroundRemoveRequestInputs,
-        model_name: Literal["tryon-v1.6"]
+        | prediction_run_params.BackgroundRemoveRequestInputs
+        | prediction_run_params.ImageToVideoRequestInputs
+        | prediction_run_params.EditRequestInputs,
+        model_name: Literal["tryon-max"]
+        | Literal["tryon-v1.6"]
         | Literal["product-to-model"]
         | Literal["face-to-model"]
         | Literal["model-create"]
-        | Literal["model-variation"]
         | Literal["model-swap"]
         | Literal["reframe"]
         | Literal["background-change"]
-        | Literal["background-remove"],
+        | Literal["background-remove"]
+        | Literal["image-to-video"]
+        | Literal["edit"],
         webhook_url: str | Omit = omit,
         poll_interval: int | None = None,
         timeout: int | None = None,
@@ -1025,6 +1065,24 @@ class AsyncPredictionsResource(AsyncAPIResource):
     async def subscribe(
         self,
         *,
+        inputs: prediction_run_params.TryOnMaxRequestInputs,
+        model_name: Literal["tryon-max"],
+        webhook_url: str | Omit = omit,
+        poll_interval: int | None = None,
+        timeout: int | None = None,
+        max_retries: int | None = None,
+        on_enqueued: EnqueuedCallback | None = None,
+        on_queue_update: QueueUpdateCallback | None = None,
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        request_timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> PredictionSubscribeResponse: ...
+
+    @overload
+    async def subscribe(
+        self,
+        *,
         inputs: prediction_run_params.TryOnRequestInputs,
         model_name: Literal["tryon-v1.6"],
         webhook_url: str | Omit = omit,
@@ -1081,24 +1139,6 @@ class AsyncPredictionsResource(AsyncAPIResource):
         *,
         inputs: prediction_run_params.ModelCreateRequestInputs,
         model_name: Literal["model-create"],
-        webhook_url: str | Omit = omit,
-        poll_interval: int | None = None,
-        timeout: int | None = None,
-        max_retries: int | None = None,
-        on_enqueued: EnqueuedCallback | None = None,
-        on_queue_update: QueueUpdateCallback | None = None,
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        request_timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> PredictionSubscribeResponse: ...
-
-    @overload
-    async def subscribe(
-        self,
-        *,
-        inputs: prediction_run_params.ModelVariationRequestInputs,
-        model_name: Literal["model-variation"],
         webhook_url: str | Omit = omit,
         poll_interval: int | None = None,
         timeout: int | None = None,
@@ -1183,27 +1223,67 @@ class AsyncPredictionsResource(AsyncAPIResource):
         request_timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> PredictionSubscribeResponse: ...
 
+    @overload
     async def subscribe(
         self,
         *,
-        inputs: prediction_run_params.TryOnRequestInputs
+        inputs: prediction_run_params.ImageToVideoRequestInputs,
+        model_name: Literal["image-to-video"],
+        webhook_url: str | Omit = omit,
+        poll_interval: int | None = None,
+        timeout: int | None = None,
+        max_retries: int | None = None,
+        on_enqueued: EnqueuedCallback | None = None,
+        on_queue_update: QueueUpdateCallback | None = None,
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        request_timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> PredictionSubscribeResponse: ...
+
+    @overload
+    async def subscribe(
+        self,
+        *,
+        inputs: prediction_run_params.EditRequestInputs,
+        model_name: Literal["edit"],
+        webhook_url: str | Omit = omit,
+        poll_interval: int | None = None,
+        timeout: int | None = None,
+        max_retries: int | None = None,
+        on_enqueued: EnqueuedCallback | None = None,
+        on_queue_update: QueueUpdateCallback | None = None,
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        request_timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> PredictionSubscribeResponse: ...
+
+    async def subscribe(
+        self,
+        *,
+        inputs: prediction_run_params.TryOnMaxRequestInputs
+        | prediction_run_params.TryOnRequestInputs
         | prediction_run_params.ProductToModelRequestInputs
         | prediction_run_params.FaceToModelRequestInputs
         | prediction_run_params.ModelCreateRequestInputs
-        | prediction_run_params.ModelVariationRequestInputs
         | prediction_run_params.ModelSwapRequestInputs
         | prediction_run_params.ReframeRequestInputs
         | prediction_run_params.BackgroundChangeRequestInputs
-        | prediction_run_params.BackgroundRemoveRequestInputs,
-        model_name: Literal["tryon-v1.6"]
+        | prediction_run_params.BackgroundRemoveRequestInputs
+        | prediction_run_params.ImageToVideoRequestInputs
+        | prediction_run_params.EditRequestInputs,
+        model_name: Literal["tryon-max"]
+        | Literal["tryon-v1.6"]
         | Literal["product-to-model"]
         | Literal["face-to-model"]
         | Literal["model-create"]
-        | Literal["model-variation"]
         | Literal["model-swap"]
         | Literal["reframe"]
         | Literal["background-change"]
-        | Literal["background-remove"],
+        | Literal["background-remove"]
+        | Literal["image-to-video"]
+        | Literal["edit"],
         webhook_url: str | Omit = omit,
         poll_interval: int | None = None,
         timeout: int | None = None,
