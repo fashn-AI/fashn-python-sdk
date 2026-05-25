@@ -29,6 +29,8 @@ __all__ = [
     "ImageToVideoRequestInputs",
     "EditRequest",
     "EditRequestInputs",
+    "PackshotRequest",
+    "PackshotRequestInputs",
 ]
 
 
@@ -73,11 +75,7 @@ class TryOnMaxRequestInputs(TypedDict, total=False):
     """
 
     num_images: int
-    """Number of images to generate in a single run.
-
-    Image generation has a random element in it, so trying multiple images at once
-    increases the chances of getting a good result.
-    """
+    """Number of images to generate per request (1-4)."""
 
     output_format: Literal["png", "jpeg"]
     """Specifies the desired output image format.
@@ -190,11 +188,7 @@ class TryOnRequestInputs(TypedDict, total=False):
     """
 
     num_samples: int
-    """Number of images to generate in a single run.
-
-    Image generation has a random element in it, so trying multiple images at once
-    increases the chances of getting a good result.
-    """
+    """Number of images to generate per request (1-4)."""
 
     output_format: Literal["png", "jpeg"]
     """Specifies the desired output image format.
@@ -253,7 +247,7 @@ class ProductToModelRequestInputs(TypedDict, total=False):
     data:image/jpg;base64,<YOUR_BASE64>)
     """
 
-    aspect_ratio: Literal["1:1", "2:3", "3:4", "4:5", "5:4", "4:3", "3:2", "16:9", "9:16"]
+    aspect_ratio: Literal["21:9", "1:1", "4:3", "3:2", "2:3", "5:4", "4:5", "3:4", "16:9", "9:16"]
     """Desired aspect ratio for the output image.
 
     Only applies when `model_image` is not provided (standard product-to-model
@@ -353,11 +347,11 @@ class FaceToModelRequestInputs(TypedDict, total=False):
     data:image/jpg;base64,<YOUR_BASE64>)
     """
 
-    aspect_ratio: Literal["1:1", "4:5", "3:4", "2:3", "9:16"]
+    aspect_ratio: Literal["21:9", "1:1", "4:3", "3:2", "2:3", "5:4", "4:5", "3:4", "16:9", "9:16"]
     """Desired aspect ratio for the output image.
 
-    Only vertical ratios are supported. Images will always be extended downward to
-    fit the aspect ratio.
+    Vertical ratios (e.g. `2:3`, `3:4`, `9:16`) produce the most natural upper-body
+    portraits.
 
     **Default:** `2:3`
     """
@@ -432,7 +426,7 @@ class ModelCreateRequestInputs(TypedDict, total=False):
     Describes the desired fashion model, clothing, pose, and scene.
     """
 
-    aspect_ratio: Literal["1:1", "2:3", "3:4", "4:5", "5:4", "4:3", "3:2", "16:9", "9:16"]
+    aspect_ratio: Literal["21:9", "1:1", "4:3", "3:2", "2:3", "5:4", "4:5", "3:4", "16:9", "9:16"]
     """Defines the width-to-height ratio of the generated image.
 
     This parameter controls the canvas dimensions for text-only generation. When
@@ -446,6 +440,7 @@ class ModelCreateRequestInputs(TypedDict, total=False):
 
     | Aspect Ratio | Resolution  | Use Case                      |
     | ------------ | ----------- | ----------------------------- |
+    | 21:9         | 1568 × 672  | Ultra-wide cinematic          |
     | 1:1          | 1024 × 1024 | Square format, social media   |
     | 2:3          | 832 × 1248  | Portrait, fashion photography |
     | 3:4          | 880 × 1176  | Standard portrait             |
@@ -688,11 +683,7 @@ class ReframeRequestInputs(TypedDict, total=False):
     """
 
     num_images: int
-    """Number of images to generate in a single run.
-
-    Image generation has a random element in it, so trying multiple images at once
-    increases the chances of getting a good result.
-    """
+    """Number of images to generate per request (1-4)."""
 
     output_format: Literal["png", "jpeg"]
     """Specifies the desired output image format.
@@ -939,11 +930,7 @@ class EditRequestInputs(TypedDict, total=False):
     """
 
     num_images: int
-    """Number of images to generate in a single run.
-
-    Image generation has a random element in it, so trying multiple images at once
-    increases the chances of getting a good result.
-    """
+    """Number of images to generate per request (1-4)."""
 
     output_format: Literal["png", "jpeg"]
     """Specifies the desired output image format.
@@ -952,6 +939,94 @@ class EditRequestInputs(TypedDict, total=False):
       creation where quality is paramount.
     - `jpeg`: Provides a faster response with a slightly compressed image, more
       suitable for real-time applications.
+    """
+
+    resolution: Literal["1k", "2k", "4k"]
+    """Resolution setting for the output image."""
+
+    return_base64: bool
+    """
+    When set to `true`, the API will return the generated image as a base64-encoded
+    string instead of a CDN URL. The base64 string will be prefixed according to the
+    `output_format` (e.g., `data:image/png;base64,...` or
+    `data:image/jpeg;base64,...`). This option offers enhanced privacy as
+    user-generated outputs are not stored on our servers when `return_base64` is
+    enabled.
+    """
+
+    seed: int
+    """Sets random operations to a fixed state.
+
+    Use the same seed to reproduce results with the same inputs, or different seed
+    to force different results.
+    """
+
+
+class PackshotRequest(TypedDict, total=False):
+    inputs: Required[PackshotRequestInputs]
+
+    model_name: Required[Literal["packshot"]]
+    """Turns a product photo into a clean commercial packshot.
+
+    Optionally accepts a style reference image to guide staging, background, and
+    lighting.
+    """
+
+    webhook_url: str
+    """Optional webhook URL to receive completion notifications"""
+
+
+class PackshotRequestInputs(TypedDict, total=False):
+    product_image: Required[str]
+    """Source product image to convert into a commercial packshot.
+
+    The AI generates a clean studio-style presentation while preserving product
+    identity and detail.
+
+    Base64 images must include the proper prefix (e.g.,
+    `data:image/jpg;base64,<YOUR_BASE64>`)
+    """
+
+    aspect_ratio: Literal["21:9", "1:1", "4:3", "3:2", "2:3", "5:4", "4:5", "3:4", "16:9", "9:16"]
+    """Optional aspect ratio for the output image."""
+
+    generation_mode: Literal["fast", "balanced", "quality"]
+    """Sets the generation quality level.
+
+    'quality' produces the most detailed and realistic output but takes longer to
+    process and costs more credits. 'fast' prioritizes speed and lower cost.
+    """
+
+    image_context: str
+    """
+    Optional URL or base64 of a style reference image guiding the packshot
+    presentation (staging, background, lighting). The reference influences styling
+    without overriding the product itself.
+
+    Base64 images must include the proper prefix (e.g.,
+    `data:image/jpg;base64,<YOUR_BASE64>`)
+    """
+
+    num_images: int
+    """Number of images to generate per request (1-4)."""
+
+    output_format: Literal["png", "jpeg"]
+    """Specifies the desired output image format.
+
+    - `png`: Delivers the highest quality image, ideal for use cases such as content
+      creation where quality is paramount.
+    - `jpeg`: Provides a faster response with a slightly compressed image, more
+      suitable for real-time applications.
+    """
+
+    prompt: str
+    """Optional natural-language description of the desired packshot styling.
+
+    If empty, the model picks a sensible commercial default for the detected
+    product.
+
+    **Examples:** "clean white background flat-lay", "soft studio lighting on a
+    beige pedestal", "isolated on a marble surface"
     """
 
     resolution: Literal["1k", "2k", "4k"]
@@ -987,4 +1062,5 @@ PredictionRunParams: TypeAlias = Union[
     BackgroundRemoveRequest,
     ImageToVideoRequest,
     EditRequest,
+    PackshotRequest,
 ]

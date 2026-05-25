@@ -167,7 +167,7 @@ class TestPredictions:
         prediction = client.predictions.run(
             inputs={
                 "product_image": "https://example.com/product.jpg",
-                "aspect_ratio": "1:1",
+                "aspect_ratio": "21:9",
                 "generation_mode": "fast",
                 "image_prompt": "https://example.com/inspiration.jpg",
                 "model_image": "https://example.com/person.jpg",
@@ -225,7 +225,7 @@ class TestPredictions:
         prediction = client.predictions.run(
             inputs={
                 "face_image": "https://example.com/headshot.jpg",
-                "aspect_ratio": "1:1",
+                "aspect_ratio": "21:9",
                 "generation_mode": "fast",
                 "num_images": 1,
                 "output_format": "png",
@@ -282,7 +282,7 @@ class TestPredictions:
         prediction = client.predictions.run(
             inputs={
                 "prompt": "A professional model wearing casual clothes",
-                "aspect_ratio": "1:1",
+                "aspect_ratio": "21:9",
                 "face_reference": "https://example.com/face.jpg",
                 "face_reference_mode": "match_base",
                 "generation_mode": "fast",
@@ -689,6 +689,64 @@ class TestPredictions:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
+    def test_method_run_overload_12(self, client: Fashn) -> None:
+        prediction = client.predictions.run(
+            inputs={"product_image": "https://example.com/product.jpg"},
+            model_name="packshot",
+        )
+        assert_matches_type(PredictionRunResponse, prediction, path=["response"])
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    def test_method_run_with_all_params_overload_12(self, client: Fashn) -> None:
+        prediction = client.predictions.run(
+            inputs={
+                "product_image": "https://example.com/product.jpg",
+                "aspect_ratio": "21:9",
+                "generation_mode": "fast",
+                "image_context": "https://example.com/reference-packshot.jpg",
+                "num_images": 1,
+                "output_format": "png",
+                "prompt": "prompt",
+                "resolution": "1k",
+                "return_base64": True,
+                "seed": 0,
+            },
+            model_name="packshot",
+            webhook_url="https://example.com/webhook",
+        )
+        assert_matches_type(PredictionRunResponse, prediction, path=["response"])
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    def test_raw_response_run_overload_12(self, client: Fashn) -> None:
+        response = client.predictions.with_raw_response.run(
+            inputs={"product_image": "https://example.com/product.jpg"},
+            model_name="packshot",
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        prediction = response.parse()
+        assert_matches_type(PredictionRunResponse, prediction, path=["response"])
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    def test_streaming_response_run_overload_12(self, client: Fashn) -> None:
+        with client.predictions.with_streaming_response.run(
+            inputs={"product_image": "https://example.com/product.jpg"},
+            model_name="packshot",
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            prediction = response.parse()
+            assert_matches_type(PredictionRunResponse, prediction, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
     def test_method_status(self, client: Fashn) -> None:
         prediction = client.predictions.status(
             "123a87r9-4129-4bb3-be18-9c9fb5bd7fc1-u1",
@@ -885,7 +943,7 @@ class TestAsyncPredictions:
         prediction = await async_client.predictions.run(
             inputs={
                 "product_image": "https://example.com/product.jpg",
-                "aspect_ratio": "1:1",
+                "aspect_ratio": "21:9",
                 "generation_mode": "fast",
                 "image_prompt": "https://example.com/inspiration.jpg",
                 "model_image": "https://example.com/person.jpg",
@@ -943,7 +1001,7 @@ class TestAsyncPredictions:
         prediction = await async_client.predictions.run(
             inputs={
                 "face_image": "https://example.com/headshot.jpg",
-                "aspect_ratio": "1:1",
+                "aspect_ratio": "21:9",
                 "generation_mode": "fast",
                 "num_images": 1,
                 "output_format": "png",
@@ -1000,7 +1058,7 @@ class TestAsyncPredictions:
         prediction = await async_client.predictions.run(
             inputs={
                 "prompt": "A professional model wearing casual clothes",
-                "aspect_ratio": "1:1",
+                "aspect_ratio": "21:9",
                 "face_reference": "https://example.com/face.jpg",
                 "face_reference_mode": "match_base",
                 "generation_mode": "fast",
@@ -1396,6 +1454,64 @@ class TestAsyncPredictions:
                 "prompt": "change the dress to red",
             },
             model_name="edit",
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            prediction = await response.parse()
+            assert_matches_type(PredictionRunResponse, prediction, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    async def test_method_run_overload_12(self, async_client: AsyncFashn) -> None:
+        prediction = await async_client.predictions.run(
+            inputs={"product_image": "https://example.com/product.jpg"},
+            model_name="packshot",
+        )
+        assert_matches_type(PredictionRunResponse, prediction, path=["response"])
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    async def test_method_run_with_all_params_overload_12(self, async_client: AsyncFashn) -> None:
+        prediction = await async_client.predictions.run(
+            inputs={
+                "product_image": "https://example.com/product.jpg",
+                "aspect_ratio": "21:9",
+                "generation_mode": "fast",
+                "image_context": "https://example.com/reference-packshot.jpg",
+                "num_images": 1,
+                "output_format": "png",
+                "prompt": "prompt",
+                "resolution": "1k",
+                "return_base64": True,
+                "seed": 0,
+            },
+            model_name="packshot",
+            webhook_url="https://example.com/webhook",
+        )
+        assert_matches_type(PredictionRunResponse, prediction, path=["response"])
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    async def test_raw_response_run_overload_12(self, async_client: AsyncFashn) -> None:
+        response = await async_client.predictions.with_raw_response.run(
+            inputs={"product_image": "https://example.com/product.jpg"},
+            model_name="packshot",
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        prediction = await response.parse()
+        assert_matches_type(PredictionRunResponse, prediction, path=["response"])
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    async def test_streaming_response_run_overload_12(self, async_client: AsyncFashn) -> None:
+        async with async_client.predictions.with_streaming_response.run(
+            inputs={"product_image": "https://example.com/product.jpg"},
+            model_name="packshot",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
