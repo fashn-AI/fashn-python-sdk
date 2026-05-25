@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.9.0 (2026-05-25)
+
+Full Changelog: [v0.8.0...v0.9.0](https://github.com/fashn-AI/fashn-python-sdk/compare/v0.8.0...v0.9.0)
+
+### Features
+
+* **predictions:** add packshot overload to subscribe() ([1d522a9](https://github.com/fashn-AI/fashn-python-sdk/commit/1d522a92d6fff6c0964d29deb1efbb68beb5f178))
+
 ## 0.8.0 (2026-05-25)
 
 Full Changelog: [v0.7.0...v0.8.0](https://github.com/fashn-AI/fashn-python-sdk/compare/v0.7.0...v0.8.0)
