@@ -240,6 +240,24 @@ class PredictionsResource(SyncAPIResource):
         request_timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> PredictionSubscribeResponse: ...
 
+    @overload
+    def subscribe(
+        self,
+        *,
+        inputs: prediction_run_params.PackshotRequestInputs,
+        model_name: Literal["packshot"],
+        webhook_url: str | Omit = omit,
+        poll_interval: int | None = None,
+        timeout: int | None = None,
+        max_retries: int | None = None,
+        on_enqueued: EnqueuedCallback | None = None,
+        on_queue_update: QueueUpdateCallback | None = None,
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        request_timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> PredictionSubscribeResponse: ...
+
     def subscribe(
         self,
         *,
@@ -253,7 +271,8 @@ class PredictionsResource(SyncAPIResource):
         | prediction_run_params.BackgroundChangeRequestInputs
         | prediction_run_params.BackgroundRemoveRequestInputs
         | prediction_run_params.ImageToVideoRequestInputs
-        | prediction_run_params.EditRequestInputs,
+        | prediction_run_params.EditRequestInputs
+        | prediction_run_params.PackshotRequestInputs,
         model_name: Literal["tryon-max"]
         | Literal["tryon-v1.6"]
         | Literal["product-to-model"]
@@ -264,7 +283,8 @@ class PredictionsResource(SyncAPIResource):
         | Literal["background-change"]
         | Literal["background-remove"]
         | Literal["image-to-video"]
-        | Literal["edit"],
+        | Literal["edit"]
+        | Literal["packshot"],
         webhook_url: str | Omit = omit,
         poll_interval: int | None = None,
         timeout: int | None = None,
@@ -1321,6 +1341,24 @@ class AsyncPredictionsResource(AsyncAPIResource):
         request_timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> PredictionSubscribeResponse: ...
 
+    @overload
+    async def subscribe(
+        self,
+        *,
+        inputs: prediction_run_params.PackshotRequestInputs,
+        model_name: Literal["packshot"],
+        webhook_url: str | Omit = omit,
+        poll_interval: int | None = None,
+        timeout: int | None = None,
+        max_retries: int | None = None,
+        on_enqueued: EnqueuedCallback | None = None,
+        on_queue_update: QueueUpdateCallback | None = None,
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        request_timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> PredictionSubscribeResponse: ...
+
     async def subscribe(
         self,
         *,
@@ -1334,7 +1372,8 @@ class AsyncPredictionsResource(AsyncAPIResource):
         | prediction_run_params.BackgroundChangeRequestInputs
         | prediction_run_params.BackgroundRemoveRequestInputs
         | prediction_run_params.ImageToVideoRequestInputs
-        | prediction_run_params.EditRequestInputs,
+        | prediction_run_params.EditRequestInputs
+        | prediction_run_params.PackshotRequestInputs,
         model_name: Literal["tryon-max"]
         | Literal["tryon-v1.6"]
         | Literal["product-to-model"]
@@ -1345,7 +1384,8 @@ class AsyncPredictionsResource(AsyncAPIResource):
         | Literal["background-change"]
         | Literal["background-remove"]
         | Literal["image-to-video"]
-        | Literal["edit"],
+        | Literal["edit"]
+        | Literal["packshot"],
         webhook_url: str | Omit = omit,
         poll_interval: int | None = None,
         timeout: int | None = None,
