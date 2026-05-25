@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.8.0 (2026-05-25)
+
+Full Changelog: [v0.7.0...v0.8.0](https://github.com/fashn-AI/fashn-python-sdk/compare/v0.7.0...v0.8.0)
+
+### Features
+
+* **api:** api update ([e8109bd](https://github.com/fashn-AI/fashn-python-sdk/commit/e8109bdf07184d1f1c66ed5cee66d6b43ac1b448))
+
 ## 0.7.0 (2026-05-18)
 
 Full Changelog: [v0.6.0...v0.7.0](https://github.com/fashn-AI/fashn-python-sdk/compare/v0.6.0...v0.7.0)
