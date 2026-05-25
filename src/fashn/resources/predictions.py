@@ -456,6 +456,7 @@ class PredictionsResource(SyncAPIResource):
         - Image reframing (reframe)
         - Image to video (image-to-video)
         - Image editing (edit)
+        - Product packshot (packshot)
 
         All requests use the versioned format with model_name and inputs structure.
 
@@ -505,6 +506,7 @@ class PredictionsResource(SyncAPIResource):
         - Image reframing (reframe)
         - Image to video (image-to-video)
         - Image editing (edit)
+        - Product packshot (packshot)
 
         All requests use the versioned format with model_name and inputs structure.
 
@@ -553,6 +555,7 @@ class PredictionsResource(SyncAPIResource):
         - Image reframing (reframe)
         - Image to video (image-to-video)
         - Image editing (edit)
+        - Product packshot (packshot)
 
         All requests use the versioned format with model_name and inputs structure.
 
@@ -602,6 +605,7 @@ class PredictionsResource(SyncAPIResource):
         - Image reframing (reframe)
         - Image to video (image-to-video)
         - Image editing (edit)
+        - Product packshot (packshot)
 
         All requests use the versioned format with model_name and inputs structure.
 
@@ -652,6 +656,7 @@ class PredictionsResource(SyncAPIResource):
         - Image reframing (reframe)
         - Image to video (image-to-video)
         - Image editing (edit)
+        - Product packshot (packshot)
 
         All requests use the versioned format with model_name and inputs structure.
 
@@ -699,6 +704,7 @@ class PredictionsResource(SyncAPIResource):
         - Image reframing (reframe)
         - Image to video (image-to-video)
         - Image editing (edit)
+        - Product packshot (packshot)
 
         All requests use the versioned format with model_name and inputs structure.
 
@@ -747,6 +753,7 @@ class PredictionsResource(SyncAPIResource):
         - Image reframing (reframe)
         - Image to video (image-to-video)
         - Image editing (edit)
+        - Product packshot (packshot)
 
         All requests use the versioned format with model_name and inputs structure.
 
@@ -794,6 +801,7 @@ class PredictionsResource(SyncAPIResource):
         - Image reframing (reframe)
         - Image to video (image-to-video)
         - Image editing (edit)
+        - Product packshot (packshot)
 
         All requests use the versioned format with model_name and inputs structure.
 
@@ -841,6 +849,7 @@ class PredictionsResource(SyncAPIResource):
         - Image reframing (reframe)
         - Image to video (image-to-video)
         - Image editing (edit)
+        - Product packshot (packshot)
 
         All requests use the versioned format with model_name and inputs structure.
 
@@ -888,6 +897,7 @@ class PredictionsResource(SyncAPIResource):
         - Image reframing (reframe)
         - Image to video (image-to-video)
         - Image editing (edit)
+        - Product packshot (packshot)
 
         All requests use the versioned format with model_name and inputs structure.
 
@@ -936,12 +946,62 @@ class PredictionsResource(SyncAPIResource):
         - Image reframing (reframe)
         - Image to video (image-to-video)
         - Image editing (edit)
+        - Product packshot (packshot)
 
         All requests use the versioned format with model_name and inputs structure.
 
         Args:
           model_name: Versatile post-processing to restyle shots, adjust views, and fix details while
               preserving identity and product fidelity.
+
+          webhook_url: Optional webhook URL to receive completion notifications
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        ...
+
+    @overload
+    def run(
+        self,
+        *,
+        inputs: prediction_run_params.PackshotRequestInputs,
+        model_name: Literal["packshot"],
+        webhook_url: str | Omit = omit,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> PredictionRunResponse:
+        """Submit a prediction request for AI-powered fashion processing.
+
+        Supports multiple
+        model types including:
+
+        - Try-on max (tryon-max)
+        - Virtual try-on v1.6 (tryon-v1.6)
+        - Model creation (model-create)
+        - Model swap (model-swap)
+        - Product to model (product-to-model)
+        - Face to model (face-to-model)
+        - Background operations (background-remove, background-change)
+        - Image reframing (reframe)
+        - Image to video (image-to-video)
+        - Image editing (edit)
+        - Product packshot (packshot)
+
+        All requests use the versioned format with model_name and inputs structure.
+
+        Args:
+          model_name: Turns a product photo into a clean commercial packshot. Optionally accepts a
+              style reference image to guide staging, background, and lighting.
 
           webhook_url: Optional webhook URL to receive completion notifications
 
@@ -969,7 +1029,8 @@ class PredictionsResource(SyncAPIResource):
         | prediction_run_params.BackgroundChangeRequestInputs
         | prediction_run_params.BackgroundRemoveRequestInputs
         | prediction_run_params.ImageToVideoRequestInputs
-        | prediction_run_params.EditRequestInputs,
+        | prediction_run_params.EditRequestInputs
+        | prediction_run_params.PackshotRequestInputs,
         model_name: Literal["tryon-max"]
         | Literal["tryon-v1.6"]
         | Literal["product-to-model"]
@@ -980,7 +1041,8 @@ class PredictionsResource(SyncAPIResource):
         | Literal["background-change"]
         | Literal["background-remove"]
         | Literal["image-to-video"]
-        | Literal["edit"],
+        | Literal["edit"]
+        | Literal["packshot"],
         webhook_url: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -1474,6 +1536,7 @@ class AsyncPredictionsResource(AsyncAPIResource):
         - Image reframing (reframe)
         - Image to video (image-to-video)
         - Image editing (edit)
+        - Product packshot (packshot)
 
         All requests use the versioned format with model_name and inputs structure.
 
@@ -1523,6 +1586,7 @@ class AsyncPredictionsResource(AsyncAPIResource):
         - Image reframing (reframe)
         - Image to video (image-to-video)
         - Image editing (edit)
+        - Product packshot (packshot)
 
         All requests use the versioned format with model_name and inputs structure.
 
@@ -1571,6 +1635,7 @@ class AsyncPredictionsResource(AsyncAPIResource):
         - Image reframing (reframe)
         - Image to video (image-to-video)
         - Image editing (edit)
+        - Product packshot (packshot)
 
         All requests use the versioned format with model_name and inputs structure.
 
@@ -1620,6 +1685,7 @@ class AsyncPredictionsResource(AsyncAPIResource):
         - Image reframing (reframe)
         - Image to video (image-to-video)
         - Image editing (edit)
+        - Product packshot (packshot)
 
         All requests use the versioned format with model_name and inputs structure.
 
@@ -1670,6 +1736,7 @@ class AsyncPredictionsResource(AsyncAPIResource):
         - Image reframing (reframe)
         - Image to video (image-to-video)
         - Image editing (edit)
+        - Product packshot (packshot)
 
         All requests use the versioned format with model_name and inputs structure.
 
@@ -1717,6 +1784,7 @@ class AsyncPredictionsResource(AsyncAPIResource):
         - Image reframing (reframe)
         - Image to video (image-to-video)
         - Image editing (edit)
+        - Product packshot (packshot)
 
         All requests use the versioned format with model_name and inputs structure.
 
@@ -1765,6 +1833,7 @@ class AsyncPredictionsResource(AsyncAPIResource):
         - Image reframing (reframe)
         - Image to video (image-to-video)
         - Image editing (edit)
+        - Product packshot (packshot)
 
         All requests use the versioned format with model_name and inputs structure.
 
@@ -1812,6 +1881,7 @@ class AsyncPredictionsResource(AsyncAPIResource):
         - Image reframing (reframe)
         - Image to video (image-to-video)
         - Image editing (edit)
+        - Product packshot (packshot)
 
         All requests use the versioned format with model_name and inputs structure.
 
@@ -1859,6 +1929,7 @@ class AsyncPredictionsResource(AsyncAPIResource):
         - Image reframing (reframe)
         - Image to video (image-to-video)
         - Image editing (edit)
+        - Product packshot (packshot)
 
         All requests use the versioned format with model_name and inputs structure.
 
@@ -1906,6 +1977,7 @@ class AsyncPredictionsResource(AsyncAPIResource):
         - Image reframing (reframe)
         - Image to video (image-to-video)
         - Image editing (edit)
+        - Product packshot (packshot)
 
         All requests use the versioned format with model_name and inputs structure.
 
@@ -1954,12 +2026,62 @@ class AsyncPredictionsResource(AsyncAPIResource):
         - Image reframing (reframe)
         - Image to video (image-to-video)
         - Image editing (edit)
+        - Product packshot (packshot)
 
         All requests use the versioned format with model_name and inputs structure.
 
         Args:
           model_name: Versatile post-processing to restyle shots, adjust views, and fix details while
               preserving identity and product fidelity.
+
+          webhook_url: Optional webhook URL to receive completion notifications
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        ...
+
+    @overload
+    async def run(
+        self,
+        *,
+        inputs: prediction_run_params.PackshotRequestInputs,
+        model_name: Literal["packshot"],
+        webhook_url: str | Omit = omit,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> PredictionRunResponse:
+        """Submit a prediction request for AI-powered fashion processing.
+
+        Supports multiple
+        model types including:
+
+        - Try-on max (tryon-max)
+        - Virtual try-on v1.6 (tryon-v1.6)
+        - Model creation (model-create)
+        - Model swap (model-swap)
+        - Product to model (product-to-model)
+        - Face to model (face-to-model)
+        - Background operations (background-remove, background-change)
+        - Image reframing (reframe)
+        - Image to video (image-to-video)
+        - Image editing (edit)
+        - Product packshot (packshot)
+
+        All requests use the versioned format with model_name and inputs structure.
+
+        Args:
+          model_name: Turns a product photo into a clean commercial packshot. Optionally accepts a
+              style reference image to guide staging, background, and lighting.
 
           webhook_url: Optional webhook URL to receive completion notifications
 
@@ -1987,7 +2109,8 @@ class AsyncPredictionsResource(AsyncAPIResource):
         | prediction_run_params.BackgroundChangeRequestInputs
         | prediction_run_params.BackgroundRemoveRequestInputs
         | prediction_run_params.ImageToVideoRequestInputs
-        | prediction_run_params.EditRequestInputs,
+        | prediction_run_params.EditRequestInputs
+        | prediction_run_params.PackshotRequestInputs,
         model_name: Literal["tryon-max"]
         | Literal["tryon-v1.6"]
         | Literal["product-to-model"]
@@ -1998,7 +2121,8 @@ class AsyncPredictionsResource(AsyncAPIResource):
         | Literal["background-change"]
         | Literal["background-remove"]
         | Literal["image-to-video"]
-        | Literal["edit"],
+        | Literal["edit"]
+        | Literal["packshot"],
         webhook_url: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
