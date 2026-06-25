@@ -837,7 +837,7 @@ class ImageToVideoRequestInputs(TypedDict, total=False):
     When provided, the video smoothly transitions from the `image` (start frame) to
     `end_image` (end frame) over the clip duration.
 
-    Only supported with `resolution: "1080p"`.
+    Supported with `resolution: "480p"`, `"720p"`, and `"1080p"`.
 
     Base64 images must include the proper prefix (e.g.,
     `data:image/jpg;base64,<YOUR_BASE64>`).
@@ -856,7 +856,7 @@ class ImageToVideoRequestInputs(TypedDict, total=False):
     """
 
     resolution: Literal["480p", "720p", "1080p"]
-    """Target video resolution used by the internal video engine."""
+    """Target video resolution used by the video engine."""
 
     seed: int
     """Sets random operations to a fixed state.
