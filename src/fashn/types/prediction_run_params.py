@@ -67,7 +67,7 @@ class TryOnMaxRequestInputs(TypedDict, total=False):
     aspect_ratio: Literal["21:9", "1:1", "4:3", "3:2", "2:3", "5:4", "4:5", "3:4", "16:9", "9:16"]
     """Optional aspect ratio for the output image."""
 
-    generation_mode: Literal["balanced", "quality"]
+    generation_mode: Literal["fast", "balanced", "quality"]
     """Sets the generation quality level.
 
     'quality' produces the most detailed and realistic output but takes longer to
