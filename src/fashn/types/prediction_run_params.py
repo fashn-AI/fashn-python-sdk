@@ -108,10 +108,9 @@ class TryOnMaxRequestInputs(TypedDict, total=False):
     """
 
     seed: int
-    """Sets random operations to a fixed state.
+    """Controls generation randomness on a best-effort basis.
 
-    Use the same seed to reproduce results with the same inputs, or different seed
-    to force different results.
+    Exact reproducibility is not guaranteed.
     """
 
 
@@ -210,10 +209,9 @@ class TryOnRequestInputs(TypedDict, total=False):
     """
 
     seed: int
-    """Sets random operations to a fixed state.
+    """Controls generation randomness on a best-effort basis.
 
-    Use the same seed to reproduce results with the same inputs, or different seed
-    to force different results.
+    Exact reproducibility is not guaranteed.
     """
 
     segmentation_free: bool
@@ -314,10 +312,9 @@ class ProductToModelRequestInputs(TypedDict, total=False):
     """
 
     seed: int
-    """Seed for reproducible results.
+    """Controls generation randomness on a best-effort basis.
 
-    Use the same seed to reproduce results with the same inputs, or different seed
-    to force different results. Must be between 0 and 2^32-1.
+    Must be between 0 and 2^32-1; exact reproducibility is not guaranteed.
     """
 
 
@@ -402,10 +399,9 @@ class FaceToModelRequestInputs(TypedDict, total=False):
     """
 
     seed: int
-    """Sets random operations to a fixed state.
+    """Controls generation randomness on a best-effort basis.
 
-    Use the same seed to reproduce results with the same inputs, or different seed
-    to force different results.
+    Exact reproducibility is not guaranteed.
     """
 
 
@@ -519,10 +515,9 @@ class ModelCreateRequestInputs(TypedDict, total=False):
     """
 
     seed: int
-    """Sets random operations to a fixed state.
+    """Controls generation randomness on a best-effort basis.
 
-    Use the same seed to reproduce results with the same inputs, or different seed
-    to force different results.
+    Exact reproducibility is not guaranteed.
     """
 
 
@@ -611,10 +606,9 @@ class ModelSwapRequestInputs(TypedDict, total=False):
     """
 
     seed: int
-    """Sets random operations to a fixed state.
+    """Controls generation randomness on a best-effort basis.
 
-    Use the same seed to reproduce results with the same inputs, or different seed
-    to force different results.
+    Exact reproducibility is not guaranteed.
     """
 
 
@@ -705,10 +699,9 @@ class ReframeRequestInputs(TypedDict, total=False):
     """
 
     seed: int
-    """Sets random operations to a fixed state.
+    """Controls generation randomness on a best-effort basis.
 
-    Use the same seed to reproduce results with the same inputs, or different seed
-    to force different results.
+    Exact reproducibility is not guaranteed.
     """
 
 
@@ -771,10 +764,9 @@ class BackgroundChangeRequestInputs(TypedDict, total=False):
     """
 
     seed: int
-    """Sets random operations to a fixed state.
+    """Controls generation randomness on a best-effort basis.
 
-    Use the same seed to reproduce results with the same inputs, or different seed
-    to force different results.
+    Exact reproducibility is not guaranteed.
     """
 
 
@@ -859,10 +851,9 @@ class ImageToVideoRequestInputs(TypedDict, total=False):
     """Target video resolution used by the video engine."""
 
     seed: int
-    """Sets random operations to a fixed state.
+    """Controls generation randomness on a best-effort basis.
 
-    Use the same seed to reproduce results with the same inputs, or different seed
-    to force different results.
+    Exact reproducibility is not guaranteed.
     """
 
 
@@ -955,10 +946,9 @@ class EditRequestInputs(TypedDict, total=False):
     """
 
     seed: int
-    """Sets random operations to a fixed state.
+    """Controls generation randomness on a best-effort basis.
 
-    Use the same seed to reproduce results with the same inputs, or different seed
-    to force different results.
+    Exact reproducibility is not guaranteed.
     """
 
 
@@ -1043,10 +1033,9 @@ class PackshotRequestInputs(TypedDict, total=False):
     """
 
     seed: int
-    """Sets random operations to a fixed state.
+    """Controls generation randomness on a best-effort basis.
 
-    Use the same seed to reproduce results with the same inputs, or different seed
-    to force different results.
+    Exact reproducibility is not guaranteed.
     """
 
 
