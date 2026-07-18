@@ -1,5 +1,16 @@
 # Changelog
 
+## 0.10.0 (2026-07-18)
+
+Full Changelog: [v0.9.0...v0.10.0](https://github.com/fashn-AI/fashn-python-sdk/compare/v0.9.0...v0.10.0)
+
+### Features
+
+* **api:** api update ([01ba803](https://github.com/fashn-AI/fashn-python-sdk/commit/01ba80315eb57c11e8831783ac03e6326f62b0e7))
+* **api:** api update ([5c5614c](https://github.com/fashn-AI/fashn-python-sdk/commit/5c5614cf8eab98ce8b572f4753dd0400e730f96a))
+* **api:** api update ([52a5de5](https://github.com/fashn-AI/fashn-python-sdk/commit/52a5de54429b304c1ec61a921b9bb02619fa30ec))
+* **stlc:** configurable CI runner and private-production-repo support in workflow templates ([5ad607a](https://github.com/fashn-AI/fashn-python-sdk/commit/5ad607a25e6e577d566e04b73e9d63a277cff43e))
+
 ## 0.9.0 (2026-05-25)
 
 Full Changelog: [v0.8.0...v0.9.0](https://github.com/fashn-AI/fashn-python-sdk/compare/v0.8.0...v0.9.0)

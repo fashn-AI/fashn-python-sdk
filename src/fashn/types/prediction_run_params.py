@@ -67,7 +67,7 @@ class TryOnMaxRequestInputs(TypedDict, total=False):
     aspect_ratio: Literal["21:9", "1:1", "4:3", "3:2", "2:3", "5:4", "4:5", "3:4", "16:9", "9:16"]
     """Optional aspect ratio for the output image."""
 
-    generation_mode: Literal["balanced", "quality"]
+    generation_mode: Literal["fast", "balanced", "quality"]
     """Sets the generation quality level.
 
     'quality' produces the most detailed and realistic output but takes longer to
@@ -108,10 +108,9 @@ class TryOnMaxRequestInputs(TypedDict, total=False):
     """
 
     seed: int
-    """Sets random operations to a fixed state.
+    """Controls generation randomness on a best-effort basis.
 
-    Use the same seed to reproduce results with the same inputs, or different seed
-    to force different results.
+    Exact reproducibility is not guaranteed.
     """
 
 
@@ -210,10 +209,9 @@ class TryOnRequestInputs(TypedDict, total=False):
     """
 
     seed: int
-    """Sets random operations to a fixed state.
+    """Controls generation randomness on a best-effort basis.
 
-    Use the same seed to reproduce results with the same inputs, or different seed
-    to force different results.
+    Exact reproducibility is not guaranteed.
     """
 
     segmentation_free: bool
@@ -314,10 +312,9 @@ class ProductToModelRequestInputs(TypedDict, total=False):
     """
 
     seed: int
-    """Seed for reproducible results.
+    """Controls generation randomness on a best-effort basis.
 
-    Use the same seed to reproduce results with the same inputs, or different seed
-    to force different results. Must be between 0 and 2^32-1.
+    Must be between 0 and 2^32-1; exact reproducibility is not guaranteed.
     """
 
 
@@ -402,10 +399,9 @@ class FaceToModelRequestInputs(TypedDict, total=False):
     """
 
     seed: int
-    """Sets random operations to a fixed state.
+    """Controls generation randomness on a best-effort basis.
 
-    Use the same seed to reproduce results with the same inputs, or different seed
-    to force different results.
+    Exact reproducibility is not guaranteed.
     """
 
 
@@ -519,10 +515,9 @@ class ModelCreateRequestInputs(TypedDict, total=False):
     """
 
     seed: int
-    """Sets random operations to a fixed state.
+    """Controls generation randomness on a best-effort basis.
 
-    Use the same seed to reproduce results with the same inputs, or different seed
-    to force different results.
+    Exact reproducibility is not guaranteed.
     """
 
 
@@ -611,10 +606,9 @@ class ModelSwapRequestInputs(TypedDict, total=False):
     """
 
     seed: int
-    """Sets random operations to a fixed state.
+    """Controls generation randomness on a best-effort basis.
 
-    Use the same seed to reproduce results with the same inputs, or different seed
-    to force different results.
+    Exact reproducibility is not guaranteed.
     """
 
 
@@ -705,10 +699,9 @@ class ReframeRequestInputs(TypedDict, total=False):
     """
 
     seed: int
-    """Sets random operations to a fixed state.
+    """Controls generation randomness on a best-effort basis.
 
-    Use the same seed to reproduce results with the same inputs, or different seed
-    to force different results.
+    Exact reproducibility is not guaranteed.
     """
 
 
@@ -771,10 +764,9 @@ class BackgroundChangeRequestInputs(TypedDict, total=False):
     """
 
     seed: int
-    """Sets random operations to a fixed state.
+    """Controls generation randomness on a best-effort basis.
 
-    Use the same seed to reproduce results with the same inputs, or different seed
-    to force different results.
+    Exact reproducibility is not guaranteed.
     """
 
 
@@ -837,7 +829,7 @@ class ImageToVideoRequestInputs(TypedDict, total=False):
     When provided, the video smoothly transitions from the `image` (start frame) to
     `end_image` (end frame) over the clip duration.
 
-    Only supported with `resolution: "1080p"`.
+    Supported with `resolution: "480p"`, `"720p"`, and `"1080p"`.
 
     Base64 images must include the proper prefix (e.g.,
     `data:image/jpg;base64,<YOUR_BASE64>`).
@@ -856,13 +848,12 @@ class ImageToVideoRequestInputs(TypedDict, total=False):
     """
 
     resolution: Literal["480p", "720p", "1080p"]
-    """Target video resolution used by the internal video engine."""
+    """Target video resolution used by the video engine."""
 
     seed: int
-    """Sets random operations to a fixed state.
+    """Controls generation randomness on a best-effort basis.
 
-    Use the same seed to reproduce results with the same inputs, or different seed
-    to force different results.
+    Exact reproducibility is not guaranteed.
     """
 
 
@@ -955,10 +946,9 @@ class EditRequestInputs(TypedDict, total=False):
     """
 
     seed: int
-    """Sets random operations to a fixed state.
+    """Controls generation randomness on a best-effort basis.
 
-    Use the same seed to reproduce results with the same inputs, or different seed
-    to force different results.
+    Exact reproducibility is not guaranteed.
     """
 
 
@@ -1043,10 +1033,9 @@ class PackshotRequestInputs(TypedDict, total=False):
     """
 
     seed: int
-    """Sets random operations to a fixed state.
+    """Controls generation randomness on a best-effort basis.
 
-    Use the same seed to reproduce results with the same inputs, or different seed
-    to force different results.
+    Exact reproducibility is not guaranteed.
     """
 
 
